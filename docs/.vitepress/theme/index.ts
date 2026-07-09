@@ -1,5 +1,6 @@
 import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
+import { useData } from 'vitepress'
 import type { Theme } from 'vitepress'
 import { withBlogTheme } from 'vitepress-plugin-blog'
 import 'vitepress-plugin-blog/style.css'
@@ -11,7 +12,11 @@ const enhanced = {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      'doc-after': () => [h(Busuanzi), h(GiscusComment)],
+      'doc-after': () => {
+        const { frontmatter } = useData()
+        const showComments = frontmatter.value.comment !== false
+        return [h(Busuanzi), showComments ? h(GiscusComment) : null]
+      },
     })
   },
 } satisfies Theme

@@ -1,5 +1,6 @@
 ---
 title: 关于我
+comment: false
 ---
 
 # 关于我
