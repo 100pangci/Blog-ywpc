@@ -44,6 +44,12 @@ export default defineConfig({
     plugins: [RssPlugin(RSS), blogPlugin({ postsDir: 'posts' })],
   },
 
+  transformPageData(pageData) {
+    if (pageData.filePath.startsWith('posts/') || pageData.filePath.startsWith('life/')) {
+      pageData.frontmatter.aside = false
+    }
+  },
+
   themeConfig: {
     logo: '/logo.svg',
     search: {
@@ -80,24 +86,6 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/posts/': [
-        {
-          text: '技术博客',
-          items: [
-            { text: '全部文章', link: '/posts/' },
-            { text: 'Hello World', link: '/posts/hello' },
-          ],
-        },
-      ],
-      '/life/': [
-        {
-          text: '生活随笔',
-          items: [
-            { text: '全部随笔', link: '/life/' },
-            { text: '第一篇随笔', link: '/life/first' },
-          ],
-        },
-      ],
       '/gallery/': [
         {
           text: '作品展示',

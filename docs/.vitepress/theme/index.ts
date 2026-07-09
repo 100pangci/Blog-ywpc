@@ -7,13 +7,13 @@ import GiscusComment from './components/GiscusComment.vue'
 import Busuanzi from './components/Busuanzi.vue'
 import './style/vars.css'
 
-const blogTheme = withBlogTheme(DefaultTheme)
-
-export default {
-  ...blogTheme,
+const enhanced = {
+  extends: DefaultTheme,
   Layout: () => {
-    return h(blogTheme.Layout!, null, {
+    return h(DefaultTheme.Layout, null, {
       'doc-after': () => [h(Busuanzi), h(GiscusComment)],
     })
   },
 } satisfies Theme
+
+export default withBlogTheme(enhanced)
