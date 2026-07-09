@@ -94,6 +94,8 @@
 
 .VPHero .image-container {
   perspective: 800px;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .dark .VPHero .image-src {
@@ -128,11 +130,13 @@
 }
 
 /* ---------- Feature cards ---------- */
+.VPHome .VPHero .container,
 .VPFeatures .container {
-  gap: 20px !important;
-  max-width: 1152px;
-  margin: 0 auto;
-  padding: 0 24px 24px;
+  max-width: 1208px;
+}
+
+.VPFeatures .items {
+  gap: 4px;
 }
 
 .VPFeature {
