@@ -44,12 +44,6 @@ export default defineConfig({
     plugins: [RssPlugin(RSS), blogPlugin({ postsDir: 'posts' })],
   },
 
-  transformPageData(pageData) {
-    if (pageData.filePath.startsWith('posts/') || pageData.filePath.startsWith('life/')) {
-      pageData.frontmatter.aside = false
-    }
-  },
-
   themeConfig: {
     logo: '/logo.svg',
     search: {
