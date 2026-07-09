@@ -123,6 +123,15 @@
   box-shadow: 0 8px 24px rgba(233, 82, 149, 0.32);
 }
 
+.dark .VPButton.brand {
+  background-color: #b84a6e;
+}
+
+.dark .VPButton.brand:hover {
+  box-shadow: 0 8px 24px rgba(184, 74, 110, 0.4);
+  background-color: #c95a7e;
+}
+
 .VPButton.alt {
   border-radius: 999px;
   transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
@@ -264,6 +273,7 @@ div[class*="language-"] {
 
 /* ---------- Background & glass ---------- */
 html {
+  scroll-behavior: smooth;
   background: url(/images/bg.png) center / cover fixed;
   background-color: #f7f7f9;
 }

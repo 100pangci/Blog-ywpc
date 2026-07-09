@@ -7,6 +7,7 @@ import Busuanzi from './components/Busuanzi.vue'
 import BlogPostMeta from './components/BlogPostMeta.vue'
 import BlogPostNav from './components/BlogPostNav.vue'
 import BlogList from './components/BlogList.vue'
+import BackToTop from './components/BackToTop.vue'
 import './style/vars.css'
 
 export default {
@@ -32,6 +33,7 @@ export default {
         }
         return children
       },
+      'layout-top': () => h(BackToTop),
     })
   },
   enhanceApp({ app }) {
