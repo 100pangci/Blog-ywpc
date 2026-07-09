@@ -145,7 +145,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: '<a href="/feed.xml" style="color: inherit;">RSS 订阅</a>',
+      message: '<a href="https://100pangci.github.io/Blog-ywpc/feed.xml" style="color: inherit;">RSS 订阅</a>',
       copyright: `Copyright © ${new Date().getFullYear()} <a href="https://github.com/100pangci" style="color: inherit;">Ywpc</a>`,
     },
   },
