@@ -197,6 +197,17 @@
   background-clip: padding-box;
 }
 
+/* ---------- Blog post tag visibility fix ---------- */
+.blog-post__tags li {
+  background-color: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+.blog-card__tags li {
+  background-color: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
 /* ---------- Doc refinements ---------- */
 .vp-doc {
   letter-spacing: 0.01em;
