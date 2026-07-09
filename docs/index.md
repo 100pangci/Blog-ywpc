@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Ywpc's Blog"
   text: "技术笔记 · 生活随笔"
-  tagline: 记录成长，分享热爱
+  tagline: 记录成长，分享热爱 —— 在代码与生活之间，寻找平衡与热爱。
   image:
     src: https://github.com/100pangci.png
     alt: Ywpc

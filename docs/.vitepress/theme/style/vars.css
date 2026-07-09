@@ -31,6 +31,8 @@
   --vp-sidebar-bg-color: rgba(246, 246, 247, 0.68);
   --vp-local-search-bg: rgba(255, 255, 255, 0.88);
   --vp-code-block-bg: rgba(41, 45, 62, 0.88);
+
+  --vp-c-divider: rgba(0, 0, 0, 0.06);
 }
 
 .dark {
@@ -48,14 +50,32 @@
   --vp-sidebar-bg-color: rgba(37, 37, 40, 0.68);
   --vp-local-search-bg: rgba(37, 37, 40, 0.88);
   --vp-code-block-bg: rgba(22, 22, 24, 0.88);
+
+  --vp-c-divider: rgba(255, 255, 255, 0.08);
 }
 
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #e95295 0%, #eb6ea5 35%, #f5b1aa 70%);
+}
+
+/* ---------- Hero ---------- */
 .VPHero .name {
   padding-top: 12px;
+  letter-spacing: -0.02em;
+  background-size: 200% auto;
+  animation: hero-gradient 6s ease infinite;
 }
 
 .VPHero .text {
   padding-top: 12px;
+  letter-spacing: -0.01em;
+}
+
+@keyframes hero-gradient {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
 }
 
 @media (min-width: 960px) {
@@ -68,7 +88,7 @@
 
 .VPHero .image-src {
   border-radius: 50%;
-  box-shadow: 0 0 60px rgba(233, 82, 149, 0.3);
+  box-shadow: 0 10px 60px rgba(233, 82, 149, 0.3);
   transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
@@ -77,7 +97,7 @@
 }
 
 .dark .VPHero .image-src {
-  box-shadow: 0 0 60px rgba(245, 177, 170, 0.35);
+  box-shadow: 0 10px 60px rgba(245, 177, 170, 0.35);
 }
 
 .VPHero .image-bg {
@@ -88,27 +108,67 @@
   background: radial-gradient(circle at 50% 50%, rgba(245, 177, 170, 0.14) 0%, transparent 70%);
 }
 
+.VPButton.brand {
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(233, 82, 149, 0.32);
+}
+
+.VPButton.alt {
+  border-radius: 999px;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.VPButton.alt:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- Feature cards ---------- */
+.VPFeatures .container {
+  gap: 20px !important;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+}
+
 .VPFeature {
   border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  border-radius: 16px;
+  background: linear-gradient(180deg, var(--vp-c-bg-elv) 0%, var(--vp-c-bg-soft) 100%);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPFeature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(233, 82, 149, 0.1), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
 }
 
 .VPFeature:hover {
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 24px rgba(233, 82, 149, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(233, 82, 149, 0.12);
+  transform: translateY(-4px);
+}
+
+.VPFeature:hover::before {
+  opacity: 1;
 }
 
 .dark .VPFeature:hover {
-  box-shadow: 0 4px 24px rgba(245, 177, 170, 0.12);
+  box-shadow: 0 12px 32px rgba(245, 177, 170, 0.14);
 }
 
-:root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(135deg, #e95295 0%, #eb6ea5 35%, #f5b1aa 70%);
-}
-
+/* ---------- Gradient clip text ---------- */
 .clip {
   background: var(--vp-home-hero-name-background);
   -webkit-background-clip: text;
@@ -116,8 +176,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -126,11 +188,30 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--vp-c-divider);
-  border-radius: 3px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--vp-c-text-3);
+  background-clip: padding-box;
+}
+
+/* ---------- Doc refinements ---------- */
+.vp-doc {
+  letter-spacing: 0.01em;
+}
+
+.vp-doc h1 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.vp-doc h2,
+.vp-doc h3 {
+  letter-spacing: -0.01em;
+  font-weight: 650;
 }
 
 .vp-doc a {
@@ -143,46 +224,96 @@
 }
 
 .custom-block {
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .vp-doc img {
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .vp-doc table {
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
 }
 
 div[class*="language-"] {
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .VPSidebarItem .text {
   transition: color 0.2s;
 }
 
+/* ---------- Background & glass ---------- */
 html {
   background: url(/images/bg.png) center / cover fixed;
+  background-color: #f7f7f9;
+}
+
+.dark html,
+html.dark {
+  background-color: #1a1a1c;
 }
 
 .Layout {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .VPNav {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .VPSidebar {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .VPFooter {
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-top: 1px solid var(--vp-c-divider);
 }
 
 .VPLocalSearchBox .shell {
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ---------- Mobile adaptation ---------- */
+@media (max-width: 768px) {
+  .VPFeatures .container {
+    padding: 0 16px 16px;
+    gap: 16px !important;
+  }
+
+  .VPFeature {
+    border-radius: 14px;
+  }
+
+  .vp-doc {
+    font-size: 15px;
+  }
+
+  .vp-doc img,
+  .vp-doc table,
+  div[class*="language-"] {
+    border-radius: 10px;
+  }
+
+  .VPFooter .container {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+.VPContent,
+.vp-doc {
+  -webkit-overflow-scrolling: touch;
 }
