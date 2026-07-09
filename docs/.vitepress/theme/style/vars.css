@@ -58,23 +58,26 @@
   padding-top: 12px;
 }
 
+@media (min-width: 960px) {
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
 .VPHero .image-src {
   border-radius: 50%;
   box-shadow: 0 0 60px rgba(233, 82, 149, 0.3);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.VPHero .image-container {
+  perspective: 800px;
 }
 
 .dark .VPHero .image-src {
   box-shadow: 0 0 60px rgba(245, 177, 170, 0.35);
-}
-
-.VPHero .image-src:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 80px rgba(233, 82, 149, 0.45);
-}
-
-.dark .VPHero .image-src:hover {
-  box-shadow: 0 0 80px rgba(245, 177, 170, 0.5);
 }
 
 .VPHero .image-bg {

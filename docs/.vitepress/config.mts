@@ -33,6 +33,7 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#e95295' }],
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:locale', content: 'zh_CN' }],
+    ['script', {}, `document.addEventListener('DOMContentLoaded',()=>{const e=document.querySelector('.VPHero .image-container');if(!e)return;const t=e.querySelector('img');if(!t)return;let o=!1;e.addEventListener('mousemove',n=>{const r=e.getBoundingClientRect(),s=(n.clientX-r.left)/r.width-.5,l=(n.clientY-r.top)/r.height-.5,i=Math.max(r.width,r.height);t.style.transform='translate('+Math.round(s*i*.04)+'px,'+Math.round(l*i*.04)+'px) rotateX('+Math.round(l*-15)+'deg) rotateY('+Math.round(s*15)+'deg) scale(1.05)';t.style.boxShadow='0 0 80px rgba(233,82,149,0.45)';o||(o=!0,t.style.transition='none')});e.addEventListener('mouseleave',()=>{o=!1,t.style.transition='transform .6s ease,box-shadow .6s ease';t.style.transform='';t.style.boxShadow=''})});`],
   ],
 
   sitemap: {
