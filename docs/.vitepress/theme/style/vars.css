@@ -49,7 +49,7 @@
 }
 
 .VPHero .image-src:hover {
-  transform: scale(1.05) rotate(3deg);
+  transform: scale(1.03);
   box-shadow: 0 0 80px rgba(233, 82, 149, 0.45);
 }
 
