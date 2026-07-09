@@ -2,48 +2,59 @@
   --vp-font-family-base: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --vp-font-family-mono: "Fira Code", "Cascadia Code", "JetBrains Mono", "Source Code Pro", Consolas, "Courier New", monospace;
 
-  --vp-c-brand-1: #3b82f6;
-  --vp-c-brand-2: #2563eb;
-  --vp-c-brand-3: #1d4ed8;
-  --vp-c-brand-soft: rgba(59, 130, 246, 0.14);
+  --vp-c-brand-1: #e95295;
+  --vp-c-brand-2: #eb6ea5;
+  --vp-c-brand-3: #d0576b;
+  --vp-c-brand-soft: rgba(233, 82, 149, 0.14);
 
-  --vp-c-tip-1: #3b82f6;
-  --vp-c-tip-2: #60a5fa;
-  --vp-c-tip-3: #93bbfd;
-  --vp-c-tip-soft: rgba(59, 130, 246, 0.14);
+  --vp-c-tip-1: #88a67c;
+  --vp-c-tip-2: #a3c294;
+  --vp-c-tip-3: #c1d8b0;
+  --vp-c-tip-soft: rgba(136, 166, 124, 0.14);
 
-  --vp-c-warning-1: #f59e0b;
-  --vp-c-warning-2: #fbbf24;
-  --vp-c-warning-3: #fcd34d;
-  --vp-c-warning-soft: rgba(245, 158, 11, 0.14);
+  --vp-c-warning-1: #e6b422;
+  --vp-c-warning-2: #f0c840;
+  --vp-c-warning-3: #f5d870;
+  --vp-c-warning-soft: rgba(230, 180, 34, 0.14);
 
-  --vp-c-danger-1: #ef4444;
-  --vp-c-danger-2: #f87171;
-  --vp-c-danger-3: #fca5a5;
-  --vp-c-danger-soft: rgba(239, 68, 68, 0.14);
+  --vp-c-danger-1: #e95464;
+  --vp-c-danger-2: #ed7a86;
+  --vp-c-danger-3: #f3a0a8;
+  --vp-c-danger-soft: rgba(233, 84, 100, 0.14);
 }
 
 .dark {
-  --vp-c-brand-1: #60a5fa;
-  --vp-c-brand-2: #3b82f6;
-  --vp-c-brand-3: #2563eb;
-  --vp-c-brand-soft: rgba(96, 165, 250, 0.16);
+  --vp-c-brand-1: #f5b1aa;
+  --vp-c-brand-2: #eebbcb;
+  --vp-c-brand-3: #f4b3c2;
+  --vp-c-brand-soft: rgba(245, 177, 170, 0.16);
 }
 
 .VPHero .image-src {
   border-radius: 50%;
-  box-shadow: 0 0 60px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 60px rgba(233, 82, 149, 0.3);
   transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.dark .VPHero .image-src {
+  box-shadow: 0 0 60px rgba(245, 177, 170, 0.35);
 }
 
 .VPHero .image-src:hover {
   transform: scale(1.05) rotate(3deg);
-  box-shadow: 0 0 80px rgba(59, 130, 246, 0.45);
+  box-shadow: 0 0 80px rgba(233, 82, 149, 0.45);
+}
+
+.dark .VPHero .image-src:hover {
+  box-shadow: 0 0 80px rgba(245, 177, 170, 0.5);
 }
 
 .VPHero .image-bg {
-  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(233, 82, 149, 0.12) 0%, transparent 70%);
+}
+
+.dark .VPHero .image-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(245, 177, 170, 0.14) 0%, transparent 70%);
 }
 
 .VPFeature {
@@ -54,13 +65,17 @@
 
 .VPFeature:hover {
   border-color: var(--vp-c-brand-1);
-  box-shadow: 0 4px 24px rgba(59, 130, 246, 0.12);
+  box-shadow: 0 4px 24px rgba(233, 82, 149, 0.1);
   transform: translateY(-2px);
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 4px 24px rgba(245, 177, 170, 0.12);
 }
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --vp-home-hero-name-background: linear-gradient(135deg, #e95295 0%, #eb6ea5 35%, #f5b1aa 70%);
 }
 
 .clip {

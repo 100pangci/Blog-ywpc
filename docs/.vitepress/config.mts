@@ -30,7 +30,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/Blog-ywpc/favicon.ico' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: "Ywpc's Blog RSS", href: '/Blog-ywpc/feed.xml' }],
-    ['meta', { name: 'theme-color', content: '#3b82f6' }],
+    ['meta', { name: 'theme-color', content: '#e95295' }],
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:locale', content: 'zh_CN' }],
   ],
