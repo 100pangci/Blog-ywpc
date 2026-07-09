@@ -94,3 +94,34 @@ npm run docs:build
 - RSS 订阅 (`/feed.xml`)
 - Sitemap 自动生成
 - 图片画廊
+
+## 主题架构
+
+> 博客插件 `vitepress-plugin-blog` 的 `BlogPostLayout` 在 SSR 阶段会因 `virtual:blog-posts` 虚拟模块加载失败而退化为默认布局。已将文章详情页的布局逻辑完全提取到主题层，不依赖插件的 SSR。
+
+```
+docs/.vitepress/theme/
+├── index.ts                 # 入口，注册 doc-before / doc-after 插槽
+├── style/vars.css           # 全局样式变量 + 移动端适配 + 毛玻璃背景
+├── components/
+│   ├── BlogPostMeta.vue     # 文章头部（面包屑 / 标题 / 描述 / 作者 / 日期 / 标签 / 封面）
+│   ├── BlogPostNav.vue      # 上下篇导航
+│   ├── Busuanzi.vue         # 不蒜子统计（独立 JSONP + 5s 超时回退）
+│   └── GiscusComment.vue    # Giscus 评论
+└── composables/
+    └── usePosts.ts          # import.meta.glob 扫描 docs/posts/ 目录，解析 frontmatter，
+                              计算阅读时间，提供 prev/next 导航数据
+```
+
+**文章详情页渲染流程：**
+
+1. `theme/index.ts` 通过 `doc-before` 插槽检测 `frontmatter.blogPost === true`
+2. 匹配到时渲染 `BlogPostMeta`（面包屑、标题、标签等）—— SSR 直接输出静态 HTML
+3. `doc-after` 插槽追加 `BlogPostNav`（上下篇）+ `Busuanzi` + `GiscusComment`
+
+**与博客插件的分工：**
+
+- **列表页** `/posts/`：仍使用插件的 `<BlogIndex />` 组件（客户端 hydration 正常）
+- **文章页** `/posts/xxx`：由主题层接管，通过 `usePosts.ts` 的 `import.meta.glob` 在构建期扫描文章，SSR 友好
+
+**写文章注意：** 标题由 frontmatter 的 `title` 字段渲染为 `<h1>`，markdown 正文中不要重复写 `# 标题`，否则会出现双标题。
