@@ -5,4 +5,4 @@ comment: false
 published: false
 ---
 
-<BlogIndex />
+<BlogList />

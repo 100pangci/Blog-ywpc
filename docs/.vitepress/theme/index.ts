@@ -2,15 +2,14 @@ import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import type { Theme } from 'vitepress'
-import { withBlogTheme } from 'vitepress-plugin-blog'
-import 'vitepress-plugin-blog/style.css'
 import GiscusComment from './components/GiscusComment.vue'
 import Busuanzi from './components/Busuanzi.vue'
 import BlogPostMeta from './components/BlogPostMeta.vue'
 import BlogPostNav from './components/BlogPostNav.vue'
+import BlogList from './components/BlogList.vue'
 import './style/vars.css'
 
-const enhanced = {
+export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
@@ -35,6 +34,7 @@ const enhanced = {
       },
     })
   },
+  enhanceApp({ app }) {
+    app.component('BlogList', BlogList)
+  },
 } satisfies Theme
-
-export default withBlogTheme(enhanced)

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { RssPlugin, type RSSOptions } from 'vitepress-plugin-rss'
-import { blogPlugin } from 'vitepress-plugin-blog/plugin'
 import taskLists from 'markdown-it-task-lists'
 
 const RSS: RSSOptions = {
@@ -48,7 +47,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [RssPlugin(RSS), blogPlugin({ postsDir: 'posts' })],
+    plugins: [RssPlugin(RSS)],
   },
 
   themeConfig: {

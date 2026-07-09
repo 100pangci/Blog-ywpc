@@ -30,6 +30,8 @@ description: 文章摘要（可选）
 你的 Markdown 内容...
 ```
 
+> 标题由 frontmatter 的 `title` 字段自动渲染为 `<h1>`，正文中不要重复写 `# 标题`。
+
 ### 生活随笔
 
 在 `docs/life/` 下新建 `.md` 文件：
@@ -74,30 +76,39 @@ npm run docs:build
 
 ### 2. 配置 Giscus 评论
 
-1. 访问 [giscus.app](https://giscus.app) 获取配置（需使用公共仓库，且开启 Discussions 功能）
+1. 访问 [giscus.app](https://giscus.app) 获取配置
 2. 修改 `docs/.vitepress/theme/components/GiscusComment.vue` 中的默认值：
    - `repo`：已配置为 `100pangci/Blog-ywpc`
    - `repoId`：已配置
    - `categoryId`：已配置
 3. 单篇文章关闭评论：在 frontmatter 中设置 `comment: false`
 
-### 3. 配置不蒜子统计
+### 3. 配置自部署页面计数器
 
-无需额外配置，已自动加载 busuanzi 脚本。统计信息显示在文章底部和页脚。
+> 不再使用不蒜子（`busuanzi.ibruce.info`）服务。改为自部署的 Cloudflare Worker。
 
-## 功能
+1. 安装 [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)（`npm i -g wrangler`）
+2. 登录 Cloudflare：`wrangler login`
+3. 创建 KV Namespace：`wrangler kv:namespace create "BLOG_COUNTER"`
+4. 复制输出的 namespace ID
+5. 在 `docs/counter-worker.js` 顶部有 `wrangler.toml` 模板，创建文件后填入 namespace ID：
 
-- 站内全文搜索
-- 暗色模式（跟随系统）
-- Giscus 评论系统
-- 不蒜子访问统计
-- RSS 订阅 (`/feed.xml`)
-- Sitemap 自动生成
-- 图片画廊
+```toml
+name = "blog-counter"
+main = "counter.js"
+compatibility_date = "2026-01-01"
+
+[[kv_namespaces]]
+binding = "BLOG_COUNTER"
+id = "你的namespace-id"
+```
+
+6. 部署：`wrangler deploy`
+7. 修改 `docs/.vitepress/theme/components/Busuanzi.vue` 第一行的 `COUNTER_ENDPOINT` 为你的 worker 地址。
 
 ## 主题架构
 
-> 博客插件 `vitepress-plugin-blog` 的 `BlogPostLayout` 在 SSR 阶段会因 `virtual:blog-posts` 虚拟模块加载失败而退化为默认布局。已将文章详情页的布局逻辑完全提取到主题层，不依赖插件的 SSR。
+完全自建的 VitePress 主题，不依赖 `vitepress-plugin-blog`：
 
 ```
 docs/.vitepress/theme/
@@ -106,22 +117,26 @@ docs/.vitepress/theme/
 ├── components/
 │   ├── BlogPostMeta.vue     # 文章头部（面包屑 / 标题 / 描述 / 作者 / 日期 / 标签 / 封面）
 │   ├── BlogPostNav.vue      # 上下篇导航
-│   ├── Busuanzi.vue         # 不蒜子统计（独立 JSONP + 5s 超时回退）
+│   ├── BlogList.vue         # 博客列表页（搜索 + 标签筛选）
+│   ├── Busuanzi.vue         # 自部署计数器（Cloudflare Worker）
 │   └── GiscusComment.vue    # Giscus 评论
 └── composables/
-    └── usePosts.ts          # import.meta.glob 扫描 docs/posts/ 目录，解析 frontmatter，
-                              计算阅读时间，提供 prev/next 导航数据
+    └── usePosts.ts          # import.meta.glob 扫描 posts/，SSR 友好
 ```
 
 **文章详情页渲染流程：**
 
 1. `theme/index.ts` 通过 `doc-before` 插槽检测 `frontmatter.blogPost === true`
 2. 匹配到时渲染 `BlogPostMeta`（面包屑、标题、标签等）—— SSR 直接输出静态 HTML
-3. `doc-after` 插槽追加 `BlogPostNav`（上下篇）+ `Busuanzi` + `GiscusComment`
+3. `doc-after` 插槽追加 `BlogPostNav`（上下篇）+ 计数器 + Giscus 评论
 
-**与博客插件的分工：**
+## 功能
 
-- **列表页** `/posts/`：仍使用插件的 `<BlogIndex />` 组件（客户端 hydration 正常）
-- **文章页** `/posts/xxx`：由主题层接管，通过 `usePosts.ts` 的 `import.meta.glob` 在构建期扫描文章，SSR 友好
-
-**写文章注意：** 标题由 frontmatter 的 `title` 字段渲染为 `<h1>`，markdown 正文中不要重复写 `# 标题`，否则会出现双标题。
+- 站内全文搜索
+- 暗色模式（跟随系统）
+- Giscus 评论系统
+- 自部署页面计数器
+- RSS 订阅 (`/feed.xml`)
+- Sitemap 自动生成
+- 图片画廊
+- Markdown 任务列表 (`- [ ]`)
