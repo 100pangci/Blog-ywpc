@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 interface Props {
   repo?: string
@@ -25,7 +25,29 @@ const props = withDefaults(defineProps<Props>(), {
 
 const scriptLoaded = ref(false)
 
+function getTheme(): string {
+  if (typeof document === 'undefined') return 'light'
+  const stored = localStorage.getItem('vitepress-theme-appearance')
+  if (stored === 'dark') return 'dark'
+  if (stored === 'light') return 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+function sendGiscusTheme(theme: string) {
+  const iframe = document.querySelector<HTMLIFrameElement>('.giscus-comment iframe')
+  if (iframe?.contentWindow) {
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme === 'dark' ? 'dark_dimmed' : 'light' } } },
+      'https://giscus.app'
+    )
+  }
+}
+
+let observer: MutationObserver | null = null
+
 onMounted(() => {
+  const currentTheme = getTheme()
+
   const script = document.createElement('script')
   script.src = 'https://giscus.app/client.js'
   script.setAttribute('data-repo', props.repo)
@@ -37,13 +59,22 @@ onMounted(() => {
   script.setAttribute('data-reactions-enabled', '1')
   script.setAttribute('data-emit-metadata', '0')
   script.setAttribute('data-input-position', 'bottom')
-  script.setAttribute('data-theme', 'preferred_color_scheme')
+  script.setAttribute('data-theme', currentTheme)
   script.setAttribute('data-lang', 'zh-CN')
   script.setAttribute('crossorigin', 'anonymous')
   script.setAttribute('async', '')
   script.onload = () => {
     scriptLoaded.value = true
+
+    observer = new MutationObserver(() => {
+      sendGiscusTheme(getTheme())
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
   }
   document.querySelector('.giscus-comment')?.appendChild(script)
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
 })
 </script>
