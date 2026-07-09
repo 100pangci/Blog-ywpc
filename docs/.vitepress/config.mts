@@ -33,7 +33,7 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#e95295' }],
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:locale', content: 'zh_CN' }],
-    ['script', {}, `document.addEventListener('DOMContentLoaded',function(){var e=document.querySelector('.VPHero .image-container');if(e){var t=e.querySelector('img');if(!t)return;var o=!1;e.addEventListener('mousemove',function(n){var r=e.getBoundingClientRect(),i=(n.clientX-r.left)/r.width-.5,u=(n.clientY-r.top)/r.height-.5;t.style.transform='rotateX('+Math.round(u*-10)+'deg) rotateY('+Math.round(i*10)+'deg)';t.style.boxShadow='0 8px 60px rgba(233,82,149,0.45)';o||(o=!0,t.style.transition='none')});e.addEventListener('mouseleave',function(){o=!1,t.style.transition='transform .6s ease,box-shadow .6s ease';t.style.transform='';t.style.boxShadow=''})}document.querySelectorAll('.VPFeature').forEach(function(c){c.addEventListener('mousemove',function(n){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(n.clientX-r.left)/r.width*100+'%');c.style.setProperty('--my',(n.clientY-r.top)/r.height*100+'%')})})});`],
+    ['script', {}, `document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.VPFeature').forEach(function(c){c.addEventListener('mousemove',function(n){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(n.clientX-r.left)/r.width*100+'%');c.style.setProperty('--my',(n.clientY-r.top)/r.height*100+'%')})})});`],
   ],
 
   sitemap: {
