@@ -19,18 +19,26 @@ npm run docs:dev
 
 ```md
 ---
-blogPost: true
-title: 文章标题
-date: 2026-07-09
-author: 100pangci
-tags: [标签1, 标签2]
-description: 文章摘要（可选）
+blogPost: true        # 标记为博客文章（必须）
+title: 文章标题        # 页面标题和列表显示（必须）
+date: 2026-07-09      # 发布日期，用于排序
+author: 100pangci     # 作者名（可写 GitHub 用户名）
+tags: [Vue, VitePress]  # 标签，列表页可筛选
+description: 文章摘要   # 可选，不填则自动截取正文首段
+cover: /images/xxx.png # 可选，封面图
 ---
 
 你的 Markdown 内容...
 ```
 
-> 标题由 frontmatter 的 `title` 字段自动渲染为 `<h1>`，正文中不要重复写 `# 标题`。
+> **注意**：标题由 frontmatter 的 `title` 自动渲染为 `<h1>`，正文中**不要重复写 `# 标题`**，否则会出现两个标题。
+
+**文章自动获得：**
+- 面包屑导航（技术博客 / 文章标题）
+- 作者、发布日期、阅读时间（自动计算）
+- 标签胶囊
+- 上下篇导航（按日期排序）
+- Giscus 评论（可关闭）
 
 ### 生活随笔
 
@@ -40,13 +48,69 @@ description: 文章摘要（可选）
 ---
 title: 随笔标题
 date: 2026-07-09
-tags: [标签1, 标签2]
+tags: [生活, 旅行]
 ---
 
 你的内容...
 ```
 
-### 图片引用
+> 生活随笔不会出现在 `/posts/` 技术博客列表中，仅在 `/life/` 下展示。
+
+### Frontmatter 字段说明
+
+| 字段 | 适用 | 说明 |
+|------|------|------|
+| `blogPost` | 技术博客 | `true` 时标记为文章，获得完整文章布局 |
+| `title` | 全部 | 页面标题，同时也作为列表显示的标题 |
+| `date` | 全部 | `YYYY-MM-DD` 格式，按此降序排列 |
+| `tags` | 全部 | 数组 `[标签1, 标签2]`，列表页可筛选 |
+| `author` | 技术博客 | 作者名，GitHub 用户名会自动显示头像 |
+| `description` | 全部 | 列表页显示的摘要，不填则自动截取正文 |
+| `cover` | 技术博客 | 封面图 URL 或 `/images/xxx.png` |
+| `comment` | 全部 | `false` 时关闭该页 Giscus 评论 |
+| `aside` | 全部 | `false` 时隐藏右侧大纲栏 |
+| `published` | 全部 | `false` 时不在任何列表中出现 |
+
+### Markdown 功能
+
+该博客支持标准 Markdown 语法及以下扩展：
+
+**任务列表：**
+```md
+- [x] 已完成的事项
+- [ ] 待办的事项
+```
+
+**代码块（带高亮和行号）：**
+````md
+```js
+console.log('Hello World')
+```
+````
+
+**表格：**
+```md
+| 名称 | 说明 |
+|------|------|
+| Foo  | Bar  |
+```
+
+**提示框：**
+```md
+::: tip 提示
+这是一条提示信息
+:::
+
+::: warning 注意
+这是一条警告
+:::
+
+::: danger 危险
+这是危险提醒
+:::
+```
+
+**图片引用：**
 
 将图片放入 `docs/public/images/`，在文章中引用：
 
@@ -56,7 +120,22 @@ tags: [标签1, 标签2]
 
 ### 关闭评论
 
-在 frontmatter 中添加 `comment: false` 即可关闭单篇文章的 Giscus 评论。
+在 frontmatter 中添加 `comment: false` 即可关闭单篇文章的 Giscus 评论：
+
+```md
+---
+title: 某篇文章
+comment: false
+---
+```
+
+### 预览文章
+
+```bash
+npm run docs:dev
+```
+
+浏览器打开 `http://localhost:5173/Blog-ywpc/`，修改 Markdown 后页面会自动热更新。
 
 ## 构建
 
