@@ -29,3 +29,90 @@
   --vp-c-brand-3: #2563eb;
   --vp-c-brand-soft: rgba(96, 165, 250, 0.16);
 }
+
+.VPHero .image-src {
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.VPHero .image-src:hover {
+  transform: scale(1.05) rotate(3deg);
+  box-shadow: 0 0 80px rgba(59, 130, 246, 0.45);
+}
+
+.VPHero .image-bg {
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.VPFeature {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 4px 24px rgba(59, 130, 246, 0.12);
+  transform: translateY(-2px);
+}
+
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+}
+
+.clip {
+  background: var(--vp-home-hero-name-background);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}
+
+.vp-doc a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.vp-doc a:hover {
+  text-decoration: underline;
+}
+
+.custom-block {
+  border-radius: 8px;
+}
+
+.vp-doc img {
+  border-radius: 8px;
+}
+
+.vp-doc table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+div[class*="language-"] {
+  border-radius: 8px;
+}
+
+.VPSidebarItem .text {
+  transition: color 0.2s;
+}

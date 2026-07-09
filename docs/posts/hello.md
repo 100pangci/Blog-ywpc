@@ -1,7 +1,9 @@
 ---
+blogPost: true
 title: Hello World - 我的第一篇文章
 date: 2026-07-01
-tags: ['技术', '入门']
+author: 100pangci
+tags: [技术, 入门]
 ---
 
 # Hello World

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "vitepress-plugin-blog": "^0.2.0",
     "vue": "^3.5.39"
   },
   "devDependencies": {

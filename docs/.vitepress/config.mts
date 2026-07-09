@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { RssPlugin, type RSSOptions } from 'vitepress-plugin-rss'
+import { blogPlugin } from 'vitepress-plugin-blog/plugin'
 
 const RSS: RSSOptions = {
   title: "Ywpc's Blog",
@@ -39,7 +40,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [RssPlugin(RSS)],
+    plugins: [RssPlugin(RSS), blogPlugin({ postsDir: 'posts' })],
   },
 
   themeConfig: {
@@ -71,8 +72,8 @@ export default defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
-      { text: '技术博客', link: '/posts/hello' },
-      { text: '生活随笔', link: '/life/first' },
+      { text: '技术博客', link: '/posts/' },
+      { text: '生活随笔', link: '/life/' },
       { text: '作品展示', link: '/gallery/' },
       { text: '关于', link: '/about' },
     ],
@@ -82,6 +83,7 @@ export default defineConfig({
         {
           text: '技术博客',
           items: [
+            { text: '全部文章', link: '/posts/' },
             { text: 'Hello World', link: '/posts/hello' },
           ],
         },
@@ -90,6 +92,7 @@ export default defineConfig({
         {
           text: '生活随笔',
           items: [
+            { text: '全部随笔', link: '/life/' },
             { text: '第一篇随笔', link: '/life/first' },
           ],
         },
@@ -106,7 +109,6 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/100pangci' },
-      { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>' }, link: '/feed.xml', ariaLabel: 'RSS Feed' },
     ],
 
     outline: {
