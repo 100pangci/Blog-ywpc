@@ -16,29 +16,60 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const isDocPage = ref(false)
+const ids = ['busuanzi_value_site_pv', 'busuanzi_value_site_uv', 'busuanzi_value_page_pv']
 
+let scriptEl: HTMLScriptElement | null = null
 let timer: number | null = null
+
+function dash() {
+  ids.forEach(id => {
+    const span = document.getElementById(id)
+    if (span && span.textContent === '...') span.textContent = '—'
+  })
+}
 
 onMounted(() => {
   isDocPage.value = !!document.querySelector('.content')
 
-  const el = document.createElement('script')
-  el.async = true
-  el.referrerPolicy = 'no-referrer-when-downgrade'
-  el.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-  document.head.appendChild(el)
+  const cb = 'BusuanziCallback_' + Math.floor(Math.random() * 1e12)
+  ;(window as any)[cb] = (data: Record<string, string>) => {
+    if (scriptEl && scriptEl.parentNode) {
+      scriptEl.parentNode.removeChild(scriptEl)
+      scriptEl = null
+    }
+    if (timer !== null) { clearTimeout(timer); timer = null }
+    if (data) {
+      ['site_pv', 'site_uv', 'page_pv'].forEach(key => {
+        const span = document.getElementById('busuanzi_value_' + key)
+        if (span && data[key] != null) span.textContent = String(data[key])
+      })
+    }
+    // clean stale callbacks
+    delete (window as any)[cb]
+  }
+
+  scriptEl = document.createElement('script')
+  scriptEl.async = true
+  scriptEl.referrerPolicy = 'no-referrer-when-downgrade'
+  scriptEl.onerror = () => { dash(); cleanup() }
+  scriptEl.src = `https://busuanzi.ibruce.info/busuanzi?jsonpCallback=${cb}`
+  document.head.appendChild(scriptEl)
 
   timer = window.setTimeout(() => {
-    ;['busuanzi_value_site_pv', 'busuanzi_value_site_uv', 'busuanzi_value_page_pv'].forEach(id => {
-      const span = document.getElementById(id)
-      if (span && span.textContent === '...') span.textContent = '—'
-    })
-  }, 5000)
+    dash()
+    cleanup()
+  }, 8000)
 })
 
-onUnmounted(() => {
-  if (timer !== null) clearTimeout(timer)
-})
+function cleanup() {
+  if (scriptEl && scriptEl.parentNode) {
+    scriptEl.parentNode.removeChild(scriptEl)
+    scriptEl = null
+  }
+  if (timer !== null) { clearTimeout(timer); timer = null }
+}
+
+onUnmounted(() => { cleanup() })
 </script>
 
 <style scoped>

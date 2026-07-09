@@ -16,6 +16,7 @@
     "vue": "^3.5.39"
   },
   "devDependencies": {
+    "markdown-it-task-lists": "^2.1.1",
     "vitepress": "^1.6.4",
     "vitepress-plugin-rss": "^0.4.4"
   }

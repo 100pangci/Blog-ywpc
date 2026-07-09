@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { RssPlugin, type RSSOptions } from 'vitepress-plugin-rss'
 import { blogPlugin } from 'vitepress-plugin-blog/plugin'
+import taskLists from 'markdown-it-task-lists'
 
 const RSS: RSSOptions = {
   title: "Ywpc's Blog",
@@ -26,6 +27,12 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
   ignoreDeadLinks: true,
+
+  markdown: {
+    config: (md) => {
+      md.use(taskLists)
+    },
+  },
 
   head: [
     ['link', { rel: 'icon', href: '/Blog-ywpc/favicon.ico' }],
