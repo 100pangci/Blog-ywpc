@@ -28,7 +28,7 @@
 
     <div v-if="filtered.length" class="blog-list__grid">
       <article v-for="post in filtered" :key="post.url" class="blog-list__card">
-        <a :href="post.url" class="blog-list__link">
+          <a :href="withBase(post.url)" class="blog-list__link">
           <div class="blog-list__card-body">
             <h2 class="blog-list__title">{{ post.title }}</h2>
             <div class="blog-list__meta">
@@ -52,6 +52,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
 
 const { allPosts } = usePosts()
