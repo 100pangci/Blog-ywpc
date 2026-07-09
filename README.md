@@ -11,6 +11,51 @@ npm run docs:dev
 
 浏览器打开 http://localhost:5173/Blog-ywpc/ 查看效果。
 
+## 发布文章
+
+### 技术博客
+
+在 `docs/posts/` 下新建 `.md` 文件，按以下格式编写：
+
+```md
+---
+blogPost: true
+title: 文章标题
+date: 2026-07-09
+author: 100pangci
+tags: [标签1, 标签2]
+description: 文章摘要（可选）
+---
+
+你的 Markdown 内容...
+```
+
+### 生活随笔
+
+在 `docs/life/` 下新建 `.md` 文件：
+
+```md
+---
+title: 随笔标题
+date: 2026-07-09
+tags: [标签1, 标签2]
+---
+
+你的内容...
+```
+
+### 图片引用
+
+将图片放入 `docs/public/images/`，在文章中引用：
+
+```md
+![描述](/images/your-image.png)
+```
+
+### 关闭评论
+
+在 frontmatter 中添加 `comment: false` 即可关闭单篇文章的 Giscus 评论。
+
 ## 构建
 
 ```bash
@@ -32,18 +77,13 @@ npm run docs:build
 1. 访问 [giscus.app](https://giscus.app) 获取配置（需使用公共仓库，且开启 Discussions 功能）
 2. 修改 `docs/.vitepress/theme/components/GiscusComment.vue` 中的默认值：
    - `repo`：已配置为 `100pangci/Blog-ywpc`
-   - `repoId`：替换 `<你的Giscus Repo ID>`
-   - `categoryId`：替换 `<你的Giscus Category ID>`
+   - `repoId`：已配置
+   - `categoryId`：已配置
 3. 单篇文章关闭评论：在 frontmatter 中设置 `comment: false`
 
 ### 3. 配置不蒜子统计
 
 无需额外配置，已自动加载 busuanzi 脚本。统计信息显示在文章底部和页脚。
-
-### 4. 待填项
-
-- `docs/.vitepress/config.mts` 页脚中的 `备案号待填`
-- `docs/.vitepress/theme/components/GiscusComment.vue` 中的 Giscus repoId / categoryId
 
 ## 功能
 
