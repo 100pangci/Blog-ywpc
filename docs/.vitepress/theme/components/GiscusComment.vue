@@ -18,9 +18,9 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   repo: '100pangci/Blog-ywpc',
-  repoId: '<你的Giscus Repo ID>',
+  repoId: 'R_kgDOTTRCWA',
   category: 'Announcements',
-  categoryId: '<你的Giscus Category ID>',
+  categoryId: 'DIC_kwDOTTRCWM4DA1Gl',
 })
 
 const scriptLoaded = ref(false)
