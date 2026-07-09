@@ -61,7 +61,8 @@
 
 /* ---------- Hero ---------- */
 .VPHero .name {
-  padding-top: 12px;
+  padding-top: 0;
+  margin-top: -8px;
   letter-spacing: -0.02em;
   background-size: 200% auto;
   animation: hero-gradient 6s ease infinite;
