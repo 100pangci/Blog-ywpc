@@ -60,6 +60,10 @@
 }
 
 /* ---------- Hero ---------- */
+.VPHero {
+  padding-bottom: 32px !important;
+}
+
 .VPHero .name {
   padding-top: 12px;
   padding-bottom: 4px;
