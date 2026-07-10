@@ -10,6 +10,7 @@ import BlogPostNav from './components/BlogPostNav.vue'
 import BlogList from './components/BlogList.vue'
 import BackToTop from './components/BackToTop.vue'
 import LoadingBar from './components/LoadingBar.vue'
+import FloatingToc from './components/FloatingToc.vue'
 import './style/vars.css'
 
 export default {
@@ -38,7 +39,7 @@ export default {
         return children
       },
       // 布局顶部：加载进度条 + 回到顶部按钮
-      'layout-top': () => [h(LoadingBar), h(BackToTop)],
+      'layout-top': () => [h(LoadingBar), h(BackToTop), h(FloatingToc)],
     })
   },
   // 全局注册 BlogList 组件，供 Markdown 中通过 <BlogList /> 调用

@@ -376,6 +376,10 @@ html.dark {
 
 /* ---------- Mobile adaptation ---------- */
 @media (max-width: 768px) {
+  .VPFeatures {
+    padding-top: 16px !important;
+  }
+
   .VPFeatures .container {
     padding: 0 16px 16px;
     gap: 16px !important;
