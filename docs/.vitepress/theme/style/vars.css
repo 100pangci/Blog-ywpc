@@ -91,26 +91,48 @@
   }
 }
 
-.VPHero .image-src {
-  border-radius: 50%;
+.VPHero .image-container {
+  width: 320px !important;
+  height: 320px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 959px) {
+  .VPHero .image {
+    margin: 0 !important;
+  }
+
+  .VPHero .image-container {
+    width: 224px !important;
+    height: 224px !important;
+  }
+}
+
+.VPHero .image-container .image-src {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  transform: none !important;
+  border-radius: 0 !important;
   box-shadow: 0 10px 60px rgba(233, 82, 149, 0.3);
   transition: transform 0.6s ease, box-shadow 0.6s ease;
 }
 
-.VPHero .image-container {
-  perspective: 800px;
-}
-
-.dark .VPHero .image-src {
+.dark .VPHero .image-container .image-src {
   box-shadow: 0 10px 60px rgba(245, 177, 170, 0.35);
 }
 
 .VPHero .image-bg {
-  background: radial-gradient(circle at 50% 50%, rgba(233, 82, 149, 0.12) 0%, transparent 70%);
-}
-
-.dark .VPHero .image-bg {
-  background: radial-gradient(circle at 50% 50%, rgba(245, 177, 170, 0.14) 0%, transparent 70%);
+  display: none !important;
 }
 
 .VPButton.brand {
