@@ -23,7 +23,7 @@ const modules = import.meta.glob('../../../posts/*.md', {
 
 /** 简易 frontmatter 解析（YAML 键值对，支持数组和引号） */
 function parseFrontmatter(raw: string): Record<string, any> {
-  const match = raw.match(/^---\n([\s\S]*?)\n---/)
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!match) return {}
   const fm: Record<string, any> = {}
   match[1].split('\n').forEach(line => {

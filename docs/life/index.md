@@ -23,7 +23,7 @@ const posts = computed<Post[]>(() => {
     .filter(([path]) => path !== './index.md')
     .map(([path, raw]) => {
       const content = raw as string
-      const fmMatch = content.match(/^---\n([\s\S]*?)\n---/)
+      const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
       const frontmatter: Record<string, any> = {}
 
       if (fmMatch) {
