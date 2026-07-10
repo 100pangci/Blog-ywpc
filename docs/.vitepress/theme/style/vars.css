@@ -414,3 +414,8 @@ html.dark {
 .vp-doc {
   -webkit-overflow-scrolling: touch;
 }
+
+/* ---------- Aside curtain fix ---------- */
+.aside-curtain {
+  background: transparent !important;
+}
