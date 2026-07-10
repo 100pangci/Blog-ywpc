@@ -360,12 +360,12 @@ html.dark {
   opacity: 0.85;
 }
 
-.VPFooter :deep(a) {
+.VPFooter a {
   pointer-events: auto;
   text-decoration: none;
 }
 
-.VPFooter :deep(a):hover {
+.VPFooter a:hover {
   text-decoration: underline;
 }
 

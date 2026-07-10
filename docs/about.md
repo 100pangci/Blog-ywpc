@@ -3,8 +3,6 @@ title: 关于我
 comment: true
 ---
 
-# 关于我
-
 我是 **ywpc**，也可以叫我百分百原味胖次。
 
 ## GitHub 项目

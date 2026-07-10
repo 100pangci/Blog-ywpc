@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+// 文章元信息组件 — 面包屑、标题、描述、作者、日期、标签、封面
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
@@ -44,13 +45,17 @@ const fm = computed(() => frontmatter.value)
 const tags = computed(() => fm.value.tags || [])
 const { allPosts } = usePosts()
 
+// 从当前页面相对路径提取 slug
 const currentSlug = computed(() => {
   const rp = page.value.relativePath || ''
   return rp.replace(/.*\//, '').replace(/\.md$/, '')
 })
 
+// 查找当前文章对象以获取阅读时间等额外信息
 const post = computed(() => allPosts.value.find(p => p.slug === currentSlug.value) || null)
 const readingTime = computed(() => post.value?.readingTime || null)
+
+// 格式化日期为中文显示
 const formattedDate = computed(() => {
   if (!fm.value.date) return ''
   try {

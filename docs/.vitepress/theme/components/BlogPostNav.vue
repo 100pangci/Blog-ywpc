@@ -15,11 +15,13 @@
 </template>
 
 <script setup lang="ts">
+// 上下篇导航组件 — 基于文章日期顺序提供「上一篇 / 下一篇」链接
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { getAdjacentPosts } from '../composables/usePosts'
 
 const { page } = useData()
+// 从当前页面相对路径提取 slug
 const slug = computed(() => {
   const rp = page.value.relativePath || ''
   return rp.replace(/.*\//, '').replace(/\.md$/, '')

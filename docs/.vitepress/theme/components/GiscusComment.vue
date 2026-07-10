@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts">
+// Giscus 评论组件 — 基于 GitHub Discussions 的评论系统
 import { ref, onMounted, onUnmounted } from 'vue'
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
   categoryId?: string
 }
 
+// 默认配置对应 100pangci/Blog-ywpc 仓库的 Discussions
 const props = withDefaults(defineProps<Props>(), {
   repo: '100pangci/Blog-ywpc',
   repoId: 'R_kgDOTTRCWA',
@@ -25,6 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const scriptLoaded = ref(false)
 
+// 获取当前主题（light / dark），与 VitePress 主题同步
 function getTheme(): string {
   if (typeof document === 'undefined') return 'light'
   const stored = localStorage.getItem('vitepress-theme-appearance')
@@ -33,6 +36,7 @@ function getTheme(): string {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
+// 通过 postMessage 通知 Giscus iframe 切换主题
 function sendGiscusTheme(theme: string) {
   const iframe = document.querySelector<HTMLIFrameElement>('.giscus-comment iframe')
   if (iframe?.contentWindow) {
@@ -48,6 +52,7 @@ let observer: MutationObserver | null = null
 onMounted(() => {
   const currentTheme = getTheme()
 
+  // 动态创建 Giscus 脚本并注入到容器
   const script = document.createElement('script')
   script.src = 'https://giscus.app/client.js'
   script.setAttribute('data-repo', props.repo)
@@ -66,6 +71,7 @@ onMounted(() => {
   script.onload = () => {
     scriptLoaded.value = true
 
+    // 监听 html 的 class 变化以同步切换评论主题
     observer = new MutationObserver(() => {
       sendGiscusTheme(getTheme())
     })

@@ -8,11 +8,9 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Ywpc",
   "license": "ISC",
   "dependencies": {
-    "vitepress-plugin-blog": "^0.2.0",
     "vue": "^3.5.39"
   },
   "devDependencies": {

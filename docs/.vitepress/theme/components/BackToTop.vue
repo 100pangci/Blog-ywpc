@@ -16,10 +16,12 @@
 </template>
 
 <script setup lang="ts">
+// 回到顶部按钮 — 滚动时显示/隐藏，点击平滑回到顶部
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRoute } from 'vitepress'
 
 const route = useRoute()
+// 首页不显示回到顶部按钮
 const isHome = computed(() => route.path === '/' || route.path === '/Blog-ywpc/')
 const visible = ref(false)
 

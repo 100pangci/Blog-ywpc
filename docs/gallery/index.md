@@ -5,6 +5,7 @@ comment: false
 ---
 
 <script setup>
+// 作品展示页 — 画廊网格布局，使用 picsum.photos 占位图
 const items = [
   { src: 'https://picsum.photos/seed/1/600/400', title: '示例作品 1', desc: '描述文字' },
   { src: 'https://picsum.photos/seed/2/600/400', title: '示例作品 2', desc: '描述文字' },

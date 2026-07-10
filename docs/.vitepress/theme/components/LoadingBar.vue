@@ -1,25 +1,29 @@
 <script setup lang="ts">
+// 加载进度条组件 — 页面切换时在顶部显示进度动画
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vitepress'
 
 const router = useRouter()
-const isLoading = ref(false)
-const progress = ref(0)
+const isLoading = ref(false)  // 是否正在加载
+const progress = ref(0)       // 当前进度（0–100）
 
 let timer: ReturnType<typeof setTimeout> | null = null
+
+// 保存原始路由钩子，以便在完成后恢复
 const savedHooks = {
   onBeforeRouteChange: router.onBeforeRouteChange,
   onAfterRouteChange: router.onAfterRouteChange,
 }
 
+// 开始加载：重置进度并启动模拟进度
 function start() {
   if (timer) clearTimeout(timer)
   progress.value = 0
   isLoading.value = true
-
   tick()
 }
 
+// 模拟进度递增（渐近逼近 95%，不会达到 100% 直到 finish 被调用）
 function tick() {
   const diff = 100 - progress.value
   progress.value += diff * 0.18
@@ -29,6 +33,7 @@ function tick() {
   }
 }
 
+// 加载完成：跳到 100% 并隐藏
 function finish() {
   if (timer) clearTimeout(timer)
   progress.value = 100
@@ -39,6 +44,7 @@ function finish() {
 }
 
 onMounted(() => {
+  // 劫持路由钩子以自动控制进度条
   router.onBeforeRouteChange = (to) => {
     start()
     return savedHooks.onBeforeRouteChange?.(to)
@@ -51,6 +57,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  // 恢复原始路由钩子
   router.onBeforeRouteChange = savedHooks.onBeforeRouteChange
   router.onAfterRouteChange = savedHooks.onAfterRouteChange
 })

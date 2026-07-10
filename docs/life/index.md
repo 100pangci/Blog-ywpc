@@ -3,6 +3,9 @@ comment: false
 ---
 
 <script setup lang="ts">
+// 生活随笔列表 — 扫描 life/ 目录下的 Markdown 生成文章卡片列表
+// 注意：此处的 frontmatter 解析逻辑与 usePosts.ts 中的 parseFrontmatter 重复，
+// 但鉴于 glob 路径不同且逻辑简单，暂保持独立
 import { computed } from 'vue'
 
 interface Post {

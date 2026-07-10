@@ -51,20 +51,23 @@
 </template>
 
 <script setup lang="ts">
+// 技术博客列表组件 — 支持搜索和标签筛选
 import { ref, computed } from 'vue'
 import { withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
 
 const { allPosts } = usePosts()
-const searchQuery = ref('')
-const activeTag = ref('all')
+const searchQuery = ref('')        // 搜索关键词
+const activeTag = ref('all')       // 当前选中的标签
 
+// 所有标签（去重、排序）
 const allTags = computed(() => {
   const set = new Set<string>()
   allPosts.value.forEach(p => p.tags.forEach(t => set.add(t)))
   return Array.from(set).sort()
 })
 
+// 过滤后的文章列表（同时匹配搜索和标签）
 const filtered = computed(() => {
   const q = searchQuery.value.trim().toLowerCase()
   const tag = activeTag.value
