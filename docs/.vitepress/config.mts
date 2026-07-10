@@ -95,17 +95,8 @@ export default defineConfig({
       { text: '关于', link: '/about' },
     ],
 
-    // 侧边栏（仅作品展示需要）
-    sidebar: {
-      '/gallery/': [
-        {
-          text: '作品展示',
-          items: [
-            { text: '画廊', link: '/gallery/' },
-          ],
-        },
-      ],
-    },
+    // 侧边栏
+    sidebar: {},
 
     // 社交链接
     socialLinks: [

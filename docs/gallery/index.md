@@ -1,6 +1,6 @@
 ---
 title: 作品展示
-layout: page
+aside: false
 comment: false
 ---
 
