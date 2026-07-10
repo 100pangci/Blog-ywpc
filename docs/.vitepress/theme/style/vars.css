@@ -417,5 +417,9 @@ html.dark {
 
 /* ---------- Aside curtain fix ---------- */
 .aside-curtain {
-  background: transparent !important;
+  display: none !important;
+}
+
+.aside-content {
+  padding-bottom: 0 !important;
 }
