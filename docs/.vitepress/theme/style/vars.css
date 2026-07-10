@@ -30,8 +30,10 @@
   --vp-nav-bg-color: rgba(255, 255, 255, 0.68);
   --vp-sidebar-bg-color: rgba(246, 246, 247, 0.68);
   --vp-local-search-bg: rgba(255, 255, 255, 0.88);
-  --vp-code-block-bg: rgba(41, 45, 62, 0.88);
+  --vp-code-block-bg: rgba(248, 248, 250, 0.92);
+  --vp-code-bg: rgba(233, 82, 149, 0.08);
 
+  --vp-nav-screen-bg-color: rgba(255, 255, 255, 0.92);
   --vp-c-divider: rgba(0, 0, 0, 0.06);
 }
 
@@ -40,6 +42,10 @@
   --vp-c-brand-2: #eebbcb;
   --vp-c-brand-3: #f4b3c2;
   --vp-c-brand-soft: rgba(245, 177, 170, 0.16);
+
+  --vp-c-text-1: rgba(255, 255, 255, 0.90);
+  --vp-c-text-2: rgba(235, 235, 245, 0.75);
+  --vp-c-text-3: rgba(235, 235, 245, 0.52);
 
   --vp-c-bg: rgba(30, 30, 32, 0.72);
   --vp-c-bg-soft: rgba(37, 37, 40, 0.72);
@@ -50,7 +56,9 @@
   --vp-sidebar-bg-color: rgba(37, 37, 40, 0.68);
   --vp-local-search-bg: rgba(37, 37, 40, 0.88);
   --vp-code-block-bg: rgba(22, 22, 24, 0.88);
+  --vp-code-bg: rgba(245, 177, 170, 0.12);
 
+  --vp-nav-screen-bg-color: rgba(30, 30, 32, 0.92);
   --vp-c-divider: rgba(255, 255, 255, 0.08);
 }
 
@@ -292,6 +300,16 @@
 div[class*="language-"] {
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+:root div[class*="language-"] {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark div[class*="language-"] {
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .VPSidebarItem .text {
@@ -327,6 +345,11 @@ html.dark {
 .VPSidebar {
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.VPNavScreen {
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
 .VPFooter {
@@ -393,6 +416,10 @@ html.dark {
   .vp-doc table,
   div[class*="language-"] {
     border-radius: 10px;
+  }
+
+  .vp-doc div[class*="language-"] {
+    margin: 16px 16px !important;
   }
 
   .VPFooter .container {

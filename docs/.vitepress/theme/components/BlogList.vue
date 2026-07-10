@@ -35,7 +35,7 @@
           <div class="blog-card__content">
             <div class="blog-card__header">
               <time v-if="post.date">{{ post.date }}</time>
-              <span v-if="post.readingTime"> · {{ post.readingTime }} min read</span>
+              <span v-if="post.readingTime">阅读时间：约 {{ post.readingTime }} 分钟 </span>
             </div>
             <h2 class="blog-card__title">{{ post.title }}</h2>
             <p v-if="post.description" class="blog-card__excerpt">{{ post.description }}</p>

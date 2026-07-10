@@ -8,6 +8,7 @@ let docTop = 0
 let naturalHeight = 0
 let isConstrained = false
 let lastActive: Element | null = null
+let tightened = false
 
 function remeasure() {
   if (!el || !document.contains(el)) return
@@ -37,8 +38,15 @@ function apply() {
     isConstrained = true
   }
 
-  if (scrollTop <= 0 && isConstrained) {
-    el.scrollTop = 0
+  if (scrollTop <= 0) {
+    tightened = false
+    if (isConstrained) el.scrollTop = 0
+  } else if (!tightened && isConstrained) {
+    tightened = true
+    const firstLink = el.querySelector<HTMLElement>('.outline-link')
+    if (firstLink) {
+      firstLink.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }
   }
 
   const naturalTop = docTop - scrollTop

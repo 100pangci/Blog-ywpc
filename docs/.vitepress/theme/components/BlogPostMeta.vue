@@ -19,7 +19,7 @@
         <span>{{ fm.author }}</span>
       </div>
       <time v-if="fm.date" :datetime="fm.date" class="blog-time">{{ formattedDate }}</time>
-      <span v-if="readingTime" class="blog-read"> · {{ readingTime }} min read</span>
+      <span v-if="readingTime" class="blog-read">阅读时间：约 {{ readingTime }} 分钟 </span>
     </div>
 
     <!-- tags -->
