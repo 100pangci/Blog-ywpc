@@ -78,7 +78,7 @@
 }
 
 .VPFeatures {
-  padding-top: 0 !important;
+  padding-top: 24px !important;
   padding-bottom: 0 !important;
 }
 
@@ -375,11 +375,7 @@ html.dark {
 }
 
 /* ---------- Mobile adaptation ---------- */
-@media (max-width: 768px) {
-  .VPFeatures {
-    padding-top: 16px !important;
-  }
-
+@media (max-width: 960px) {
   .VPFeatures .container {
     padding: 0 16px 16px;
     gap: 16px !important;
