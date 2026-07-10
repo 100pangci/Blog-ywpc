@@ -10,7 +10,7 @@ interface Post {
   slug: string
 }
 
-const zhModules = import.meta.glob('../../../life/*.md', {
+const zhModules = import.meta.glob('../../../zh/life/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -69,7 +69,7 @@ function buildPosts(modules: Record<string, any>, prefix: string): Post[] {
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
 }
 
-const zhPosts = computed(() => buildPosts(zhModules, ''))
+const zhPosts = computed(() => buildPosts(zhModules, 'zh/'))
 const enPosts = computed(() => buildPosts(enModules, 'en/'))
 const jaPosts = computed(() => buildPosts(jaModules, 'ja/'))
 

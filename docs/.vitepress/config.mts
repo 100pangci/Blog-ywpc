@@ -59,18 +59,18 @@ export default defineConfig({
 
   // ========== 多语言配置 ==========
   locales: {
-    root: {
+    zh: {
       label: '中文',
       lang: 'zh-CN',
       title: "Ywpc's Blog",
       description: '个人博客 - 技术笔记 / 生活随笔 / 作品展示',
       themeConfig: {
         nav: [
-          { text: '首页', link: '/' },
-          { text: '技术博客', link: '/posts/' },
-          { text: '生活随笔', link: '/life/' },
-          { text: '作品展示', link: '/gallery/' },
-          { text: '关于', link: '/about' },
+          { text: '首页', link: '/zh/' },
+          { text: '技术博客', link: '/zh/posts/' },
+          { text: '生活随笔', link: '/zh/life/' },
+          { text: '作品展示', link: '/zh/gallery/' },
+          { text: '关于', link: '/zh/about' },
         ],
         outline: { level: [2, 3], label: '本页目录' },
         editLink: {
@@ -170,7 +170,7 @@ export default defineConfig({
       provider: 'local',
       options: {
         locales: {
-          root: {
+          zh: {
             translations: {
               button: { buttonText: '搜索', buttonAriaLabel: '搜索文档' },
               modal: {

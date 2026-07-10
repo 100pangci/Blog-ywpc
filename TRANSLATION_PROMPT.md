@@ -22,8 +22,9 @@
 
 ```
 docs/
-├── posts/        # 中文技术博客
-├── life/         # 中文生活随笔
+├── zh/
+│   ├── posts/    # 中文技术博客
+│   └── life/     # 中文生活随笔
 ├── en/
 │   ├── posts/    # 英文技术博客
 │   └── life/     # 英文生活随笔
@@ -34,7 +35,7 @@ docs/
 
 # 任务
 
-1. **对比文件**：检查 `docs/en/posts/`、`docs/en/life/`、`docs/ja/posts/`、`docs/ja/life/` 目录，找出其中缺少的文件（相对于中文原文 `docs/posts/` 和 `docs/life/`）。
+1. **对比文件**：检查 `docs/en/posts/`、`docs/en/life/`、`docs/ja/posts/`、`docs/ja/life/` 目录，找出其中缺少的文件（相对于中文原文 `docs/zh/posts/` 和 `docs/zh/life/`）。
 
 2. **忽略规则**：
    - 跳过 `index.md`（列表页不需要翻译）

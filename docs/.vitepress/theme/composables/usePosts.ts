@@ -13,7 +13,7 @@ interface Post {
   readingTime: number
 }
 
-const zhModules = import.meta.glob('../../../posts/*.md', {
+const zhModules = import.meta.glob('../../../zh/posts/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -85,7 +85,7 @@ function buildPosts(modules: Record<string, any>, prefix: string): Post[] {
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
 }
 
-const zhPosts = computed(() => buildPosts(zhModules, ''))
+const zhPosts = computed(() => buildPosts(zhModules, 'zh/'))
 const enPosts = computed(() => buildPosts(enModules, 'en/'))
 const jaPosts = computed(() => buildPosts(jaModules, 'ja/'))
 

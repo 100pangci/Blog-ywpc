@@ -20,8 +20,9 @@
 
 ## 多语言架构
 
-- 使用 VitePress 内置 i18n（`locales` 配置），根路由 `/` = 中文，`/en/` = 英文，`/ja/` = 日文
-- 每种语言有独立的目录：`docs/`（中文）、`docs/en/`（英文）、`docs/ja/`（日文）
+- 使用 VitePress 内置 i18n（`locales` 配置），`/zh/` = 中文，`/en/` = 英文，`/ja/` = 日文
+- 根路由 `/` 根据浏览器 `Accept-Language` 自动跳转到对应语言
+- 每种语言有独立的目录：`docs/zh/`（中文）、`docs/en/`（英文）、`docs/ja/`（日文）
 - 组件内的 UI 文字通过 `useI18n` composable 获取，定义在 `docs/.vitepress/theme/composables/useI18n.ts`
 - 文章列表自动根据当前语言切换扫描目录（`usePosts.ts`、`useLifePosts.ts`）
 
@@ -33,11 +34,11 @@
   - `usePosts.ts` — 多语言感知，扫描 `posts/` / `en/posts/` / `ja/posts/`
   - `useLifePosts.ts` — 同上，扫描 `life/` 系列
   - `useI18n.ts` — 多语言文案（zh/en/ja）
-- `docs/posts/` — 中文技术博客（需 `blogPost: true` 获得完整文章布局）
-- `docs/life/` — 中文生活随笔
-- `docs/gallery/` — 中文作品展示
-- `docs/en/` — 英文内容（结构镜像根目录）
-- `docs/ja/` — 日文内容（结构镜像根目录）
+- `docs/zh/posts/` — 中文技术博客（需 `blogPost: true` 获得完整文章布局）
+- `docs/zh/life/` — 中文生活随笔
+- `docs/zh/gallery/` — 中文作品展示
+- `docs/en/` — 英文内容（结构镜像 `docs/zh/`）
+- `docs/ja/` — 日文内容（结构镜像 `docs/zh/`）
 - `docs/public/images/` — 静态图片
 - `docs/counter-worker.js` — Cloudflare Worker 计数器（独立部署，不属于 VitePress 构建）
 
@@ -57,7 +58,7 @@
 - CI 在 `main` 分支推送时自动部署（`.github/workflows/deploy.yml`）
 - GitHub Pages 需要选择 **GitHub Actions** 作为 Source
 - `base: '/Blog-ywpc/'`，所有硬编码 URL 须以此前缀
-- 语言切换通过 `/en/`、`/ja/` 前缀自动处理
+- 语言切换通过 `/zh/`、`/en/`、`/ja/` 前缀自动处理
 
 ## 外部服务
 

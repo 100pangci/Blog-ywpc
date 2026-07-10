@@ -2,7 +2,7 @@
   <div class="blog-post-meta">
     <!-- breadcrumbs -->
     <p class="blog-breadcrumbs">
-      <a :href="withBase('/posts/')">{{ t('postMeta.breadcrumb') }}</a>
+      <a :href="withBase('/' + locale + '/posts/')">{{ t('postMeta.breadcrumb') }}</a>
       <span aria-hidden="true"> / </span>
       <span>{{ fm.title }}</span>
     </p>
@@ -45,7 +45,7 @@ const { frontmatter, page } = useData()
 const fm = computed(() => frontmatter.value)
 const tags = computed(() => fm.value.tags || [])
 const { allPosts } = usePosts()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // 从当前页面相对路径提取 slug
 const currentSlug = computed(() => {

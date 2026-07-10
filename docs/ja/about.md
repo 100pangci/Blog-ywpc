@@ -35,4 +35,76 @@ comment: false
 - `2025-01-21` [How-To-Ask-Questions-The-Smart-Way-Galgame](https://github.com/GalGame-Work/How-To-Ask-Questions-The-Smart-Way-Galgame)
 - `2025-02-05` [キミと seven つ目の days Steam 完全版中国語パッチ](https://tieba.baidu.com/p/9470219388)
 
-> **注**：完全な日本語訳については、[中国語原文](/about) をご参照ください（作業中）。
+### 翻訳グループ
+
+#### 青桔漢化組
+
+- `2021-08-09` [ダストマニア・グロテスク　～解体挿入新書～](https://vndb.org/r82043)
+
+  *担当：導入、画像編集*
+
+- `2021-12-18` [僕は天使じゃないよ](https://vndb.org/r82042)
+
+  *担当：導入、潤色、テスト*
+
+#### 月見狐漢化組
+
+- `2022-06-05` [触祭の都](https://vndb.org/r92052)
+
+  *担当：プログラム、初翻、美術、監修*
+
+- `2023-07-19` [ラムネ](https://vndb.org/r94777)
+
+  *担当：初翻、校正潤色、美術、字幕、画像編集*
+
+- `2024-08-17` [3M -Marionettes manipulate the marionette-](https://vndb.org/r114707)
+
+  *担当：翻訳、美術、テスト*
+
+- `2026-01-28` [LOST:SMILE memories + promises](https://vndb.org/r93409)
+
+  *担当：統括協力、翻訳、初校、美術、特殊効果字幕*
+
+#### 萌AI同好会
+
+- `2023-11-30` [景の海のアペイリア](https://vndb.org/r57360)
+
+  *担当：画像編集*
+
+- `2025-02-01` [景の海のアペイリア ～カサブランカの騎士～](https://vndb.org/r131733)
+
+  *担当：画像編集*
+
+#### 伊甸学院
+
+- `2024-02-09` [月照～ツキノテラス～](https://vndb.org/r117211)
+
+  *担当：画像編集、テスト*
+
+#### 甜心漢化組
+
+- `2025-01-28` [死に逝く騎士、異世界に響く断末魔](https://vndb.org/r123038)
+
+  *担当：初翻、校正、美術*
+
+- `2026-02-16` [EXTRAVAGANZA ～蟲愛でる少女～](https://vndb.org/r97805)
+
+  *担当：美術、校正、テスト*
+
+> 注：一部の日付は経年により正確でない可能性があります。日付が1つのみの場合は公開日です。
+
+---
+
+## その他のプロジェクト
+
+- [VNビジュアルノベル漢化パッチ遺産アーカイブ](https://t.me/vn_patch)
+
+## お問い合わせ
+
+- **GitHub**：[100pangci](https://github.com/100pangci)
+- **Email**：[ywpc05@gmail.com](mailto:ywpc05@gmail.com)
+- **Telegram**：[@ywpc05](https://t.me/ywpc05)
+
+## このサイトについて
+
+このブログは [VitePress](https://vitepress.dev/) で構築され、GitHub Pages でホストされています。このテーマが気に入ったら、ぜひ Fork や Star をお願いします！
