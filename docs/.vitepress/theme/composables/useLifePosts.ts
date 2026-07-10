@@ -1,4 +1,5 @@
 import { computed } from 'vue'
+import { useData } from 'vitepress'
 
 interface Post {
   title: string
@@ -9,7 +10,17 @@ interface Post {
   slug: string
 }
 
-const modules = import.meta.glob('../../../life/*.md', {
+const zhModules = import.meta.glob('../../../life/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+})
+const enModules = import.meta.glob('../../../en/life/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+})
+const jaModules = import.meta.glob('../../../ja/life/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -35,7 +46,7 @@ function parseFrontmatter(raw: string): Record<string, any> {
   return fm
 }
 
-const lifePosts = computed<Post[]>(() => {
+function buildPosts(modules: Record<string, any>, prefix: string): Post[] {
   return Object.entries(modules)
     .filter(([path]) => !path.endsWith('index.md'))
     .map(([path, raw]) => {
@@ -51,13 +62,26 @@ const lifePosts = computed<Post[]>(() => {
         date: frontmatter.date || '',
         tags: frontmatter.tags || [],
         description,
-        url: `/life/${slug}`,
+        url: `/${prefix}life/${slug}`,
         slug,
       }
     })
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-})
+}
+
+const zhPosts = computed(() => buildPosts(zhModules, ''))
+const enPosts = computed(() => buildPosts(enModules, 'en/'))
+const jaPosts = computed(() => buildPosts(jaModules, 'ja/'))
 
 export function useLifePosts() {
+  const { lang } = useData()
+
+  const lifePosts = computed<Post[]>(() => {
+    const l = lang.value || 'zh-CN'
+    if (l.startsWith('en')) return enPosts.value
+    if (l.startsWith('ja')) return jaPosts.value
+    return zhPosts.value
+  })
+
   return { lifePosts }
 }

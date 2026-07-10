@@ -5,15 +5,15 @@
         v-model="searchQuery"
         type="search"
         class="blog-index__search"
-        placeholder="搜索文章标题或描述..."
-        aria-label="搜索文章"
+        :placeholder="t('blogList.search')"
+        :aria-label="t('blogList.search')"
       />
       <div v-if="allTags.length" class="blog-index__filters">
         <button
           :class="['blog-index__tag', { 'blog-index__tag--active': activeTag === 'all' }]"
           @click="activeTag = 'all'"
         >
-          全部
+          {{ t('blogList.all') }}
         </button>
         <button
           v-for="tag in allTags"
@@ -35,7 +35,7 @@
           <div class="blog-card__content">
             <div class="blog-card__header">
               <time v-if="post.date">{{ post.date }}</time>
-              <span v-if="post.readingTime">阅读时间：约 {{ post.readingTime }} 分钟 </span>
+              <span v-if="post.readingTime">{{ t('blogList.readingTime', { min: post.readingTime }) }}</span>
             </div>
             <h2 class="blog-card__title">{{ post.title }}</h2>
             <p v-if="post.description" class="blog-card__excerpt">{{ post.description }}</p>
@@ -53,12 +53,12 @@
     </div>
 
     <div v-else class="blog-index__empty">
-      <p>没有找到匹配的文章，试试清空搜索或换个标签</p>
+      <p>{{ t('blogList.empty') }}</p>
     </div>
 
     <div v-if="showPagination" class="blog-index__pagination">
       <div class="blog-index__pagination-info">
-        第 {{ currentPage }} / {{ totalPages }} 页 · {{ filtered.length }} 篇
+        {{ t('blogList.pageInfo', { current: currentPage, total: totalPages, count: filtered.length }) }}
       </div>
       <div class="blog-index__pagination-controls">
         <button
@@ -66,7 +66,7 @@
           :disabled="currentPage <= 1"
           @click="currentPage--"
         >
-          上一页
+           {{ t('blogList.prev') }}
         </button>
         <span class="blog-index__pagination-current">{{ currentPage }}</span>
         <button
@@ -74,14 +74,14 @@
           :disabled="currentPage >= totalPages"
           @click="currentPage++"
         >
-          下一页
+           {{ t('blogList.next') }}
         </button>
         <span class="blog-index__page-size">
-          每页
-          <select v-model.number="pageSize" class="blog-index__page-size-select">
-            <option v-for="s in pageSizes" :key="s" :value="s">{{ s }}</option>
-          </select>
-          篇
+           {{ t('blogList.perPage') }}
+           <select v-model.number="pageSize" class="blog-index__page-size-select">
+             <option v-for="s in pageSizes" :key="s" :value="s">{{ s }}</option>
+           </select>
+           {{ t('blogList.unit') }}
         </span>
       </div>
     </div>
@@ -93,6 +93,7 @@ import { ref, computed } from 'vue'
 import { withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
 import { useLifePosts } from '../composables/useLifePosts'
+import { useI18n } from '../composables/useI18n'
 
 const props = withDefaults(defineProps<{
   type?: 'tech' | 'life'
@@ -102,6 +103,7 @@ const props = withDefaults(defineProps<{
 
 const { allPosts } = usePosts()
 const { lifePosts } = useLifePosts()
+const { t } = useI18n()
 
 const sourcePosts = computed(() => props.type === 'life' ? lifePosts.value : allPosts.value)
 const searchQuery = ref('')

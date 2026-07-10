@@ -57,108 +57,151 @@ export default defineConfig({
     plugins: [RssPlugin(RSS)],
   },
 
-  themeConfig: {
-    // 站点 Logo
-    logo: '/logo.svg',
-    // 本地搜索配置（中文）
-    search: {
-      provider: 'local',
-      options: {
-        translations: {
-          button: {
-            buttonText: '搜索',
-            buttonAriaLabel: '搜索文档',
-          },
-          modal: {
-            noResultsText: '没有找到相关结果',
-            resetButtonTitle: '清除查询',
-            footer: {
-              selectText: '选择',
-              navigateText: '切换',
-              closeText: '关闭',
-            },
-          },
+  // ========== 多语言配置 ==========
+  locales: {
+    root: {
+      label: '中文',
+      lang: 'zh-CN',
+      title: "Ywpc's Blog",
+      description: '个人博客 - 技术笔记 / 生活随笔 / 作品展示',
+      themeConfig: {
+        nav: [
+          { text: '首页', link: '/' },
+          { text: '技术博客', link: '/posts/' },
+          { text: '生活随笔', link: '/life/' },
+          { text: '作品展示', link: '/gallery/' },
+          { text: '关于', link: '/about' },
+        ],
+        outline: { level: [2, 3], label: '本页目录' },
+        editLink: {
+          pattern: 'https://github.com/100pangci/Blog-ywpc/edit/main/docs/:path',
+          text: '在 GitHub 上编辑此页',
         },
-        locales: {
-          zh: {
-            translations: {
-              button: {
-                buttonText: '搜索',
-                buttonAriaLabel: '搜索文档',
-              },
-              modal: {
-                noResultsText: '没有找到相关结果',
-                resetButtonTitle: '清除查询',
-                footer: {
-                  selectText: '选择',
-                  navigateText: '切换',
-                  closeText: '关闭',
-                },
-              },
-            },
-          },
+        lastUpdated: { text: '最后更新于', formatOptions: { dateStyle: 'short', timeStyle: 'short' } },
+        docFooter: { prev: '上一页', next: '下一页' },
+        darkModeSwitchLabel: '外观',
+        sidebarMenuLabel: '菜单',
+        returnToTopLabel: '回到顶部',
+        notFound: {
+          title: '页面未找到',
+          quote: '也许你要找的页面不在这里。',
+          linkLabel: '返回首页',
+          linkText: '返回首页',
         },
       },
     },
+    en: {
+      label: 'English',
+      lang: 'en-US',
+      title: "Ywpc's Blog",
+      description: 'Personal blog - Tech notes / Life / Gallery',
+      themeConfig: {
+        nav: [
+          { text: 'Home', link: '/en/' },
+          { text: 'Blog', link: '/en/posts/' },
+          { text: 'Life', link: '/en/life/' },
+          { text: 'Gallery', link: '/en/gallery/' },
+          { text: 'About', link: '/en/about' },
+        ],
+        outline: { level: [2, 3], label: 'On this page' },
+        editLink: {
+          pattern: 'https://github.com/100pangci/Blog-ywpc/edit/main/docs/:path',
+          text: 'Edit this page on GitHub',
+        },
+        lastUpdated: { text: 'Last updated', formatOptions: { dateStyle: 'short', timeStyle: 'short' } },
+        docFooter: { prev: 'Previous', next: 'Next' },
+        darkModeSwitchLabel: 'Appearance',
+        sidebarMenuLabel: 'Menu',
+        returnToTopLabel: 'Back to top',
+        notFound: {
+          title: 'Page not found',
+          quote: 'The page you are looking for is not here.',
+          linkLabel: 'Back to home',
+          linkText: 'Back to home',
+        },
+      },
+    },
+    ja: {
+      label: '日本語',
+      lang: 'ja-JP',
+      title: "Ywpc's Blog",
+      description: '個人ブログ - 技術ノート / 日常 / ギャラリー',
+      themeConfig: {
+        nav: [
+          { text: 'ホーム', link: '/ja/' },
+          { text: 'ブログ', link: '/ja/posts/' },
+          { text: '日常', link: '/ja/life/' },
+          { text: 'ギャラリー', link: '/ja/gallery/' },
+          { text: 'について', link: '/ja/about' },
+        ],
+        outline: { level: [2, 3], label: '目次' },
+        editLink: {
+          pattern: 'https://github.com/100pangci/Blog-ywpc/edit/main/docs/:path',
+          text: 'GitHub で編集',
+        },
+        lastUpdated: { text: '最終更新', formatOptions: { dateStyle: 'short', timeStyle: 'short' } },
+        docFooter: { prev: '前へ', next: '次へ' },
+        darkModeSwitchLabel: 'テーマ',
+        sidebarMenuLabel: 'メニュー',
+        returnToTopLabel: 'トップへ戻る',
+        notFound: {
+          title: 'ページが見つかりません',
+          quote: 'お探しのページは見つかりませんでした。',
+          linkLabel: 'ホームに戻る',
+          linkText: 'ホームに戻る',
+        },
+      },
+    },
+  },
 
-    // 导航栏
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '技术博客', link: '/posts/' },
-      { text: '生活随笔', link: '/life/' },
-      { text: '作品展示', link: '/gallery/' },
-      { text: '关于', link: '/about' },
-    ],
-
-    // 侧边栏
-    sidebar: {},
-
-    // 社交链接
+  themeConfig: {
+    // 站点 Logo（共用）
+    logo: '/logo.svg',
+    // 社交链接（共用）
     socialLinks: [
       { icon: 'github', link: 'https://github.com/100pangci' },
     ],
-
-    // 文章大纲
-    outline: {
-      level: [2, 3],
-      label: '本页目录',
-    },
-
-    // 编辑链接（跳转 GitHub）
-    editLink: {
-      pattern: 'https://github.com/100pangci/Blog-ywpc/edit/main/docs/:path',
-      text: '在 GitHub 上编辑此页',
-    },
-
-    // 最后更新时间
-    lastUpdated: {
-      text: '最后更新于',
-      formatOptions: {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      },
-    },
-
-    // 上下页导航文案
-    docFooter: {
-      prev: '上一页',
-      next: '下一页',
-    },
-
-    // 其余 UI 文案
-    darkModeSwitchLabel: '外观',
-    sidebarMenuLabel: '菜单',
-    returnToTopLabel: '回到顶部',
-    notFound: {
-      title: '页面未找到',
-      quote: '也许你要找的页面不在这里。',
-      linkLabel: '返回首页',
-      linkText: '返回首页',
-    },
-
-    // 页脚版权
+    // 页脚版权（共用）
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} <a href="https://github.com/100pangci" style="color: inherit;">Ywpc</a>`,
+    },
+    // 本地搜索（多语言文案通过 locales 切换）
+    search: {
+      provider: 'local',
+      options: {
+        locales: {
+          root: {
+            translations: {
+              button: { buttonText: '搜索', buttonAriaLabel: '搜索文档' },
+              modal: {
+                noResultsText: '没有找到相关结果',
+                resetButtonTitle: '清除查询',
+                footer: { selectText: '选择', navigateText: '切换', closeText: '关闭' },
+              },
+            },
+          },
+          en: {
+            translations: {
+              button: { buttonText: 'Search', buttonAriaLabel: 'Search articles' },
+              modal: {
+                noResultsText: 'No results found',
+                resetButtonTitle: 'Clear query',
+                footer: { selectText: 'Select', navigateText: 'Navigate', closeText: 'Close' },
+              },
+            },
+          },
+          ja: {
+            translations: {
+              button: { buttonText: '検索', buttonAriaLabel: '記事を検索' },
+              modal: {
+                noResultsText: '関連する結果は見つかりませんでした',
+                resetButtonTitle: 'クエリをクリア',
+                footer: { selectText: '選択', navigateText: '移動', closeText: '閉じる' },
+              },
+            },
+          },
+        },
+      },
     },
   },
 })

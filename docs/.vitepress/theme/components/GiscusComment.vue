@@ -1,7 +1,7 @@
 <template>
   <div class="giscus-comment">
     <div class="giscus-placeholder" v-if="!scriptLoaded">
-      <p>评论加载中...</p>
+      <p>{{ t('giscus.loading') }}</p>
     </div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script setup lang="ts">
 // Giscus 评论组件 — 基于 GitHub Discussions 的评论系统
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from '../composables/useI18n'
 
 interface Props {
   repo?: string
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const scriptLoaded = ref(false)
+const { t, locale } = useI18n()
 
 // 获取当前主题（light / dark），与 VitePress 主题同步
 function getTheme(): string {
@@ -65,7 +67,7 @@ onMounted(() => {
   script.setAttribute('data-emit-metadata', '0')
   script.setAttribute('data-input-position', 'bottom')
   script.setAttribute('data-theme', currentTheme)
-  script.setAttribute('data-lang', 'zh-CN')
+  script.setAttribute('data-lang', locale.value === 'zh' ? 'zh-CN' : locale.value === 'ja' ? 'ja' : 'en')
   script.setAttribute('crossorigin', 'anonymous')
   script.setAttribute('async', '')
   script.onload = () => {

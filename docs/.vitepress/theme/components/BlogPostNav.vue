@@ -2,12 +2,12 @@
   <footer v-if="prev || next" class="blog-post-nav">
     <nav class="blog-nav">
       <a v-if="prev" :href="withBase(prev.url)" class="blog-nav-link prev">
-        <span class="blog-nav-label">← 上一篇</span>
+        <span class="blog-nav-label">{{ t('postNav.prev') }}</span>
         <span class="blog-nav-title">{{ prev.title }}</span>
       </a>
       <span v-if="!prev || !next" class="blog-nav-spacer" />
       <a v-if="next" :href="withBase(next.url)" class="blog-nav-link next">
-        <span class="blog-nav-label">下一篇 →</span>
+        <span class="blog-nav-label">{{ t('postNav.next') }}</span>
         <span class="blog-nav-title">{{ next.title }}</span>
       </a>
     </nav>
@@ -19,8 +19,10 @@
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { getAdjacentPosts } from '../composables/usePosts'
+import { useI18n } from '../composables/useI18n'
 
 const { page } = useData()
+const { t } = useI18n()
 // 从当前页面相对路径提取 slug
 const slug = computed(() => {
   const rp = page.value.relativePath || ''

@@ -2,7 +2,7 @@
   <div class="blog-post-meta">
     <!-- breadcrumbs -->
     <p class="blog-breadcrumbs">
-      <a :href="withBase('/posts/')">技术博客</a>
+      <a :href="withBase('/posts/')">{{ t('postMeta.breadcrumb') }}</a>
       <span aria-hidden="true"> / </span>
       <span>{{ fm.title }}</span>
     </p>
@@ -19,7 +19,7 @@
         <span>{{ fm.author }}</span>
       </div>
       <time v-if="fm.date" :datetime="fm.date" class="blog-time">{{ formattedDate }}</time>
-      <span v-if="readingTime" class="blog-read">阅读时间：约 {{ readingTime }} 分钟 </span>
+      <span v-if="readingTime" class="blog-read">{{ t('postMeta.readingTime', { min: readingTime }) }}</span>
     </div>
 
     <!-- tags -->
@@ -39,11 +39,13 @@
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
+import { useI18n } from '../composables/useI18n'
 
 const { frontmatter, page } = useData()
 const fm = computed(() => frontmatter.value)
 const tags = computed(() => fm.value.tags || [])
 const { allPosts } = usePosts()
+const { t } = useI18n()
 
 // 从当前页面相对路径提取 slug
 const currentSlug = computed(() => {
@@ -59,7 +61,7 @@ const readingTime = computed(() => post.value?.readingTime || null)
 const formattedDate = computed(() => {
   if (!fm.value.date) return ''
   try {
-    return new Date(fm.value.date).toLocaleDateString('zh-CN', {
+    return new Date(fm.value.date).toLocaleDateString(t('dateLocale'), {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
