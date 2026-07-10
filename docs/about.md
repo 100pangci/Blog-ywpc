@@ -1,7 +1,9 @@
 ---
 title: 关于我
-comment: true
+comment: false
 ---
+
+# 关于我
 
 我是 **ywpc**，也可以叫我百分百原味胖次。
 
