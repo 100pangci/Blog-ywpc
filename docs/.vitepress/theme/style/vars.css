@@ -421,5 +421,6 @@ html.dark {
 }
 
 .aside-content {
+  min-height: auto !important;
   padding-bottom: 0 !important;
 }
