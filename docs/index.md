@@ -10,8 +10,8 @@ hero:
     alt: Ywpc
   actions:
     - theme: brand
-      text: 技术博客
-      link: /posts/
+      text: 汉化补丁归档
+      link: https://t.me/vn_patch
     - theme: alt
       text: 关于我
       link: /about
