@@ -317,13 +317,15 @@ onUnmounted(() => {
 }
 
 .lightbox-stage {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   max-width: 90vw;
   max-height: calc(100vh - 160px);
   touch-action: none;
+}
+
+.lightbox-stage > * {
+  grid-area: 1 / 1;
 }
 
 .lightbox-stage img {
@@ -366,9 +368,6 @@ onUnmounted(() => {
 }
 
 .lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 44px;
   height: 44px;
   border: none;
@@ -390,11 +389,13 @@ onUnmounted(() => {
 }
 
 .lightbox-prev {
-  left: -52px;
+  justify-self: start;
+  margin-left: 8px;
 }
 
 .lightbox-next {
-  right: -52px;
+  justify-self: end;
+  margin-right: 8px;
 }
 
 .lightbox-controls {
