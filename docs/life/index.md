@@ -3,62 +3,9 @@ comment: false
 ---
 
 <script setup lang="ts">
-// 生活随笔列表 — 扫描 life/ 目录下的 Markdown 生成文章卡片列表
-// 注意：此处的 frontmatter 解析逻辑与 usePosts.ts 中的 parseFrontmatter 重复，
-// 但鉴于 glob 路径不同且逻辑简单，暂保持独立
-import { computed } from 'vue'
+import { useLifePosts } from '../.vitepress/theme/composables/useLifePosts'
 
-interface Post {
-  title: string
-  date: string
-  tags: string[]
-  description: string
-  link: string
-}
-
-const modules = import.meta.glob('./*.md', { query: '?raw', import: 'default', eager: true })
-
-const posts = computed<Post[]>(() => {
-  return Object.entries(modules)
-    .filter(([path]) => path !== './index.md')
-    .map(([path, raw]) => {
-      const content = raw as string
-      const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
-      const frontmatter: Record<string, any> = {}
-
-      if (fmMatch) {
-        fmMatch[1].split('\n').forEach(line => {
-          const i = line.indexOf(':')
-          if (i > 0) {
-            const key = line.slice(0, i).trim()
-            let value: any = line.slice(i + 1).trim()
-            if (value.startsWith('[') && value.endsWith(']')) {
-              value = value.slice(1, -1).split(',').map((s: string) => s.trim().replace(/['"]/g, ''))
-            } else if (value.startsWith("'") || value.startsWith('"')) {
-              value = value.slice(1, -1)
-            }
-            frontmatter[key] = value
-          }
-        })
-      }
-
-      const bodyStart = content.indexOf('---', 3)
-      const body = bodyStart >= 0 ? content.slice(bodyStart + 3).trim() : content
-      const firstP = body.match(/\n\n(.+?)(?:\n|$)/)?.[1] || ''
-      const description = frontmatter.description || firstP.slice(0, 120).replace(/[#*`\[\]]/g, '').trim()
-
-      const slug = path.replace('./', '').replace('.md', '')
-
-      return {
-        title: frontmatter.title || slug,
-        date: frontmatter.date || '',
-        tags: frontmatter.tags || [],
-        description,
-        link: `/life/${slug}`,
-      }
-    })
-    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-})
+const { lifePosts: posts } = useLifePosts()
 </script>
 
 <template>
