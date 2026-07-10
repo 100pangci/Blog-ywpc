@@ -64,6 +64,21 @@ export default defineConfig({
     search: {
       provider: 'local',
       options: {
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索文档',
+          },
+          modal: {
+            noResultsText: '没有找到相关结果',
+            resetButtonTitle: '清除查询',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭',
+            },
+          },
+        },
         locales: {
           zh: {
             translations: {
