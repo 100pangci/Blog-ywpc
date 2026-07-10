@@ -1,13 +1,11 @@
 ---
 blogPost: true
 title: Fedora Server 系统安装与维护手册
+description: 容器化！容器化！全部容器化！
 date: 2026-07-10
 author: 100pangci
 tags: [技术, Linux, Fedora, NAS]
 ---
-
-# Fedora Server 系统安装与维护手册
-
 
 ```text
 +----------------------------------------------------------------------------+

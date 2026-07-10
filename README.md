@@ -46,8 +46,11 @@ cover: /images/xxx.png # 可选，封面图
 
 ```md
 ---
+blogPost: true
 title: 随笔标题
+description: 简要描述
 date: 2026-07-09
+author: 100pangci
 tags: [生活, 旅行]
 ---
 
@@ -196,11 +199,16 @@ docs/.vitepress/theme/
 ├── components/
 │   ├── BlogPostMeta.vue     # 文章头部（面包屑 / 标题 / 描述 / 作者 / 日期 / 标签 / 封面）
 │   ├── BlogPostNav.vue      # 上下篇导航
-│   ├── BlogList.vue         # 博客列表页（搜索 + 标签筛选）
+│   ├── BlogList.vue         # 博客列表页（搜索 + 标签筛选 + 分页）
 │   ├── Busuanzi.vue         # 自部署计数器（Cloudflare Worker）
-│   └── GiscusComment.vue    # Giscus 评论
+│   ├── GiscusComment.vue    # Giscus 评论
+│   ├── BackToTop.vue        # 回到顶部按钮
+│   ├── FloatingToc.vue      # 浮动目录
+│   └── LoadingBar.vue       # 页面切换加载进度条
 └── composables/
-    └── usePosts.ts          # import.meta.glob 扫描 posts/，SSR 友好
+    ├── usePosts.ts          # import.meta.glob 扫描 posts/，SSR 友好
+    ├── useLifePosts.ts      # 扫描 life/，同上
+    └── useFloatingToc.ts    # 浮动目录逻辑
 ```
 
 **文章详情页渲染流程：**
@@ -219,3 +227,9 @@ docs/.vitepress/theme/
 - Sitemap 自动生成
 - 图片画廊
 - Markdown 任务列表 (`- [ ]`)
+- 浮动目录（文章页自动生成，随滚动高亮当前位置）
+- 回到顶部按钮（右下角浮动）
+- 页面切换加载进度条（顶部进度指示器）
+- 列表页分页（每页 5/10/20 篇可切换）
+- 列表页按标签筛选
+- 列表页搜索（匹配标题和描述）
