@@ -1,6 +1,8 @@
 ---
+blogPost: true
 title: First Essay
 date: 2026-07-02
+author: 100pangci
 tags: ['life', 'essay']
 ---
 

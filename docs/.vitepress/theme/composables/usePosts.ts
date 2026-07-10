@@ -82,31 +82,36 @@ function buildPosts(modules: Record<string, any>, prefix: string): Post[] {
         readingTime: calcReadingTime(raw as string),
       }
     })
-    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    .sort((a, b) => {
+      const dateCmp = (b.date || '').localeCompare(a.date || '')
+      if (dateCmp !== 0) return dateCmp
+      return (a.slug || '').localeCompare(b.slug || '')
+    })
 }
 
 const zhPosts = computed(() => buildPosts(zhModules, 'zh/'))
 const enPosts = computed(() => buildPosts(enModules, 'en/'))
 const jaPosts = computed(() => buildPosts(jaModules, 'ja/'))
 
+function resolvePosts(lang?: string) {
+  const l = (lang || 'zh-CN').toLowerCase()
+  if (l.startsWith('en')) return enPosts.value
+  if (l.startsWith('ja')) return jaPosts.value
+  return zhPosts.value
+}
+
 export function usePosts() {
   const { lang } = useData()
 
-  const allPosts = computed<Post[]>(() => {
-    const l = lang.value || 'zh-CN'
-    if (l.startsWith('en')) return enPosts.value
-    if (l.startsWith('ja')) return jaPosts.value
-    return zhPosts.value
-  })
+  const allPosts = computed<Post[]>(() => resolvePosts(lang.value))
 
   return { allPosts }
 }
 
-export function getAdjacentPosts(currentSlug: string) {
+export function getAdjacentPosts(currentSlug: string, langOverride?: string) {
   const { lang } = useData()
-  const l = lang.value || 'zh-CN'
-  const posts = l.startsWith('en') ? enPosts.value : l.startsWith('ja') ? jaPosts.value : zhPosts.value
-  const idx = posts.findIndex(p => p.slug === currentSlug)
+  const posts = resolvePosts(langOverride ?? lang.value)
+  const idx = posts.findIndex(p => p.slug.toLowerCase() === currentSlug.toLowerCase())
   return {
     prev: idx > 0 ? posts[idx - 1] : null,
     next: idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : null,

@@ -20,23 +20,24 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // 正文前插槽：文章元信息（面包屑、标题、标签等），有标签或 blogPost 标记的页面均展示
       'doc-before': () => {
-        const { frontmatter } = useData()
+        const { page, frontmatter } = useData()
         if (frontmatter.value.blogPost || frontmatter.value.tags?.length) {
-          return h(BlogPostMeta)
+          return h(BlogPostMeta, { key: page.value.relativePath || '' })
         }
         return null
       },
       // 正文后插槽：上下篇导航 + 计数 + Giscus 评论
       'doc-after': () => {
-        const { frontmatter } = useData()
+        const { page, frontmatter } = useData()
+        const pageKey = page.value.relativePath || ''
         const showComments = frontmatter.value.comment !== false
         const showNav = frontmatter.value.blogPost || frontmatter.value.tags?.length
         const children = [h(Busuanzi)]
         if (showNav) {
-          children.unshift(h(BlogPostNav))
+          children.unshift(h(BlogPostNav, { key: pageKey }))
         }
         if (showComments) {
-          children.push(h(GiscusComment))
+          children.push(h(GiscusComment, { key: pageKey + '-comment' }))
         }
         return children
       },

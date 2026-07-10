@@ -30,7 +30,7 @@
   --vp-nav-bg-color: rgba(255, 255, 255, 0.68);
   --vp-sidebar-bg-color: rgba(246, 246, 247, 0.68);
   --vp-local-search-bg: rgba(255, 255, 255, 0.88);
-  --vp-code-block-bg: rgba(248, 248, 250, 0.92);
+  --vp-code-block-bg: rgba(248, 248, 250, 0.65);
   --vp-code-bg: rgba(233, 82, 149, 0.08);
 
   --vp-nav-screen-bg-color: rgba(255, 255, 255, 0.92);
@@ -55,7 +55,7 @@
   --vp-nav-bg-color: rgba(30, 30, 32, 0.68);
   --vp-sidebar-bg-color: rgba(37, 37, 40, 0.68);
   --vp-local-search-bg: rgba(37, 37, 40, 0.88);
-  --vp-code-block-bg: rgba(22, 22, 24, 0.88);
+  --vp-code-block-bg: rgba(22, 22, 24, 0.60);
   --vp-code-bg: rgba(245, 177, 170, 0.12);
 
   --vp-nav-screen-bg-color: rgba(30, 30, 32, 0.92);

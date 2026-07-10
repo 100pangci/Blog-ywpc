@@ -6,8 +6,11 @@ interface Post {
   date: string
   tags: string[]
   description: string
+  author: string
+  cover: string | null
   url: string
   slug: string
+  readingTime: number
 }
 
 const zhModules = import.meta.glob('../../../zh/life/*.md', {
@@ -46,6 +49,13 @@ function parseFrontmatter(raw: string): Record<string, any> {
   return fm
 }
 
+function calcReadingTime(text: string): number {
+  const bodyStart = text.indexOf('---', 3)
+  const body = bodyStart >= 0 ? text.slice(bodyStart + 3) : text
+  const words = body.trim().split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.round(words / 220))
+}
+
 function buildPosts(modules: Record<string, any>, prefix: string): Post[] {
   return Object.entries(modules)
     .filter(([path]) => !path.endsWith('index.md'))
@@ -62,35 +72,43 @@ function buildPosts(modules: Record<string, any>, prefix: string): Post[] {
         date: frontmatter.date || '',
         tags: frontmatter.tags || [],
         description,
+        author: frontmatter.author || '',
+        cover: frontmatter.cover || null,
         url: `/${prefix}life/${slug}`,
         slug,
+        readingTime: calcReadingTime(raw as string),
       }
     })
-    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    .sort((a, b) => {
+      const dateCmp = (b.date || '').localeCompare(a.date || '')
+      if (dateCmp !== 0) return dateCmp
+      return (a.slug || '').localeCompare(b.slug || '')
+    })
 }
 
 const zhPosts = computed(() => buildPosts(zhModules, 'zh/'))
 const enPosts = computed(() => buildPosts(enModules, 'en/'))
 const jaPosts = computed(() => buildPosts(jaModules, 'ja/'))
 
+function resolvePosts(lang?: string) {
+  const l = (lang || 'zh-CN').toLowerCase()
+  if (l.startsWith('en')) return enPosts.value
+  if (l.startsWith('ja')) return jaPosts.value
+  return zhPosts.value
+}
+
 export function useLifePosts() {
   const { lang } = useData()
 
-  const lifePosts = computed<Post[]>(() => {
-    const l = lang.value || 'zh-CN'
-    if (l.startsWith('en')) return enPosts.value
-    if (l.startsWith('ja')) return jaPosts.value
-    return zhPosts.value
-  })
+  const lifePosts = computed<Post[]>(() => resolvePosts(lang.value))
 
   return { lifePosts }
 }
 
-export function getAdjacentLifePosts(currentSlug: string) {
+export function getAdjacentLifePosts(currentSlug: string, langOverride?: string) {
   const { lang } = useData()
-  const l = lang.value || 'zh-CN'
-  const posts = l.startsWith('en') ? enPosts.value : l.startsWith('ja') ? jaPosts.value : zhPosts.value
-  const idx = posts.findIndex(p => p.slug === currentSlug)
+  const posts = resolvePosts(langOverride ?? lang.value)
+  const idx = posts.findIndex(p => p.slug.toLowerCase() === currentSlug.toLowerCase())
   return {
     prev: idx > 0 ? posts[idx - 1] : null,
     next: idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : null,

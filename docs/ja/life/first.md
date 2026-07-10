@@ -1,6 +1,8 @@
 ---
+blogPost: true
 title: 初めてのエッセイ
 date: 2026-07-02
+author: 100pangci
 tags: ['日常', 'エッセイ']
 ---
 
