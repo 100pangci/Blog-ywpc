@@ -37,6 +37,10 @@ function apply() {
     isConstrained = true
   }
 
+  if (scrollTop <= 0 && isConstrained) {
+    el.scrollTop = 0
+  }
+
   const naturalTop = docTop - scrollTop
   const maxTop = winHeight - naturalHeight - bottomGap
 
