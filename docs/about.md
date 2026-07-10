@@ -5,7 +5,7 @@ comment: false
 
 # 关于我
 
-我是 **ywpc**，也可以叫我百分百原味胖次。
+我是 **ywpc**，是百分百原味胖次取“**原味胖次**”后的缩写。
 
 ## GitHub 项目
 
@@ -19,6 +19,8 @@ comment: false
 - [quleme](https://github.com/100pangci/quleme)
 - [VNDB-GUI](https://github.com/100pangci/VNDB-GUI)
 - [WeCom-Auto-check-in-For-Magisk](https://github.com/100pangci/WeCom-Auto-check-in-For-Magisk)
+
+---
 
 ## 汉化移植经历
 
@@ -81,6 +83,13 @@ comment: false
   *担任：美工、校对、测试*
 
 > 注意：部分时间因相隔已久，无法考证。若仅有一个时间，则为发布时间。
+
+---
+
+## 其它项目
+
+- [VN视觉小说汉化补丁遗产归档/VN視覺小說漢化補丁遺產歸檔](https://t.me/vn_patch)
+
 
 ## 联系我
 
