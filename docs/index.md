@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: "Ywpc's Blog"
-  text: "笔记 · 随笔"
+  text: "写自己想写的东西"
   tagline: 用对GalGame的爱，去爱整个世界。
   image:
     src: https://github.com/100pangci.png
