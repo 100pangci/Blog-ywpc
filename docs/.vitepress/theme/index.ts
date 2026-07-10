@@ -11,16 +11,17 @@ import BlogList from './components/BlogList.vue'
 import BackToTop from './components/BackToTop.vue'
 import LoadingBar from './components/LoadingBar.vue'
 import FloatingToc from './components/FloatingToc.vue'
+import LightboxGallery from './components/LightboxGallery.vue'
 import './style/vars.css'
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      // 正文前插槽：文章元信息（面包屑、标题、标签等），仅 blogPost 页面
+      // 正文前插槽：文章元信息（面包屑、标题、标签等），有标签或 blogPost 标记的页面均展示
       'doc-before': () => {
         const { frontmatter } = useData()
-        if (frontmatter.value.blogPost) {
+        if (frontmatter.value.blogPost || frontmatter.value.tags?.length) {
           return h(BlogPostMeta)
         }
         return null
@@ -29,8 +30,9 @@ export default {
       'doc-after': () => {
         const { frontmatter } = useData()
         const showComments = frontmatter.value.comment !== false
+        const showNav = frontmatter.value.blogPost || frontmatter.value.tags?.length
         const children = [h(Busuanzi)]
-        if (frontmatter.value.blogPost) {
+        if (showNav) {
           children.unshift(h(BlogPostNav))
         }
         if (showComments) {
@@ -45,5 +47,6 @@ export default {
   // 全局注册 BlogList 组件，供 Markdown 中通过 <BlogList /> 调用
   enhanceApp({ app }) {
     app.component('BlogList', BlogList)
+    app.component('LightboxGallery', LightboxGallery)
   },
 } satisfies Theme

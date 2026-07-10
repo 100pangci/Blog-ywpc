@@ -19,6 +19,7 @@
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { getAdjacentPosts } from '../composables/usePosts'
+import { getAdjacentLifePosts } from '../composables/useLifePosts'
 import { useI18n } from '../composables/useI18n'
 
 const { page } = useData()
@@ -29,7 +30,12 @@ const slug = computed(() => {
   return rp.replace(/.*\//, '').replace(/\.md$/, '')
 })
 
-const adj = computed(() => getAdjacentPosts(slug.value))
+const isLifeDir = computed(() => /\/life\//.test(page.value.relativePath || ''))
+
+const adj = computed(() => {
+  if (isLifeDir.value) return getAdjacentLifePosts(slug.value)
+  return getAdjacentPosts(slug.value)
+})
 const prev = computed(() => adj.value.prev)
 const next = computed(() => adj.value.next)
 </script>

@@ -85,3 +85,14 @@ export function useLifePosts() {
 
   return { lifePosts }
 }
+
+export function getAdjacentLifePosts(currentSlug: string) {
+  const { lang } = useData()
+  const l = lang.value || 'zh-CN'
+  const posts = l.startsWith('en') ? enPosts.value : l.startsWith('ja') ? jaPosts.value : zhPosts.value
+  const idx = posts.findIndex(p => p.slug === currentSlug)
+  return {
+    prev: idx > 0 ? posts[idx - 1] : null,
+    next: idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : null,
+  }
+}

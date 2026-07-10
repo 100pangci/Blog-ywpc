@@ -2,7 +2,7 @@
   <div class="blog-post-meta">
     <!-- breadcrumbs -->
     <p class="blog-breadcrumbs">
-      <a :href="withBase('/' + locale + '/posts/')">{{ t('postMeta.breadcrumb') }}</a>
+      <a :href="withBase('/' + locale + '/' + sectionDir + '/')">{{ breadcrumbText }}</a>
       <span aria-hidden="true"> / </span>
       <span>{{ fm.title }}</span>
     </p>
@@ -39,12 +39,14 @@
 import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
+import { useLifePosts } from '../composables/useLifePosts'
 import { useI18n } from '../composables/useI18n'
 
 const { frontmatter, page } = useData()
 const fm = computed(() => frontmatter.value)
 const tags = computed(() => fm.value.tags || [])
 const { allPosts } = usePosts()
+const { lifePosts } = useLifePosts()
 const { t, locale } = useI18n()
 
 // 从当前页面相对路径提取 slug
@@ -53,8 +55,23 @@ const currentSlug = computed(() => {
   return rp.replace(/.*\//, '').replace(/\.md$/, '')
 })
 
-// 查找当前文章对象以获取阅读时间等额外信息
-const post = computed(() => allPosts.value.find(p => p.slug === currentSlug.value) || null)
+// 检测文章所属目录（posts / life）
+const relativePath = computed(() => page.value.relativePath || '')
+const isLifeDir = computed(() => /\/life\//.test(relativePath.value))
+const sectionDir = computed(() => isLifeDir.value ? 'life' : 'posts')
+
+// 面包屑文案
+const breadcrumbText = computed(() => {
+  if (isLifeDir.value) return t('nav.life')
+  return t('postMeta.breadcrumb')
+})
+
+// 查找当前文章对象，从 posts 或 life 中获取
+const post = computed(() => {
+  return allPosts.value.find(p => p.slug === currentSlug.value) ||
+         lifePosts.value.find(p => p.slug === currentSlug.value) ||
+         null
+})
 const readingTime = computed(() => post.value?.readingTime || null)
 
 // 格式化日期为中文显示

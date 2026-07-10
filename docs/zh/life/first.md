@@ -1,6 +1,8 @@
 ---
+blogPost: true
 title: 第一篇随笔
 date: 2026-07-02
+author: 100pangci
 tags: ['生活', '随笔']
 ---
 
