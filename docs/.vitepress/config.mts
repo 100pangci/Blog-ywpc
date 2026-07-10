@@ -16,7 +16,7 @@ const RSS: RSSOptions = {
   author: {
     name: 'Ywpc',
     email: 'ywpc05@gmail.com',
-    link: 'https://github.com/100pangci',
+    link: 'https://github.com/100pangci/Blog-ywpc',
   },
 }
 
@@ -175,7 +175,7 @@ export default defineConfig({
     logo: '/logo.svg',
     // 社交链接（共用）
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/100pangci' },
+      { icon: 'github', link: 'https://github.com/100pangci/Blog-ywpc' },
     ],
     // 页脚版权（共用）
     footer: {
