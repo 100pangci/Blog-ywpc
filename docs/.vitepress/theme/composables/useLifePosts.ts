@@ -5,7 +5,8 @@ interface Post {
   date: string
   tags: string[]
   description: string
-  link: string
+  url: string
+  slug: string
 }
 
 const modules = import.meta.glob('../../../life/*.md', {
@@ -50,7 +51,8 @@ const lifePosts = computed<Post[]>(() => {
         date: frontmatter.date || '',
         tags: frontmatter.tags || [],
         description,
-        link: `/life/${slug}`,
+        url: `/life/${slug}`,
+        slug,
       }
     })
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''))

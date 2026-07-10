@@ -92,8 +92,18 @@
 import { ref, computed } from 'vue'
 import { withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
+import { useLifePosts } from '../composables/useLifePosts'
+
+const props = withDefaults(defineProps<{
+  type?: 'tech' | 'life'
+}>(), {
+  type: 'tech'
+})
 
 const { allPosts } = usePosts()
+const { lifePosts } = useLifePosts()
+
+const sourcePosts = computed(() => props.type === 'life' ? lifePosts.value : allPosts.value)
 const searchQuery = ref('')
 const activeTag = ref('all')
 const currentPage = ref(1)
@@ -102,14 +112,14 @@ const pageSizes = [5, 10, 20]
 
 const allTags = computed(() => {
   const set = new Set<string>()
-  allPosts.value.forEach(p => p.tags.forEach(t => set.add(t)))
+  sourcePosts.value.forEach(p => p.tags.forEach(t => set.add(t)))
   return Array.from(set).sort()
 })
 
 const filtered = computed(() => {
   const q = searchQuery.value.trim().toLowerCase()
   const tag = activeTag.value
-  return allPosts.value.filter(p => {
+  return sourcePosts.value.filter(p => {
     const matchSearch = !q ||
       p.title.toLowerCase().includes(q) ||
       p.description.toLowerCase().includes(q)
