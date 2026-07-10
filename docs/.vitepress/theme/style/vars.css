@@ -415,9 +415,13 @@ html.dark {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ---------- Aside curtain fix ---------- */
+/* ---------- Aside fix ---------- */
 .aside-curtain {
   display: none !important;
+}
+
+.aside-container {
+  height: auto !important;
 }
 
 .aside-content {
