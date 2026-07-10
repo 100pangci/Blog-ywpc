@@ -22,18 +22,18 @@
   --vp-c-danger-3: #f3a0a8;
   --vp-c-danger-soft: rgba(233, 84, 100, 0.14);
 
-  --vp-c-bg: rgba(255, 255, 255, 0.72);
-  --vp-c-bg-soft: rgba(246, 246, 247, 0.72);
-  --vp-c-bg-elv: rgba(255, 255, 255, 0.82);
-  --vp-c-bg-alt: rgba(246, 246, 247, 0.72);
+  --vp-c-bg: rgba(255, 255, 255, 0.58);
+  --vp-c-bg-soft: rgba(246, 246, 247, 0.55);
+  --vp-c-bg-elv: rgba(255, 255, 255, 0.72);
+  --vp-c-bg-alt: rgba(246, 246, 247, 0.55);
 
-  --vp-nav-bg-color: rgba(255, 255, 255, 0.68);
-  --vp-sidebar-bg-color: rgba(246, 246, 247, 0.68);
-  --vp-local-search-bg: rgba(255, 255, 255, 0.88);
-  --vp-code-block-bg: rgba(248, 248, 250, 0.65);
+  --vp-nav-bg-color: rgba(255, 255, 255, 0.52);
+  --vp-sidebar-bg-color: rgba(246, 246, 247, 0.52);
+  --vp-local-search-bg: rgba(255, 255, 255, 0.80);
+  --vp-code-block-bg: rgba(248, 248, 250, 0.58);
   --vp-code-bg: rgba(233, 82, 149, 0.08);
 
-  --vp-nav-screen-bg-color: rgba(255, 255, 255, 0.92);
+  --vp-nav-screen-bg-color: rgba(255, 255, 255, 0.80);
   --vp-c-divider: rgba(0, 0, 0, 0.06);
 }
 
@@ -348,14 +348,24 @@ html.dark {
 }
 
 .Layout {
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+}
+
+.dark .Layout {
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .VPNavBar {
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  background-color: transparent !important;
+}
+
+.dark .VPNavBar {
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
-  background-color: transparent !important;
 }
 
 .VPNavBar .content-body {
