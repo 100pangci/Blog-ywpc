@@ -1,99 +1,100 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 
-let observer: MutationObserver | null = null
+let mo: MutationObserver | null = null
 let el: HTMLElement | null = null
 let docTop = 0
-let elHeight = 0
+let naturalHeight = 0
 
-function getDocTop(target: HTMLElement) {
-  let top = 0
-  let cur: HTMLElement | null = target
-  while (cur) {
-    top += cur.offsetTop
-    cur = cur.offsetParent as HTMLElement | null
-  }
-  return top
+function remeasure() {
+  if (!el || !document.contains(el)) return
+  el.style.transform = ''
+  el.style.removeProperty('max-height')
+  el.style.removeProperty('overflow-y')
+  void el.offsetHeight
+  docTop = el.getBoundingClientRect().top + window.scrollY
+  naturalHeight = el.offsetHeight
 }
 
-function applyFloating() {
+function apply() {
   if (!el || !document.contains(el)) return
 
   const scrollTop = window.scrollY
   const winHeight = window.innerHeight
   const topGap = 88
   const bottomGap = 24
+  const maxHeight = winHeight - topGap - bottomGap
 
   const naturalTop = docTop - scrollTop
-  const maxTop = winHeight - elHeight - bottomGap
+  const maxTop = winHeight - naturalHeight - bottomGap
 
   if (maxTop <= topGap) {
     el.style.transform = `translateY(${topGap - naturalTop}px)`
+    el.style.setProperty('max-height', `${maxHeight}px`, 'important')
+    el.style.setProperty('overflow-y', 'auto', 'important')
     return
   }
 
-  // 在视口内跟随自然滚动，不偏移
+  el.style.removeProperty('max-height')
+  el.style.removeProperty('overflow-y')
+
   if (naturalTop >= topGap && naturalTop <= maxTop) {
     el.style.transform = ''
     return
   }
 
-  // 超出边界时粘住
-  const targetTop = naturalTop < topGap ? topGap : maxTop
-  el.style.transform = `translateY(${targetTop - naturalTop}px)`
+  const anchor = naturalTop < topGap ? topGap : maxTop
+  el.style.transform = `translateY(${anchor - naturalTop}px)`
 }
 
 function onScroll() {
-  requestAnimationFrame(applyFloating)
+  requestAnimationFrame(apply)
 }
 
 function onResize() {
-  if (el && document.contains(el)) {
-    docTop = getDocTop(el)
-    elHeight = el.offsetHeight
-    applyFloating()
-  }
+  if (!el || !document.contains(el)) return
+  remeasure()
+  apply()
 }
 
-function reset() {
-  if (el) {
-    el.style.transform = ''
-    el.style.transition = ''
-  }
+function free() {
+  if (!el) return
+  el.style.transform = ''
+  el.style.removeProperty('max-height')
+  el.style.removeProperty('overflow-y')
   el = null
   docTop = 0
-  elHeight = 0
+  naturalHeight = 0
 }
 
-function tryCapture(elCandidate: HTMLElement) {
-  if (el === elCandidate) return
-  reset()
-  el = elCandidate
-  // 加过渡动画消除生硬感
-  el.style.transition = 'transform 0.1s linear'
-  docTop = getDocTop(el)
-  elHeight = el.offsetHeight
-  applyFloating()
+function grab(found: HTMLElement) {
+  free()
+  el = found
+  remeasure()
+  apply()
 }
 
 onMounted(() => {
-  observer = new MutationObserver(() => {
-    if (el && !document.contains(el)) reset()
+  mo = new MutationObserver(() => {
     const found = document.querySelector<HTMLElement>('.VPDoc .aside-container')
-    if (found && found !== el) tryCapture(found)
+    if (found) {
+      if (found !== el) grab(found)
+    } else if (el) {
+      free()
+    }
   })
-  observer.observe(document.body, { childList: true, subtree: true })
+  mo.observe(document.body, { childList: true, subtree: true })
 
   const found = document.querySelector<HTMLElement>('.VPDoc .aside-container')
-  if (found) tryCapture(found)
+  if (found) grab(found)
 
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', onResize)
 })
 
 onUnmounted(() => {
-  observer?.disconnect()
-  reset()
+  mo?.disconnect()
+  free()
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('resize', onResize)
 })

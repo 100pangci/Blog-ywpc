@@ -1,6 +1,8 @@
 ---
+blogPost: true
 title: Fedora Server 系统安装与维护手册
 date: 2026-07-10
+author: 100pangci
 tags: [技术, Linux, Fedora, NAS]
 ---
 
@@ -924,7 +926,7 @@ serverAddr = "22.22.22.22"
 serverPort = 7000
 [auth]
 method = "token"
-token = "weii051123"
+token = "yourtoken"
 [transport]
 proxyURL = "socks5://127.0.0.1:1145"
 tls.enable = false
