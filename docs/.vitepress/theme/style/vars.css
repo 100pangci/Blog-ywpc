@@ -420,11 +420,18 @@ html.dark {
   display: none !important;
 }
 
-.aside-container {
+.VPDoc .aside-container {
+  position: static !important;
   height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
 }
 
-.aside-content {
+.VPDoc .aside-content {
   min-height: auto !important;
   padding-bottom: 0 !important;
+}
+
+.VPDocAside {
+  flex-grow: 0 !important;
 }
