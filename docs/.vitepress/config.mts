@@ -133,7 +133,7 @@ export default defineConfig({
     // 其余 UI 文案
     darkModeSwitchLabel: '外观',
     sidebarMenuLabel: '菜单',
-    returnToTopLabel: '回到顶部',
+    returnToTopLabel: '',
     notFound: {
       title: '页面未找到',
       quote: '也许你要找的页面不在这里。',
