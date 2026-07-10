@@ -52,9 +52,25 @@ export default defineConfig({
     hostname: 'https://100pangci.github.io',
   },
 
-  // Vite 插件：RSS 生成
+  // Vite 插件：RSS 生成 + base URL 尾斜杠跳转
   vite: {
-    plugins: [RssPlugin(RSS)],
+    plugins: [
+      RssPlugin(RSS),
+      {
+        name: 'base-slash-redirect',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            if (req.url === '/Blog-ywpc' || req.url === '/blog-ywpc') {
+              res.statusCode = 302
+              res.setHeader('Location', '/Blog-ywpc/')
+              res.end()
+              return
+            }
+            next()
+          })
+        },
+      },
+    ],
   },
 
   // ========== 多语言配置 ==========
