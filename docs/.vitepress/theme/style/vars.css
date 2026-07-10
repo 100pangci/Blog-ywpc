@@ -330,16 +330,11 @@ html.dark {
 }
 
 .VPFooter {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   padding: 10px 10px;
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border-top: none !important;
-  z-index: var(--vp-z-index-footer);
   pointer-events: none;
 }
 
@@ -415,23 +410,7 @@ html.dark {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ---------- Aside fix ---------- */
+/* ---------- Aside curtain fix ---------- */
 .aside-curtain {
   display: none !important;
-}
-
-.VPDoc .aside-container {
-  position: static !important;
-  height: auto !important;
-  width: auto !important;
-  overflow: visible !important;
-}
-
-.VPDoc .aside-content {
-  min-height: auto !important;
-  padding-bottom: 0 !important;
-}
-
-.VPDocAside {
-  flex-grow: 0 !important;
 }
