@@ -45,7 +45,8 @@ function apply() {
     tightened = true
     const firstLink = el.querySelector<HTMLElement>('.outline-link')
     if (firstLink) {
-      firstLink.scrollIntoView({ block: 'start', behavior: 'instant' })
+      const offset = firstLink.getBoundingClientRect().top - el.getBoundingClientRect().top + el.scrollTop
+      el.scrollTo({ top: offset, behavior: 'smooth' })
     }
   }
 
@@ -75,7 +76,8 @@ function watchActive() {
     const active = outline.querySelector<HTMLElement>('.outline-link.active')
     if (active && active !== lastActive && el && el.scrollHeight > el.clientHeight) {
       lastActive = active
-      active.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      const offset = active.getBoundingClientRect().top - el.getBoundingClientRect().top + el.scrollTop
+      el.scrollTo({ top: offset, behavior: 'smooth' })
     }
   })
   ao.observe(outline, { attributes: true, subtree: true, attributeFilter: ['class'] })
