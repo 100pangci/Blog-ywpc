@@ -29,7 +29,7 @@ function apply() {
   const scrollTop = window.scrollY
   const winHeight = window.innerHeight
   const topGap = Math.max(88, Math.floor(winHeight * 0.15))
-  const bottomGap = 24
+  const bottomGap = 64
   const maxHeight = winHeight - topGap - bottomGap
 
   if (!isConstrained) {
