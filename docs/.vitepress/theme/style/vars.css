@@ -2,10 +2,14 @@
   --vp-font-family-base: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --vp-font-family-mono: "Fira Code", "Cascadia Code", "JetBrains Mono", "Source Code Pro", Consolas, "Courier New", monospace;
 
-  --vp-c-brand-1: #e95295;
-  --vp-c-brand-2: #eb6ea5;
-  --vp-c-brand-3: #d0576b;
+  --vp-c-brand-1: #d05880;
+  --vp-c-brand-2: #dc7090;
+  --vp-c-brand-3: #c0486e;
   --vp-c-brand-soft: rgba(233, 82, 149, 0.14);
+
+  --vp-c-text-1: rgba(50, 48, 52, 0.92);
+  --vp-c-text-2: rgba(50, 48, 52, 0.72);
+  --vp-c-text-3: rgba(50, 48, 52, 0.50);
 
   --vp-c-tip-1: #88a67c;
   --vp-c-tip-2: #a3c294;
@@ -338,7 +342,7 @@ html, body {
 
 html {
   scroll-behavior: smooth;
-  background: url(/images/bg.png) center / cover fixed;
+  background: url(/images/bg.jpg) center / cover fixed;
   background-color: #f7f7f9;
 }
 

@@ -37,9 +37,10 @@ export default defineConfig({
     },
   },
 
-  // <head> 内嵌标签：图标、RSS、主题色、OG、Feature 卡片鼠标跟随光效
+  // <head> 内嵌标签：图标、RSS、Preload、主题色、OG、Feature 卡片鼠标跟随光效
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/Blog-ywpc/favicon.svg' }],
+    ['link', { rel: 'preload', as: 'image', href: 'https://github.com/100pangci.png' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: "Ywpc's Blog RSS", href: '/Blog-ywpc/feed.xml' }],
     ['meta', { name: 'theme-color', content: '#e95295' }],
     ['meta', { name: 'og:type', content: 'website' }],
