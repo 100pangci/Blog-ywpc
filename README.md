@@ -206,9 +206,10 @@ docs/.vitepress/theme/
 │   ├── FloatingToc.vue      # 浮动目录
 │   └── LoadingBar.vue       # 页面切换加载进度条
 └── composables/
-    ├── usePosts.ts          # import.meta.glob 扫描 posts/，SSR 友好
-    ├── useLifePosts.ts      # 扫描 life/，同上
-    └── useFloatingToc.ts    # 浮动目录逻辑
+    ├── useContent.ts        # 统一内容扫描（posts/life），含 CJK 阅读时间、YAML 解析
+    ├── usePosts.ts          # useContent('posts') 包装
+    ├── useLifePosts.ts      # useContent('life') 包装
+    └── useI18n.ts           # 多语言文案
 ```
 
 **文章详情页渲染流程：**

@@ -23,8 +23,7 @@ import { useI18n } from '../composables/useI18n'
 
 const route = useRoute()
 const { t } = useI18n()
-// 首页不显示回到顶部按钮
-const isHome = computed(() => route.path === '/' || route.path === '/Blog-ywpc/')
+const isHome = computed(() => /^\/(Blog-ywpc\/)?(zh\/?|en\/?|ja\/?)?$/.test(route.path))
 const visible = ref(false)
 
 function onScroll() {

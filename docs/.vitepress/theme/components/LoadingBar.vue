@@ -9,13 +9,6 @@ const progress = ref(0)       // 当前进度（0–100）
 
 let timer: ReturnType<typeof setTimeout> | null = null
 
-// 保存原始路由钩子，以便在完成后恢复
-const savedHooks = {
-  onBeforeRouteChange: router.onBeforeRouteChange,
-  onAfterRouteChange: router.onAfterRouteChange,
-}
-
-// 开始加载：重置进度并启动模拟进度
 function start() {
   if (timer) clearTimeout(timer)
   progress.value = 0
@@ -23,7 +16,6 @@ function start() {
   tick()
 }
 
-// 模拟进度递增（渐近逼近 95%，不会达到 100% 直到 finish 被调用）
 function tick() {
   const diff = 100 - progress.value
   progress.value += diff * 0.18
@@ -33,7 +25,6 @@ function tick() {
   }
 }
 
-// 加载完成：跳到 100% 并隐藏
 function finish() {
   if (timer) clearTimeout(timer)
   progress.value = 100
@@ -44,22 +35,29 @@ function finish() {
 }
 
 onMounted(() => {
-  // 劫持路由钩子以自动控制进度条
-  router.onBeforeRouteChange = (to) => {
+  const originalBefore = router.onBeforeRouteChange
+  const originalAfter = router.onAfterRouteChange
+
+  const beforeWrapper = (to: string) => {
     start()
-    return savedHooks.onBeforeRouteChange?.(to)
+    return originalBefore?.(to)
   }
-
-  router.onAfterRouteChange = (to) => {
+  const afterWrapper = (to: string) => {
     finish()
-    return savedHooks.onAfterRouteChange?.(to)
+    return originalAfter?.(to)
   }
-})
 
-onUnmounted(() => {
-  // 恢复原始路由钩子
-  router.onBeforeRouteChange = savedHooks.onBeforeRouteChange
-  router.onAfterRouteChange = savedHooks.onAfterRouteChange
+  router.onBeforeRouteChange = beforeWrapper
+  router.onAfterRouteChange = afterWrapper
+
+  onUnmounted(() => {
+    if (router.onBeforeRouteChange === beforeWrapper) {
+      router.onBeforeRouteChange = originalBefore
+    }
+    if (router.onAfterRouteChange === afterWrapper) {
+      router.onAfterRouteChange = originalAfter
+    }
+  })
 })
 </script>
 

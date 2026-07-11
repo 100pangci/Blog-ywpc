@@ -89,10 +89,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { withBase } from 'vitepress'
-import { usePosts } from '../composables/usePosts'
-import { useLifePosts } from '../composables/useLifePosts'
+import { useContent } from '../composables/useContent'
 import { useI18n } from '../composables/useI18n'
 
 const props = withDefaults(defineProps<{
@@ -101,16 +100,18 @@ const props = withDefaults(defineProps<{
   type: 'tech'
 })
 
-const { allPosts } = usePosts()
-const { lifePosts } = useLifePosts()
+const { allPosts: sourcePosts } = useContent(props.type === 'life' ? 'life' : 'posts')
 const { t } = useI18n()
 
-const sourcePosts = computed(() => props.type === 'life' ? lifePosts.value : allPosts.value)
 const searchQuery = ref('')
 const activeTag = ref('all')
 const currentPage = ref(1)
 const pageSize = ref(10)
 const pageSizes = [5, 10, 20]
+
+watch([searchQuery, activeTag], () => {
+  currentPage.value = 1
+})
 
 const allTags = computed(() => {
   const set = new Set<string>()
