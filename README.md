@@ -163,7 +163,8 @@ npm run docs:build
    - `repo`：已配置为 `100pangci/Blog-ywpc`
    - `repoId`：已配置
    - `categoryId`：已配置
-3. 单篇文章关闭评论：在 frontmatter 中设置 `comment: false`
+3. 主题颜色配置见 `docs/.vitepress/theme/config/giscusTheme.ts`
+4. 单篇文章关闭评论：在 frontmatter 中设置 `comment: false`
 
 ### 3. 配置自部署页面计数器
 
@@ -195,7 +196,11 @@ id = "你的namespace-id"
 ```
 docs/.vitepress/theme/
 ├── index.ts                 # 入口，注册 doc-before / doc-after 插槽
-├── style/vars.css           # 全局样式变量 + 移动端适配 + 毛玻璃背景
+├── style/
+│   ├── light.css            # 浅色主题 + 共享样式（27 分区）
+│   └── dark.css             # 深色主题覆写（8 分区）
+├── config/
+│   └── giscusTheme.ts       # Giscus 评论 light/dark CSS 配置
 ├── components/
 │   ├── BlogPostMeta.vue     # 文章头部（面包屑 / 标题 / 描述 / 作者 / 日期 / 标签 / 封面）
 │   ├── BlogPostNav.vue      # 上下篇导航

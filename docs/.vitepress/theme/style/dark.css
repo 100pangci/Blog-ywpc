@@ -1,0 +1,81 @@
+/* ============================================
+   Dark Theme — Blog-ywpc
+   All .dark overrides. Loaded after light.css.
+   ============================================ */
+
+/* ========== 1. CSS Custom Properties (Dark) ========== */
+.dark {
+  --vp-c-brand-1: #f5b1aa;
+  --vp-c-brand-2: #eebbcb;
+  --vp-c-brand-3: #f4b3c2;
+  --vp-c-brand-soft: rgba(245, 177, 170, 0.16);
+
+  --vp-c-text-1: rgba(255, 255, 255, 0.90);
+  --vp-c-text-2: rgba(235, 235, 245, 0.75);
+  --vp-c-text-3: rgba(235, 235, 245, 0.52);
+
+  --vp-c-bg: rgba(30, 30, 32, 0.72);
+  --vp-c-bg-soft: rgba(37, 37, 40, 0.72);
+  --vp-c-bg-elv: rgba(30, 30, 32, 0.82);
+  --vp-c-bg-alt: rgba(37, 37, 40, 0.72);
+
+  --vp-nav-bg-color: rgba(30, 30, 32, 0.68);
+  --vp-sidebar-bg-color: rgba(37, 37, 40, 0.68);
+  --vp-local-search-bg: rgba(37, 37, 40, 0.88);
+  --vp-code-block-bg: rgba(22, 22, 24, 0.60);
+  --vp-code-bg: rgba(245, 177, 170, 0.12);
+
+  --vp-nav-screen-bg-color: rgba(30, 30, 32, 0.92);
+  --vp-c-divider: rgba(255, 255, 255, 0.08);
+}
+
+/* ========== 2. Background ========== */
+html.dark {
+  background-color: #1a1a1c;
+}
+
+/* ========== 3. Glass Effect (Dark) ========== */
+.dark .Layout {
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.dark .VPNavBar {
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+/* ========== 4. Hero Section (Dark) ========== */
+.dark .VPHero .image-container {
+  animation-name: glow-breathe-dark;
+}
+
+.dark .VPHero .image-container .image-src {
+  box-shadow: 0 10px 60px rgba(245, 177, 170, 0.35);
+}
+
+/* ========== 5. Feature Cards (Dark) ========== */
+.dark .VPFeature:hover {
+  box-shadow: 0 12px 32px rgba(245, 177, 170, 0.14);
+}
+
+/* ========== 6. Buttons (Dark) ========== */
+.dark .VPButton.brand {
+  background-color: #b84a6e;
+}
+
+.dark .VPButton.brand:hover {
+  box-shadow: 0 8px 24px rgba(184, 74, 110, 0.4);
+  background-color: #c95a7e;
+}
+
+/* ========== 7. Code Blocks (Dark) ========== */
+.dark div[class*="language-"] {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ========== 8. Animations (Dark) ========== */
+@keyframes glow-breathe-dark {
+  0%, 100% { box-shadow: 0 0 20px 6px rgba(245, 177, 170, 0.15); }
+  50% { box-shadow: 0 0 40px 12px rgba(245, 177, 170, 0.3); }
+}

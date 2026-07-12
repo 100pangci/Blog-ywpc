@@ -12,7 +12,8 @@ import BackToTop from './components/BackToTop.vue'
 import LoadingBar from './components/LoadingBar.vue'
 import FloatingToc from './components/FloatingToc.vue'
 import LightboxGallery from './components/LightboxGallery.vue'
-import './style/vars.css'
+import './style/light.css'
+import './style/dark.css'
 
 // ========== 主题配置 ==========
 export default {

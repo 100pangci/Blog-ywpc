@@ -18,7 +18,6 @@ function formatText(sitePV: number, siteUV: number) {
 
 function inject(el: HTMLElement, text: string) {
   el.textContent = text
-  el.style.cssText = 'line-height:24px;font-size:12px;font-weight:500;color:var(--vp-c-text-3);opacity:0.5;pointer-events:none'
 }
 
 function waitForFooter(cb: () => void) {
