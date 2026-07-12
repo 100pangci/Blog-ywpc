@@ -59,6 +59,7 @@ export const messages = {
   postMeta: {
     breadcrumb: '技术博客',
     readingTime: '阅读时间：约 {min} 分钟',
+    outline: '本页目录',
   },
   postNav: {
     prev: '← 上一篇',

@@ -59,6 +59,7 @@ export const messages = {
   postMeta: {
     breadcrumb: 'ブログ',
     readingTime: '約 {min} 分',
+    outline: '目次',
   },
   postNav: {
     prev: '← 前の記事',

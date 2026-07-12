@@ -59,6 +59,7 @@ export const messages = {
   postMeta: {
     breadcrumb: 'Blog',
     readingTime: '~{min} min read',
+    outline: 'Outline',
   },
   postNav: {
     prev: '← Previous',

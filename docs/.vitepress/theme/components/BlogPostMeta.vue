@@ -20,6 +20,7 @@
       </div>
       <time v-if="fm.date" :datetime="fm.date" class="blog-time">{{ formattedDate }}</time>
       <span v-if="readingTime" class="blog-read">{{ t('postMeta.readingTime', { min: readingTime }) }}</span>
+      <BlogOutline class="blog-outline-inline" />
     </div>
 
     <!-- tags -->
@@ -41,6 +42,7 @@ import { useData, withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
 import { useLifePosts } from '../composables/useLifePosts'
 import { useI18n } from '../composables/useI18n'
+import BlogOutline from './BlogOutline.vue'
 
 const { frontmatter, page } = useData()
 const fm = computed(() => frontmatter.value)
