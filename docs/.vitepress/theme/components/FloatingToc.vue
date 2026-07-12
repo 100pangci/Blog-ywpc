@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 
+// ========== 状态与引用 ==========
 let mo: MutationObserver | null = null
 let ao: MutationObserver | null = null
 let el: HTMLElement | null = null
@@ -10,6 +11,7 @@ let isConstrained = false
 let lastActive: Element | null = null
 let tightened = false
 
+// ========== 尺寸重测量 ==========
 function remeasure() {
   if (!el || !document.contains(el)) return
   el.style.transform = ''
@@ -23,6 +25,7 @@ function remeasure() {
   naturalHeight = el.offsetHeight
 }
 
+// ========== 滚动定位 ==========
 function apply() {
   if (!el || !document.contains(el)) return
 
@@ -67,6 +70,7 @@ function apply() {
   el.style.transform = `translateY(${anchor - naturalTop}px)`
 }
 
+// ========== 激活项跟踪 ==========
 function watchActive() {
   ao?.disconnect()
   const outline = document.querySelector('.VPDocAsideOutline')
@@ -83,6 +87,7 @@ function watchActive() {
   ao.observe(outline, { attributes: true, subtree: true, attributeFilter: ['class'] })
 }
 
+// ========== DOM 挂载与卸载 ==========
 function free() {
   if (!el) return
   el.style.transform = ''
@@ -110,6 +115,7 @@ function onResize() {
   apply()
 }
 
+// ========== 生命周期 ==========
 onMounted(() => {
   mo = new MutationObserver(() => {
     const found = document.querySelector<HTMLElement>('.VPDoc .aside-container')

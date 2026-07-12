@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
+// ========== 类型与属性 ==========
 interface GalleryItem {
   src: string
   title: string
@@ -9,16 +10,16 @@ interface GalleryItem {
 
 const props = defineProps<{ items: GalleryItem[] }>()
 
-// --- Lightbox state ---
+// ========== 状态 ==========
 const isOpen = ref(false)
 const activeIndex = ref(0)
 
-// --- Slide transition ---
+// 轮播动画
 const prevIndex = ref(-1)
 const direction = ref(1)
 const isTransitioning = ref(false)
 
-// --- Zoom & Pan ---
+// 缩放与拖拽
 const zoom = ref(1)
 const panX = ref(0)
 const panY = ref(0)
@@ -28,7 +29,7 @@ let panStartX = 0
 let panStartY = 0
 let panMoved = false
 
-// --- Touch swipe ---
+// 触摸滑动
 let touchStartX = 0
 let touchStartY = 0
 let touchMoveX = 0
@@ -37,6 +38,7 @@ let isSwiping = false
 const touchOffset = ref(0)
 const SWIPE_THRESHOLD = 50
 
+// ========== 计算属性 ==========
 const hasPrev = computed(() => activeIndex.value > 0)
 const hasNext = computed(() => activeIndex.value < props.items.length - 1)
 
@@ -48,7 +50,7 @@ const imgStyle = computed(() => {
   }
 })
 
-// --- Open / Close ---
+// ========== 打开 / 关闭 ==========
 function open(index: number) {
   activeIndex.value = index
   resetZoom()
@@ -64,7 +66,7 @@ function close() {
   document.body.style.overflow = ''
 }
 
-// --- Slide transition ---
+// ========== 轮播切换 ==========
 function slideTo(newIndex: number, dir: number) {
   if (isTransitioning.value || !isOpen.value) return
   if (newIndex < 0 || newIndex >= props.items.length) return
@@ -90,7 +92,7 @@ function next() {
   slideTo(activeIndex.value + 1, 1)
 }
 
-// --- Zoom & Pan ---
+// ========== 缩放与平移 ==========
 function resetZoom() {
   zoom.value = 1
   panX.value = 0
@@ -141,7 +143,7 @@ function onStageClick() {
   onImageClick()
 }
 
-// --- Touch swipe ---
+// ========== 触摸滑动 ==========
 function onTouchStart(e: TouchEvent) {
   if (!isOpen.value || isZoomed.value || isTransitioning.value) return
   touchStartX = e.touches[0].clientX
@@ -185,7 +187,7 @@ function onTouchEnd() {
   isSwiping = false
 }
 
-// --- Image preloading ---
+// ========== 图片预加载 ==========
 const preloaded = new Set<string>()
 function preloadAdjacent(index: number) {
   for (const i of [index - 1, index + 1]) {
@@ -200,7 +202,7 @@ function preloadAdjacent(index: number) {
   }
 }
 
-// --- Keyboard ---
+// ========== 键盘与生命周期 ==========
 function onKeydown(e: KeyboardEvent) {
   if (!isOpen.value) return
   if (e.key === 'Escape') close()

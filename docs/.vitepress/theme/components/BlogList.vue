@@ -109,10 +109,12 @@ const currentPage = ref(1)
 const pageSize = ref(10)
 const pageSizes = [5, 10, 20]
 
+// ========== 搜索与筛选 ==========
 watch([searchQuery, activeTag], () => {
   currentPage.value = 1
 })
 
+// ========== 计算属性 ==========
 const allTags = computed(() => {
   const set = new Set<string>()
   sourcePosts.value.forEach(p => p.tags.forEach(t => set.add(t)))
@@ -131,6 +133,7 @@ const filtered = computed(() => {
   })
 })
 
+// ========== 分页逻辑 ==========
 const totalPages = computed(() => Math.max(1, Math.ceil(filtered.value.length / pageSize.value)))
 const showPagination = computed(() => filtered.value.length > pageSize.value)
 

@@ -14,6 +14,7 @@ import FloatingToc from './components/FloatingToc.vue'
 import LightboxGallery from './components/LightboxGallery.vue'
 import './style/vars.css'
 
+// ========== 主题配置 ==========
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -46,6 +47,7 @@ export default {
       'layout-top': () => [h(LoadingBar), h(BackToTop), h(FloatingToc), h(Busuanzi)],
     })
   },
+  // ========== 全局注册 ==========
   // 全局注册 BlogList 组件，供 Markdown 中通过 <BlogList /> 调用
   enhanceApp({ app }) {
     app.component('BlogList', BlogList)

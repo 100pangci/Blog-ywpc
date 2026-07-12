@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
 const scriptLoaded = ref(false)
 const { t, locale } = useI18n()
 
-
+// ========== 主题配置 ==========
 const themes: Record<string, string> = {
   light: [
     'main{',
@@ -126,6 +126,7 @@ function sendGiscusTheme(mode: string) {
 
 let observer: MutationObserver | null = null
 
+// ========== 生命周期 ==========
 onMounted(() => {
   const currentMode = getMode()
 

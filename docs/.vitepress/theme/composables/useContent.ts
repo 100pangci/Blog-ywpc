@@ -1,6 +1,7 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
 
+// ========== 类型定义 ==========
 export interface Post {
   title: string
   date: string
@@ -15,37 +16,27 @@ export interface Post {
 
 export type ContentType = 'posts' | 'life'
 
-const zhPostModules = import.meta.glob('../../../zh/posts/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-const enPostModules = import.meta.glob('../../../en/posts/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-const jaPostModules = import.meta.glob('../../../ja/posts/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-const zhLifeModules = import.meta.glob('../../../zh/life/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-const enLifeModules = import.meta.glob('../../../en/life/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-const jaLifeModules = import.meta.glob('../../../ja/life/*.md', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
+// ========== Markdown 模块索引 ==========
+const MODULES = {
+  posts: {
+    zh: import.meta.glob('../../../zh/posts/*.md', { query: '?raw', import: 'default', eager: true }),
+    en: import.meta.glob('../../../en/posts/*.md', { query: '?raw', import: 'default', eager: true }),
+    ja: import.meta.glob('../../../ja/posts/*.md', { query: '?raw', import: 'default', eager: true }),
+  },
+  life: {
+    zh: import.meta.glob('../../../zh/life/*.md', { query: '?raw', import: 'default', eager: true }),
+    en: import.meta.glob('../../../en/life/*.md', { query: '?raw', import: 'default', eager: true }),
+    ja: import.meta.glob('../../../ja/life/*.md', { query: '?raw', import: 'default', eager: true }),
+  },
+} as const
 
+const DIR_MAP: Record<ContentType, string> = { posts: 'posts', life: 'life' }
+const PREFIX_MAP: Record<string, Record<string, string>> = {
+  posts: { zh: 'zh/', en: 'en/', ja: 'ja/' },
+  life: { zh: 'zh/', en: 'en/', ja: 'ja/' },
+}
+
+// ========== Frontmatter 解析 ==========
 function parseYamlValue(value: string): any {
   if (!value) return value
   if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
@@ -100,6 +91,7 @@ function parseFrontmatter(raw: string): Record<string, any> {
   return fm
 }
 
+// ========== 阅读时间计算 ==========
 function isCJK(char: string): boolean {
   const code = char.charCodeAt(0)
   return (code >= 0x4e00 && code <= 0x9fff) ||
@@ -123,6 +115,7 @@ function calcReadingTime(text: string): number {
   return Math.max(1, Math.round(words / 220))
 }
 
+// ========== 描述提取 ==========
 function extractDescription(raw: string, fm: Record<string, any>): string {
   if (fm.description) return String(fm.description)
   const bodyStart = raw.indexOf('---', 3)
@@ -131,18 +124,22 @@ function extractDescription(raw: string, fm: Record<string, any>): string {
   return firstP.slice(0, 120).replace(/[#*`\[\]]/g, '').trim()
 }
 
-const MODULE_MAP: Record<ContentType, Record<string, Record<string, any>>> = {
-  posts: { zh: zhPostModules, en: enPostModules, ja: jaPostModules },
-  life: { zh: zhLifeModules, en: enLifeModules, ja: jaLifeModules },
+// ========== 文章列表构建与缓存 ==========
+type CacheKey = `${ContentType}-${string}`
+const postCache = new Map<CacheKey, Post[]>()
+
+const LOCALE_KEYS: Record<string, 'zh' | 'en' | 'ja'> = {
+  zh: 'zh', 'zh-cn': 'zh',
+  en: 'en', 'en-us': 'en',
+  ja: 'ja', 'ja-jp': 'ja',
 }
 
-const PREFIX_MAP: Record<ContentType, Record<string, string>> = {
-  posts: { zh: 'zh/', en: 'en/', ja: 'ja/' },
-  life: { zh: 'zh/', en: 'en/', ja: 'ja/' },
+function resolveLocale(lang?: string): 'zh' | 'en' | 'ja' {
+  return LOCALE_KEYS[(lang || 'zh-CN').toLowerCase()] || 'zh'
 }
 
 function buildPosts(modules: Record<string, any>, prefix: string, type: ContentType): Post[] {
-  const dir = type === 'life' ? 'life' : 'posts'
+  const dir = DIR_MAP[type]
   return Object.entries(modules)
     .filter(([path]) => !path.endsWith('index.md'))
     .map(([path, raw]) => {
@@ -168,29 +165,22 @@ function buildPosts(modules: Record<string, any>, prefix: string, type: ContentT
     })
 }
 
-type CacheKey = `${ContentType}-${string}`
-const postCache = new Map<CacheKey, Post[]>()
-
 function resolvePosts(lang: string | undefined, type: ContentType): Post[] {
-  const l = (lang || 'zh-CN').toLowerCase()
-  const localeKey = l.startsWith('en') ? 'en' : l.startsWith('ja') ? 'ja' : 'zh'
+  const localeKey = resolveLocale(lang)
   const cacheKey: CacheKey = `${type}-${localeKey}`
 
   let posts = postCache.get(cacheKey)
   if (!posts) {
-    const modules = MODULE_MAP[type][localeKey]
-    const prefix = PREFIX_MAP[type][localeKey]
-    posts = buildPosts(modules, prefix, type)
+    posts = buildPosts(MODULES[type][localeKey], PREFIX_MAP[type][localeKey], type)
     postCache.set(cacheKey, posts)
   }
   return posts
 }
 
+// ========== 导出函数 ==========
 export function useContent(type: ContentType = 'posts') {
   const { lang } = useData()
-
   const allPosts = computed<Post[]>(() => resolvePosts(lang.value, type))
-
   return { allPosts }
 }
 

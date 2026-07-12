@@ -26,6 +26,7 @@ const { t } = useI18n()
 const isHome = computed(() => /^\/(Blog-ywpc\/)?(zh\/?|en\/?|ja\/?)?$/.test(route.path))
 const visible = ref(false)
 
+// ========== 滚动控制 ==========
 function onScroll() {
   if (isHome.value) {
     visible.value = false

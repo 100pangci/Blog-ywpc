@@ -9,6 +9,7 @@ const progress = ref(0)       // 当前进度（0–100）
 
 let timer: ReturnType<typeof setTimeout> | null = null
 
+// ========== 进度控制 ==========
 function start() {
   if (timer) clearTimeout(timer)
   progress.value = 0
@@ -31,9 +32,10 @@ function finish() {
   setTimeout(() => {
     isLoading.value = false
     progress.value = 0
-  }, 300)
+    }, 300)
 }
 
+// ========== 生命周期 ==========
 onMounted(() => {
   const originalBefore = router.onBeforeRouteChange
   const originalAfter = router.onAfterRouteChange

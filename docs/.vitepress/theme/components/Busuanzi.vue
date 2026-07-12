@@ -9,6 +9,7 @@ import { useI18n } from '../composables/useI18n'
 const { frontmatter } = useData()
 const { t, locale } = useI18n()
 
+// ========== 计数展示 ==========
 function formatText(sitePV: number, siteUV: number) {
   return t('busuanzi.sitePV').replace('{count}', String(sitePV))
     + '  |  '
@@ -34,6 +35,7 @@ function waitForFooter(cb: () => void) {
   setTimeout(() => clearInterval(timer), 5000)
 }
 
+// ========== 生命周期 ==========
 onMounted(() => {
   if (frontmatter.value.layout !== 'home') return
 

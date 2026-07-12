@@ -49,6 +49,7 @@ const { allPosts } = usePosts()
 const { lifePosts } = useLifePosts()
 const { t, locale } = useI18n()
 
+// ========== 文章识别 ==========
 // 从当前页面相对路径提取 slug
 const currentSlug = computed(() => {
   const rp = page.value.relativePath || ''
@@ -66,6 +67,7 @@ const breadcrumbText = computed(() => {
   return t('postMeta.breadcrumb')
 })
 
+// ========== 文章数据 ==========
 // 查找当前文章对象，从 posts 或 life 中获取
 const post = computed(() => {
   return allPosts.value.find(p => p.slug === currentSlug.value) ||
