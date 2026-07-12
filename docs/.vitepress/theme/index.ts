@@ -14,7 +14,7 @@ import FloatingToc from './components/FloatingToc.vue'
 import LightboxGallery from './components/LightboxGallery.vue'
 import './style/light.css'
 import './style/dark.css'
-import './style/common.css'
+import './style/index.css'
 
 // ========== 主题配置 ==========
 export default {

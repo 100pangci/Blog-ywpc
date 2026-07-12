@@ -197,8 +197,25 @@ id = "你的namespace-id"
 docs/.vitepress/theme/
 ├── index.ts                 # 入口，注册 doc-before / doc-after 插槽
 ├── style/
-│   ├── light.css            # 浅色主题 + 共享样式（27 分区）
-│   └── dark.css             # 深色主题覆写（8 分区）
+│   ├── index.css            # 桶文件，导入以下所有 CSS
+│   ├── light.css            # 浅色主题 CSS 变量
+│   ├── dark.css             # 深色主题 CSS 变量
+│   ├── variables.css        # 全局 :root 自定义属性
+│   ├── base.css             # 基础/重置/滚动条/毛玻璃/内容区
+│   ├── nav-screen.css       # 移动端导航屏 + 语言选择器
+│   ├── hero.css             # 主页 Hero 区
+│   ├── features.css         # 特性卡片
+│   ├── buttons.css          # 按钮
+│   ├── doc.css              # 排版/自定义块/图片/表格/代码块
+│   ├── sidebar.css          # 侧边栏
+│   ├── footer.css           # 页脚 + Busuanzi 计数器
+│   ├── back-to-top.css      # 回到顶部按钮
+│   ├── blog-list.css        # 博客列表页（搜索/标签/分页）
+│   ├── blog-post.css        # 文章元信息/标签/上下篇导航
+│   ├── loading-bar.css      # 加载进度条
+│   ├── lightbox.css         # 灯箱画廊
+│   ├── giscus.css           # Giscus 评论
+│   └── mobile.css           # 移动端适配 + 行内大纲
 ├── config/
 │   └── giscusTheme.ts       # Giscus 评论 light/dark CSS 配置
 ├── components/

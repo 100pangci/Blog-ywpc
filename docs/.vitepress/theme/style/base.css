@@ -1,0 +1,108 @@
+/* ============================================
+   Base, Reset, Scrollbar, Glass, Content, Aside
+   ============================================ */
+
+/* ---------- Base & Reset ---------- */
+html, body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: url(/images/bg.jpg) center / cover fixed;
+  background-color: var(--vp-c-bg-page);
+}
+
+html.dark {
+  background-color: var(--vp-c-bg-page);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+  background-clip: padding-box;
+}
+
+/* ---------- Glass Effect ---------- */
+.Layout {
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+}
+
+.dark .Layout {
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.VPNavBar {
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  background-color: transparent !important;
+}
+
+.dark .VPNavBar {
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.VPNavBar .content-body {
+  background-color: transparent !important;
+}
+
+.VPNavBar .divider,
+.VPNavBar .divider-line {
+  background-color: transparent !important;
+}
+
+.VPSidebar {
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.VPLocalSearchBox .shell {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ---------- Content Area ---------- */
+.VPContent {
+  min-height: calc(100vh - var(--vp-nav-height, 64px));
+  -webkit-overflow-scrolling: touch;
+}
+
+.VPContent:has(.VPHome) {
+  min-height: 0 !important;
+}
+
+/* ---------- Aside Fix ---------- */
+.aside-curtain {
+  display: none !important;
+}
+
+.VPDoc .aside-container {
+  position: static !important;
+  height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
+}
+
+.VPDoc .aside-content {
+  min-height: auto !important;
+  padding-bottom: 0 !important;
+}

@@ -1,0 +1,25 @@
+/* ============================================
+   Giscus Comment
+   ============================================ */
+
+.giscus-comment {
+  margin-top: 32px;
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.giscus-comment iframe {
+  background: transparent !important;
+}
+
+.giscus-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  font-size: 14px;
+  color: var(--vp-c-text-3);
+}

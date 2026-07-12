@@ -1,0 +1,31 @@
+/* ============================================
+   Buttons
+   ============================================ */
+
+.VPButton.brand {
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.dark .VPButton.brand {
+  background-color: var(--vp-c-brand-btn);
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--vp-c-brand-shadow-strong);
+}
+
+.dark .VPButton.brand:hover {
+  box-shadow: 0 8px 24px var(--vp-c-brand-shadow-strong);
+  background-color: var(--vp-c-brand-btn-hover);
+}
+
+.VPButton.alt {
+  border-radius: 999px;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.VPButton.alt:hover {
+  transform: translateY(-2px);
+}

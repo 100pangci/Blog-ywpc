@@ -1,0 +1,109 @@
+/* ============================================
+   Mobile Nav Screen & Language Selector
+   ============================================ */
+
+/* ---------- Mobile Nav Screen ---------- */
+.VPNavScreen {
+  position: fixed;
+  top: calc(var(--vp-nav-height) + 4px);
+  right: 12px;
+  width: 280px;
+  max-height: calc(100vh - var(--vp-nav-height) - 24px);
+  background-color: var(--vp-nav-screen-bg-color);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px var(--vp-c-shadow-sm);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  overflow-y: auto;
+  pointer-events: auto;
+  z-index: 200;
+}
+
+.cloth-enter-active {
+  animation: cloth-unfold 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cloth-leave-active {
+  animation: cloth-fold 0.22s cubic-bezier(0.55, 0, 0.7, 0.3) 0.06s forwards;
+}
+
+.cloth-enter-active .container {
+  animation: cloth-content-in 0.2s ease 0.05s both;
+}
+
+.cloth-leave-active .container {
+  animation: cloth-content-out 0.06s ease forwards;
+}
+
+.cloth-enter-active .menu {
+  animation-delay: 0.05s;
+}
+
+.cloth-enter-active .translations {
+  animation-delay: 0.1s;
+}
+
+.cloth-enter-active .appearance {
+  animation-delay: 0.15s;
+}
+
+.cloth-enter-active .social-links {
+  animation-delay: 0.2s;
+}
+
+@keyframes cloth-unfold {
+  0% { clip-path: inset(0 0 100% 100%); }
+  100% { clip-path: inset(0); }
+}
+
+@keyframes cloth-fold {
+  0% { clip-path: inset(0); }
+  100% { clip-path: inset(0 0 100% 100%); }
+}
+
+@keyframes cloth-content-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cloth-content-out {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(6px); }
+}
+
+@media (min-width: 768px) {
+  .VPNavScreen {
+    display: none;
+  }
+}
+
+.VPNavScreen .container {
+  padding: 16px 20px 20px;
+}
+
+.VPNavScreen .menu + .translations,
+.VPNavScreen .menu + .appearance,
+.VPNavScreen .translations + .appearance {
+  margin-top: 16px;
+}
+
+.VPNavScreen .menu + .social-links {
+  margin-top: 12px;
+}
+
+.VPNavScreen .appearance + .social-links {
+  margin-top: 12px;
+}
+
+/* ---------- Language Selector Dropdown (Desktop) ---------- */
+.VPNavBarTranslations .VPMenu {
+  background-color: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--vp-c-divider);
+}
+
+.dark .VPNavBarTranslations .VPMenu {
+  background-color: rgba(30, 30, 32, 0.68) !important;
+}

@@ -1,0 +1,71 @@
+/* ============================================
+   Typography, Custom Blocks, Images, Tables, Code
+   ============================================ */
+
+/* ---------- Typography ---------- */
+.vp-doc {
+  letter-spacing: 0.01em;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vp-doc h1 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.vp-doc h2,
+.vp-doc h3 {
+  letter-spacing: -0.01em;
+  font-weight: 650;
+}
+
+.vp-doc a {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.vp-doc a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Custom Blocks ---------- */
+.custom-block {
+  border-radius: 12px;
+  box-shadow: 0 1px 2px var(--vp-c-shadow-2xs);
+}
+
+/* ---------- Images & Tables ---------- */
+.vp-doc img {
+  border-radius: 12px;
+  box-shadow: 0 4px 24px var(--vp-c-shadow-lg);
+}
+
+.vp-doc table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px var(--vp-c-shadow-xs);
+}
+
+/* ---------- Code Blocks ---------- */
+div[class*="language-"] {
+  border-radius: 12px;
+  box-shadow: 0 4px 24px var(--vp-c-shadow);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+:root div[class*="language-"] {
+  border: 1px solid var(--vp-c-border-light);
+}
+
+.dark div[class*="language-"] {
+  border: 1px solid var(--vp-c-border-light);
+}
+
+/* ---------- Gradient Clip Text ---------- */
+.clip {
+  background: var(--vp-home-hero-name-background);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

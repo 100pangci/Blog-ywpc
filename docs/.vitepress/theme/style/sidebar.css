@@ -1,0 +1,11 @@
+/* ============================================
+   Sidebar
+   ============================================ */
+
+.VPSidebarItem .text {
+  transition: color 0.2s;
+}
+
+.VPDocAside {
+  flex-grow: 0 !important;
+}
