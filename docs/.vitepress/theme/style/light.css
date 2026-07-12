@@ -44,7 +44,7 @@
   --vp-code-block-bg: rgba(248, 248, 250, 0.58);
   --vp-code-bg: rgba(233, 82, 149, 0.08);
 
-  --vp-nav-screen-bg-color: rgba(255, 255, 255, 0.80);
+  --vp-nav-screen-bg-color: rgba(255, 255, 255, 0.55);
   --vp-c-divider: rgba(0, 0, 0, 0.06);
 }
 
@@ -110,11 +110,6 @@ html {
 .VPSidebar {
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
-}
-
-.VPNavScreen {
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
 .VPLocalSearchBox .shell {

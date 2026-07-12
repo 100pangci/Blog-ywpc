@@ -1,4 +1,5 @@
 // VitePress 配置文件 — 博客全局设置、主题、插件
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
 import { RssPlugin, type RSSOptions } from 'vitepress-plugin-rss'
 import taskLists from 'markdown-it-task-lists'
@@ -57,6 +58,16 @@ export default defineConfig({
 
   // ========== Vite 插件 ==========
   vite: {
+    resolve: {
+      alias: [
+        {
+          find: /^.*\/VPNavScreen\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./theme/components/VPNavScreen.vue', import.meta.url)
+          ),
+        },
+      ],
+    },
     plugins: [
       RssPlugin(RSS),
       {
