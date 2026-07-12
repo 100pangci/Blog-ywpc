@@ -1595,7 +1595,8 @@ html.dark {
 .blog-outline-dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 8px;
   min-width: 160px;
   max-width: min(280px, calc(100vw - 24px));

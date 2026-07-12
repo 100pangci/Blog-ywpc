@@ -80,6 +80,7 @@ function toggle() {
       if (!dd) return
       dd.style.removeProperty('left')
       dd.style.removeProperty('right')
+      dd.style.removeProperty('transform')
       dd.style.removeProperty('max-height')
 
       const btnRect = dd.parentElement!.getBoundingClientRect()
@@ -87,13 +88,14 @@ function toggle() {
       dd.style.maxHeight = Math.min(360, Math.max(160, spaceBelow)) + 'px'
 
       const rect = dd.getBoundingClientRect()
-      if (rect.right > window.innerWidth - 8) {
-        dd.style.left = 'auto'
-        dd.style.right = '8px'
-      }
       if (rect.left < 8) {
         dd.style.left = '8px'
         dd.style.right = 'auto'
+        dd.style.transform = 'none'
+      } else if (rect.right > window.innerWidth - 8) {
+        dd.style.left = 'auto'
+        dd.style.right = '8px'
+        dd.style.transform = 'none'
       }
     })
   }
