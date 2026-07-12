@@ -27,55 +27,14 @@
 
   --vp-nav-screen-bg-color: rgba(30, 30, 32, 0.72);
   --vp-c-divider: rgba(255, 255, 255, 0.08);
-}
 
-/* ========== 2. Background ========== */
-html.dark {
-  background-color: #1a1a1c;
-}
-
-/* ========== 3. Glass Effect (Dark) ========== */
-.dark .Layout {
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-}
-
-.dark .VPNavBar {
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-}
-
-/* ========== 4. Hero Section (Dark) ========== */
-.dark .VPHero .image-container {
-  animation-name: glow-breathe-dark;
-}
-
-.dark .VPHero .image-container .image-src {
-  box-shadow: 0 10px 60px rgba(245, 177, 170, 0.35);
-}
-
-/* ========== 5. Feature Cards (Dark) ========== */
-.dark .VPFeature:hover {
-  box-shadow: 0 12px 32px rgba(245, 177, 170, 0.14);
-}
-
-/* ========== 6. Buttons (Dark) ========== */
-.dark .VPButton.brand {
-  background-color: #b84a6e;
-}
-
-.dark .VPButton.brand:hover {
-  box-shadow: 0 8px 24px rgba(184, 74, 110, 0.4);
-  background-color: #c95a7e;
-}
-
-/* ========== 7. Code Blocks (Dark) ========== */
-.dark div[class*="language-"] {
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* ========== 8. Animations (Dark) ========== */
-@keyframes glow-breathe-dark {
-  0%, 100% { box-shadow: 0 0 20px 6px rgba(245, 177, 170, 0.15); }
-  50% { box-shadow: 0 0 40px 12px rgba(245, 177, 170, 0.3); }
+  --vp-c-bg-page: #1a1a1c;
+  --vp-c-border-light: rgba(255, 255, 255, 0.06);
+  --vp-c-brand-shadow: rgba(245, 177, 170, 0.14);
+  --vp-c-brand-shadow-lg: rgba(245, 177, 170, 0.14);
+  --vp-c-brand-glow: rgba(245, 177, 170, 0.15);
+  --vp-c-brand-glow-strong: rgba(245, 177, 170, 0.3);
+  --vp-c-brand-shadow-strong: rgba(184, 74, 110, 0.4);
+  --vp-c-brand-btn: #b84a6e;
+  --vp-c-brand-btn-hover: #c95a7e;
 }
