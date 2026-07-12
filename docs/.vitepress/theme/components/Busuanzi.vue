@@ -1,36 +1,71 @@
 <template>
   <div class="busuanzi-container">
-    <span id="busuanzi_container_site_pv">
-      <span v-html="sitePVText" />
+    <span>
+      {{ t('busuanzi.sitePV').replace('{count}', String(sitePV)) }}
       &nbsp;|&nbsp;
-      <span v-html="siteUVText" />
+      {{ t('busuanzi.siteUV').replace('{count}', String(siteUV)) }}
     </span>
-    <span v-if="isDocPage" id="busuanzi_container_page_pv">
+    <span v-if="isDocPage">
       &nbsp;|&nbsp;
-      <span v-html="pagePVText" />
+      {{ t('busuanzi.pagePV').replace('{count}', String(pagePV)) }}
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { useData } from 'vitepress'
 import { useI18n } from '../composables/useI18n'
 
-const isDocPage = ref(false)
+const { page } = useData()
 const { t } = useI18n()
+const isDocPage = ref(false)
+const sitePV = ref<number>(0)
+const siteUV = ref<number>(0)
+const pagePV = ref<number>(0)
 
-const sitePVText = computed(() => t('busuanzi.sitePV').replace('{count}', '<span id="busuanzi_value_site_pv"></span>'))
-const siteUVText = computed(() => t('busuanzi.siteUV').replace('{count}', '<span id="busuanzi_value_site_uv"></span>'))
-const pagePVText = computed(() => t('busuanzi.pagePV').replace('{count}', '<span id="busuanzi_value_page_pv"></span>'))
+let cleanup: (() => void) | null = null
+
+function fetchCount() {
+  cleanup?.()
+  const cb = 'BusuanziCallback_' + Math.floor(1099511627776 * Math.random())
+  const timeout = setTimeout(() => {
+    ;(window as any)[cb] = undefined
+  }, 8000)
+
+  ;(window as any)[cb] = (data: any) => {
+    clearTimeout(timeout)
+    sitePV.value = data.site_pv ?? 0
+    siteUV.value = data.site_uv ?? 0
+    pagePV.value = data.page_pv ?? 0
+    ;(window as any)[cb] = undefined
+  }
+
+  const script = document.createElement('script')
+  script.async = true
+  script.referrerPolicy = 'no-referrer-when-downgrade'
+  script.src = `//busuanzi.ibruce.info/busuanzi?jsonpCallback=${cb}`
+  document.head.appendChild(script)
+
+  cleanup = () => {
+    clearTimeout(timeout)
+    try { document.head.removeChild(script) } catch {}
+    ;(window as any)[cb] = undefined
+  }
+}
 
 onMounted(() => {
   isDocPage.value = !!document.querySelector('.content')
+  fetchCount()
+})
 
-  const el = document.createElement('script')
-  el.async = true
-  el.referrerPolicy = 'no-referrer-when-downgrade'
-  el.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-  document.head.appendChild(el)
+watch(() => page.value.relativePath, () => {
+  isDocPage.value = !!document.querySelector('.content')
+  fetchCount()
+})
+
+onUnmounted(() => {
+  cleanup?.()
 })
 </script>
 
@@ -48,16 +83,7 @@ onMounted(() => {
   gap: 0;
 }
 
-#busuanzi_container_site_pv,
-#busuanzi_container_page_pv {
+.busuanzi-container > span {
   display: inline;
-}
-
-#busuanzi_value_site_pv,
-#busuanzi_value_site_uv,
-#busuanzi_value_page_pv {
-  color: var(--vp-c-brand-1);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
 }
 </style>
