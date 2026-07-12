@@ -119,18 +119,18 @@ watch(open, (val) => {
   <span v-if="headers.length > 0" class="blog-outline">
     <button class="blog-outline-btn" :class="{ open }" @click="toggle">
       {{ t('postMeta.outline') }}
-      <span class="vpi-chevron-right icon" />
+      <span class="vpi-chevron-right blog-outline-icon" />
     </button>
     <Transition name="outline-fade">
       <div v-if="open" ref="dropdownRef" class="blog-outline-dropdown" @click="open = false">
         <div class="blog-outline-body">
           <template v-for="h in headers" :key="h.link">
-            <a :href="h.link" class="outline-link" :class="{ nested: h.level > 2 }">{{ h.title }}</a>
+            <a :href="h.link" class="blog-outline-link" :class="{ 'blog-outline-nested': h.level > 2 }">{{ h.title }}</a>
             <a
               v-for="child in h.children"
               :key="child.link"
               :href="child.link"
-              class="outline-link nested"
+              class="blog-outline-link blog-outline-nested"
             >{{ child.title }}</a>
           </template>
         </div>
@@ -139,104 +139,3 @@ watch(open, (val) => {
   </span>
 </template>
 
-<style scoped>
-.blog-outline {
-  position: relative;
-  display: inline-block;
-}
-
-.blog-outline-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 0;
-  border: none;
-  background: none;
-  font: inherit;
-  color: var(--vp-c-text-3);
-  cursor: pointer;
-  transition: color 0.25s;
-}
-
-.blog-outline-btn:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.icon {
-  font-size: 14px;
-  transition: transform 0.25s;
-}
-
-.open > .icon {
-  transform: rotate(90deg);
-}
-
-.blog-outline-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 8px;
-  min-width: 160px;
-  max-width: min(280px, calc(100vw - 24px));
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: var(--vp-shadow-3);
-  z-index: 100;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-@media (min-width: 1280px) {
-  .blog-outline {
-    display: none;
-  }
-}
-
-.dark .blog-outline-dropdown {
-  background: var(--vp-c-bg);
-}
-
-.blog-outline-body {
-  padding: 8px 0;
-}
-
-.outline-link {
-  display: block;
-  padding: 0 16px;
-  line-height: 32px;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--vp-c-text-2);
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color 0.25s;
-}
-
-.outline-link:hover,
-.outline-link.active {
-  color: var(--vp-c-text-1);
-}
-
-.outline-link.nested {
-  padding-left: 29px;
-}
-
-.outline-fade-enter-active {
-  transition: all 0.2s ease-out;
-}
-
-.outline-fade-leave-active {
-  transition: all 0.15s ease-in;
-}
-
-.outline-fade-enter-from,
-.outline-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-</style>
