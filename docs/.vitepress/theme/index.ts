@@ -3,8 +3,8 @@ import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
 import type { Theme } from 'vitepress'
-import GiscusComment from './components/GiscusComment.vue'
 import Busuanzi from './components/Busuanzi.vue'
+import GiscusComment from './components/GiscusComment.vue'
 import BlogPostMeta from './components/BlogPostMeta.vue'
 import BlogPostNav from './components/BlogPostNav.vue'
 import BlogList from './components/BlogList.vue'
@@ -26,12 +26,7 @@ export default {
         }
         return null
       },
-      // 页脚下方：站点访问统计（仅首页）
-      'layout-bottom': () => {
-        const { frontmatter } = useData()
-        if (frontmatter.value.layout === 'home') return h(Busuanzi)
-        return null
-      },
+
       // 正文后插槽：上下篇导航 + Giscus 评论
       'doc-after': () => {
         const { page, frontmatter } = useData()
@@ -47,8 +42,8 @@ export default {
         }
         return children.length ? children : null
       },
-      // 布局顶部：加载进度条 + 回到顶部按钮
-      'layout-top': () => [h(LoadingBar), h(BackToTop), h(FloatingToc)],
+      // 布局顶部：加载进度条 + 回到顶部按钮 + 站点统计（通过 DOM 注入到页脚）
+      'layout-top': () => [h(LoadingBar), h(BackToTop), h(FloatingToc), h(Busuanzi)],
     })
   },
   // 全局注册 BlogList 组件，供 Markdown 中通过 <BlogList /> 调用

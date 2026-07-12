@@ -391,6 +391,8 @@ html.dark {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
 
+
+
 .VPFooter {
   position: fixed;
   bottom: 0;
@@ -407,8 +409,9 @@ html.dark {
 
 .VPFooter .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 4px;
 }
 
 .VPFooter .copyright {
@@ -462,9 +465,7 @@ html.dark {
   }
 
   .VPFooter .container {
-    flex-direction: column;
     gap: 8px;
-    text-align: center;
   }
 }
 

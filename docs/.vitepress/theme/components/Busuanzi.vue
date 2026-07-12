@@ -1,49 +1,67 @@
 <template>
-  <div class="busuanzi-container">
-    <span>
-      {{ t('busuanzi.sitePV').replace('{count}', String(sitePV)) }}
-      &nbsp;|&nbsp;
-      {{ t('busuanzi.siteUV').replace('{count}', String(siteUV)) }}
-    </span>
-  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
+import { useData } from 'vitepress'
 import { useI18n } from '../composables/useI18n'
 
-const { t } = useI18n()
-const sitePV = ref(0)
-const siteUV = ref(0)
+const { frontmatter } = useData()
+const { t, locale } = useI18n()
+
+function formatText(sitePV: number, siteUV: number) {
+  return t('busuanzi.sitePV').replace('{count}', String(sitePV))
+    + '  |  '
+    + t('busuanzi.siteUV').replace('{count}', String(siteUV))
+}
+
+function inject(el: HTMLElement, text: string) {
+  el.textContent = text
+  el.style.cssText = 'line-height:24px;font-size:12px;font-weight:500;color:var(--vp-c-text-3);opacity:0.5;pointer-events:none'
+}
+
+function waitForFooter(cb: () => void) {
+  if (document.querySelector('.VPFooter .container')) {
+    cb()
+    return
+  }
+  const timer = setInterval(() => {
+    if (document.querySelector('.VPFooter .container')) {
+      clearInterval(timer)
+      cb()
+    }
+  }, 50)
+  setTimeout(() => clearInterval(timer), 5000)
+}
 
 onMounted(() => {
-  const cb = 'BusuanziCallback_' + Math.floor(1099511627776 * Math.random())
-  const timeout = setTimeout(() => { (window as any)[cb] = undefined }, 8000)
+  if (frontmatter.value.layout !== 'home') return
 
-  ;(window as any)[cb] = (data: any) => {
-    clearTimeout(timeout)
-    sitePV.value = data.site_pv ?? 0
-    siteUV.value = data.site_uv ?? 0
-    ;(window as any)[cb] = undefined
-  }
+  waitForFooter(() => {
+    const container = document.querySelector('.VPFooter .container')!
+    let el = container.querySelector('.busuanzi-in-footer') as HTMLElement
+    if (!el) {
+      el = document.createElement('div')
+      el.className = 'busuanzi-in-footer'
+      container.appendChild(el)
+    }
 
-  const script = document.createElement('script')
-  script.async = true
-  script.referrerPolicy = 'no-referrer-when-downgrade'
-  script.src = `//busuanzi.ibruce.info/busuanzi?jsonpCallback=${cb}`
-  document.head.appendChild(script)
+    inject(el, formatText(0, 0))
+
+    const cb = 'BusuanziCallback_' + Math.floor(1099511627776 * Math.random())
+    const timeout = setTimeout(() => { (window as any)[cb] = undefined }, 8000)
+
+    ;(window as any)[cb] = (data: any) => {
+      clearTimeout(timeout)
+      inject(el, formatText(data.site_pv ?? 0, data.site_uv ?? 0))
+      ;(window as any)[cb] = undefined
+    }
+
+    const script = document.createElement('script')
+    script.async = true
+    script.referrerPolicy = 'no-referrer-when-downgrade'
+    script.src = `//busuanzi.ibruce.info/busuanzi?jsonpCallback=${cb}`
+    document.head.appendChild(script)
+  })
 })
 </script>
-
-<style scoped>
-.busuanzi-container {
-  margin: 0 auto;
-  max-width: var(--vp-layout-max-width);
-  text-align: center;
-  line-height: 24px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--vp-c-text-2);
-  padding: 0 24px 32px;
-}
-</style>
