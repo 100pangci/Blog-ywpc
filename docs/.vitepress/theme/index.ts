@@ -26,8 +26,12 @@ export default {
         }
         return null
       },
-      // 首页 Hero 区域：站点访问统计
-      'home-hero-info': () => h(Busuanzi),
+      // 页脚下方：站点访问统计（仅首页）
+      'layout-bottom': () => {
+        const { frontmatter } = useData()
+        if (frontmatter.value.layout === 'home') return h(Busuanzi)
+        return null
+      },
       // 正文后插槽：上下篇导航 + Giscus 评论
       'doc-after': () => {
         const { page, frontmatter } = useData()

@@ -37,9 +37,13 @@ onMounted(() => {
 
 <style scoped>
 .busuanzi-container {
+  margin: 0 auto;
+  max-width: var(--vp-layout-max-width);
   text-align: center;
-  font-size: 0.85rem;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--vp-c-text-2);
-  padding: 8px 0 0;
+  padding: 0 24px 32px;
 }
 </style>
