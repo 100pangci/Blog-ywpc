@@ -5,10 +5,6 @@
       &nbsp;|&nbsp;
       {{ t('busuanzi.siteUV').replace('{count}', String(siteUV)) }}
     </span>
-    <span v-if="isDocPage">
-      &nbsp;|&nbsp;
-      {{ t('busuanzi.pagePV').replace('{count}', String(pagePV)) }}
-    </span>
   </div>
 </template>
 
@@ -19,10 +15,8 @@ import { useI18n } from '../composables/useI18n'
 
 const { page } = useData()
 const { t } = useI18n()
-const isDocPage = ref(false)
 const sitePV = ref<number>(0)
 const siteUV = ref<number>(0)
-const pagePV = ref<number>(0)
 
 let cleanup: (() => void) | null = null
 
@@ -37,7 +31,6 @@ function fetchCount() {
     clearTimeout(timeout)
     sitePV.value = data.site_pv ?? 0
     siteUV.value = data.site_uv ?? 0
-    pagePV.value = data.page_pv ?? 0
     ;(window as any)[cb] = undefined
   }
 
@@ -55,12 +48,10 @@ function fetchCount() {
 }
 
 onMounted(() => {
-  isDocPage.value = !!document.querySelector('.content')
   fetchCount()
 })
 
 watch(() => page.value.relativePath, () => {
-  isDocPage.value = !!document.querySelector('.content')
   fetchCount()
 })
 
