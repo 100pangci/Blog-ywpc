@@ -1,6 +1,9 @@
 /* ============================================
    Dark Theme — Blog-ywpc
-   All .dark overrides. Loaded after light.css.
+   .dark overrides. Mirrors light.css exactly
+   — same variables, dark values.
+   Giscus iframe colors (mirrored) in
+   ../config/giscusTheme.ts.
    ============================================ */
 
 /* ========== 1. CSS Custom Properties (Dark) ========== */
@@ -30,11 +33,12 @@
 
   --vp-c-bg-page: #1a1a1c;
   --vp-c-border-light: rgba(255, 255, 255, 0.06);
+
   --vp-c-brand-shadow: rgba(245, 177, 170, 0.14);
   --vp-c-brand-shadow-lg: rgba(245, 177, 170, 0.14);
+  --vp-c-brand-shadow-strong: rgba(184, 74, 110, 0.4);
   --vp-c-brand-glow: rgba(245, 177, 170, 0.15);
   --vp-c-brand-glow-strong: rgba(245, 177, 170, 0.3);
-  --vp-c-brand-shadow-strong: rgba(184, 74, 110, 0.4);
   --vp-c-brand-btn: #b84a6e;
   --vp-c-brand-btn-hover: #c95a7e;
 }

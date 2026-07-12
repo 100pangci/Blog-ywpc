@@ -1,7 +1,48 @@
 /* ============================================
    Common Layout & Component Styles
    Shared by both light and dark themes.
+   Giscus iframe colors (mirrored) in
+   ../config/giscusTheme.ts.
    ============================================ */
+
+/* ========== 1. Global CSS Custom Properties ========== */
+:root {
+  --vp-font-family-base: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --vp-font-family-mono: "Fira Code", "Cascadia Code", "JetBrains Mono", "Source Code Pro", Consolas, "Courier New", monospace;
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #e95295 0%, #eb6ea5 35%, #f5b1aa 70%);
+
+  --vp-c-tip-1: #88a67c;
+  --vp-c-tip-2: #a3c294;
+  --vp-c-tip-3: #c1d8b0;
+  --vp-c-tip-soft: rgba(136, 166, 124, 0.14);
+
+  --vp-c-warning-1: #e6b422;
+  --vp-c-warning-2: #f0c840;
+  --vp-c-warning-3: #f5d870;
+  --vp-c-warning-soft: rgba(230, 180, 34, 0.14);
+
+  --vp-c-danger-1: #e95464;
+  --vp-c-danger-2: #ed7a86;
+  --vp-c-danger-3: #f3a0a8;
+  --vp-c-danger-soft: rgba(233, 84, 100, 0.14);
+
+  --vp-c-shadow: rgba(0, 0, 0, 0.08);
+  --vp-c-shadow-xs: rgba(0, 0, 0, 0.04);
+  --vp-c-shadow-2xs: rgba(0, 0, 0, 0.03);
+  --vp-c-shadow-sm: rgba(0, 0, 0, 0.1);
+  --vp-c-shadow-lg: rgba(0, 0, 0, 0.06);
+
+  --vp-c-brand-soft-alt: rgba(233, 82, 149, 0.1);
+  --vp-c-brand-focus: rgba(233, 82, 149, 0.2);
+
+  --vp-c-gallery-overlay: rgba(0, 0, 0, 0.45);
+  --vp-c-lightbox-bg: rgba(0, 0, 0, 0.5);
+  --vp-c-lightbox-shadow: rgba(0, 0, 0, 0.5);
+  --vp-c-white: #fff;
+}
+
 /* ========== 2. Base & Reset ========== */
 html, body {
   overflow-x: hidden;
