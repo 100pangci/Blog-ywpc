@@ -416,13 +416,13 @@ onUnmounted(() => {
 
 /* Lightbox overlay */
 .lightbox-overlay {
-  --lb-bg: rgba(245, 245, 245, 0.95);
-  --lb-text: #1a1a1a;
-  --lb-text-dim: rgba(0, 0, 0, 0.55);
-  --lb-btn-bg: rgba(0, 0, 0, 0.08);
-  --lb-btn-bg-hover: rgba(0, 0, 0, 0.15);
-  --lb-btn-text: #1a1a1a;
-  --lb-border: rgba(0, 0, 0, 0.2);
+  --lb-bg: rgba(0, 0, 0, 0.5);
+  --lb-text: #fff;
+  --lb-text-dim: rgba(255, 255, 255, 0.55);
+  --lb-btn-bg: rgba(255, 255, 255, 0.12);
+  --lb-btn-bg-hover: rgba(255, 255, 255, 0.25);
+  --lb-btn-text: #fff;
+  --lb-border: rgba(255, 255, 255, 0.25);
 
   position: fixed;
   inset: 0;
@@ -706,7 +706,7 @@ onUnmounted(() => {
 
 <style>
 .dark .lightbox-overlay {
-  --lb-bg: rgba(0, 0, 0, 0.88);
+  --lb-bg: rgba(0, 0, 0, 0.5);
   --lb-text: #fff;
   --lb-text-dim: rgba(255, 255, 255, 0.55);
   --lb-btn-bg: rgba(255, 255, 255, 0.12);
