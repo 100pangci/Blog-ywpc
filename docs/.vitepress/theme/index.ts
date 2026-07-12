@@ -26,20 +26,22 @@ export default {
         }
         return null
       },
-      // 正文后插槽：上下篇导航 + 计数 + Giscus 评论
+      // 首页 Hero 区域：站点访问统计
+      'home-hero-info': () => h(Busuanzi),
+      // 正文后插槽：上下篇导航 + Giscus 评论
       'doc-after': () => {
         const { page, frontmatter } = useData()
         const pageKey = page.value.relativePath || ''
         const showComments = frontmatter.value.comment !== false
         const showNav = frontmatter.value.blogPost || frontmatter.value.tags?.length
-        const children = [h(Busuanzi)]
+        const children: any[] = []
         if (showNav) {
-          children.unshift(h(BlogPostNav, { key: pageKey }))
+          children.push(h(BlogPostNav, { key: pageKey }))
         }
         if (showComments) {
           children.push(h(GiscusComment, { key: pageKey + '-comment' }))
         }
-        return children
+        return children.length ? children : null
       },
       // 布局顶部：加载进度条 + 回到顶部按钮
       'layout-top': () => [h(LoadingBar), h(BackToTop), h(FloatingToc)],

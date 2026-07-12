@@ -9,23 +9,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
-import { useData } from 'vitepress'
+import { ref, onMounted } from 'vue'
 import { useI18n } from '../composables/useI18n'
 
-const { page } = useData()
 const { t } = useI18n()
-const sitePV = ref<number>(0)
-const siteUV = ref<number>(0)
+const sitePV = ref(0)
+const siteUV = ref(0)
 
-let cleanup: (() => void) | null = null
-
-function fetchCount() {
-  cleanup?.()
+onMounted(() => {
   const cb = 'BusuanziCallback_' + Math.floor(1099511627776 * Math.random())
-  const timeout = setTimeout(() => {
-    ;(window as any)[cb] = undefined
-  }, 8000)
+  const timeout = setTimeout(() => { (window as any)[cb] = undefined }, 8000)
 
   ;(window as any)[cb] = (data: any) => {
     clearTimeout(timeout)
@@ -39,24 +32,6 @@ function fetchCount() {
   script.referrerPolicy = 'no-referrer-when-downgrade'
   script.src = `//busuanzi.ibruce.info/busuanzi?jsonpCallback=${cb}`
   document.head.appendChild(script)
-
-  cleanup = () => {
-    clearTimeout(timeout)
-    try { document.head.removeChild(script) } catch {}
-    ;(window as any)[cb] = undefined
-  }
-}
-
-onMounted(() => {
-  fetchCount()
-})
-
-watch(() => page.value.relativePath, () => {
-  fetchCount()
-})
-
-onUnmounted(() => {
-  cleanup?.()
 })
 </script>
 
@@ -65,16 +40,6 @@ onUnmounted(() => {
   text-align: center;
   font-size: 0.85rem;
   color: var(--vp-c-text-2);
-  padding: 16px 0;
-  border-top: 1px solid var(--vp-c-divider);
-  margin-top: 32px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0;
-}
-
-.busuanzi-container > span {
-  display: inline;
+  padding: 8px 0 0;
 }
 </style>
