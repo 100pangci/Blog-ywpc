@@ -9,7 +9,8 @@ comment: false
 
 ## GitHub 项目
 
-- [Binary-Patcher](https://github.com/100pangci/Binary-Patcher)
+- [Binary-Patcher（停止维护）](https://github.com/100pangci/Binary-Patcher)
+- [Binary-Patcher-Rs（开发中）](https://github.com/100pangci/Binary-Patcher-Rs)
 - [Blog-ywpc](https://github.com/100pangci/Blog-ywpc)
 - [DiskTree-GUI](https://github.com/100pangci/DiskTree-GUI)
 - [GitHub-Stars-Release-Watcher（开发中）](https://github.com/100pangci/GitHub-Stars-Release-Watcher)
