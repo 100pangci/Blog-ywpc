@@ -13,6 +13,11 @@ const RSS: RSSOptions = {
   language: 'zh-cn',
   filename: 'feed.xml',
   ignoreHome: true,
+  filter: ({ filepath, frontmatter }) => {
+    const contentPath = filepath.replace(/\\/g, '/')
+    return /\/(?:zh|en|ja)\/(?:posts|life)\/(?!index\.md$)[^/]+\.md$/.test(contentPath)
+      && frontmatter.published !== false
+  },
   ariaLabel: 'RSS Feed',
   author: {
     name: 'Ywpc',

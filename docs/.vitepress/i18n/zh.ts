@@ -50,6 +50,8 @@ export const messages = {
     all: '全部',
     prev: '上一页',
     next: '下一页',
+    jump: '跳转',
+    pageNumber: '输入要跳转的页码',
     pageInfo: '第 {current} / {total} 页 · {count} 篇',
     empty: '没有找到匹配的文章，试试清空搜索或换个标签',
     readingTime: '阅读时间：约 {min} 分钟',

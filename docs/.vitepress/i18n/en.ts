@@ -50,6 +50,8 @@ export const messages = {
     all: 'All',
     prev: '← Prev',
     next: 'Next →',
+    jump: 'Go',
+    pageNumber: 'Page number to go to',
     pageInfo: 'Page {current} / {total} · {count} posts',
     empty: 'No articles found. Try clearing the search or changing the tag.',
     readingTime: '~{min} min read',

@@ -50,6 +50,8 @@ export const messages = {
     all: 'すべて',
     prev: '← 前へ',
     next: '次へ →',
+    jump: '移動',
+    pageNumber: '移動先のページ番号',
     pageInfo: '{current} / {total} ページ · {count} 件',
     empty: '該当する記事が見つかりませんでした。検索をクリアするか、タグを変更してみてください。',
     readingTime: '約 {min} 分',

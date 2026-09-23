@@ -56,32 +56,50 @@
       <p>{{ t('blogList.empty') }}</p>
     </div>
 
-    <div v-if="showPagination" class="blog-index__pagination">
-      <div class="blog-index__pagination-info">
+    <div class="blog-index__pagination">
+      <div v-if="filtered.length" class="blog-index__pagination-info">
         {{ t('blogList.pageInfo', { current: currentPage, total: totalPages, count: filtered.length }) }}
       </div>
       <div class="blog-index__pagination-controls">
-        <button
-          class="blog-index__pagination-btn"
-          :disabled="currentPage <= 1"
-          @click="currentPage--"
-        >
-           {{ t('blogList.prev') }}
-        </button>
-        <span class="blog-index__pagination-current">{{ currentPage }}</span>
-        <button
-          class="blog-index__pagination-btn"
-          :disabled="currentPage >= totalPages"
-          @click="currentPage++"
-        >
-           {{ t('blogList.next') }}
-        </button>
+        <template v-if="showPagination">
+          <button
+            class="blog-index__pagination-btn"
+            :disabled="currentPage <= 1"
+            @click="currentPage--"
+          >
+            {{ t('blogList.prev') }}
+          </button>
+          <div class="blog-index__page-jump">
+            <input
+              v-model.number="jumpPage"
+              class="blog-index__page-jump-input"
+              type="number"
+              min="1"
+              :max="totalPages"
+              step="1"
+              :aria-label="t('blogList.pageNumber')"
+              @keydown.enter.prevent="jumpToPage"
+              @change="jumpToPage"
+            />
+            <span aria-hidden="true">/ {{ totalPages }}</span>
+            <button class="blog-index__pagination-btn" @click="jumpToPage">
+              {{ t('blogList.jump') }}
+            </button>
+          </div>
+          <button
+            class="blog-index__pagination-btn"
+            :disabled="currentPage >= totalPages"
+            @click="currentPage++"
+          >
+            {{ t('blogList.next') }}
+          </button>
+        </template>
         <span class="blog-index__page-size">
-           {{ t('blogList.perPage') }}
-           <select v-model.number="pageSize" class="blog-index__page-size-select">
-             <option v-for="s in pageSizes" :key="s" :value="s">{{ s }}</option>
-           </select>
-           {{ t('blogList.unit') }}
+          {{ t('blogList.perPage') }}
+          <select v-model.number="pageSize" class="blog-index__page-size-select">
+            <option v-for="s in pageSizes" :key="s" :value="s">{{ s }}</option>
+          </select>
+          {{ t('blogList.unit') }}
         </span>
       </div>
     </div>
@@ -107,11 +125,20 @@ const searchQuery = ref('')
 const activeTag = ref('all')
 const currentPage = ref(1)
 const pageSize = ref(10)
+const jumpPage = ref<number | ''>(1)
 const pageSizes = [5, 10, 20]
 
 // ========== 搜索与筛选 ==========
 watch([searchQuery, activeTag], () => {
   currentPage.value = 1
+  jumpPage.value = 1
+})
+watch(pageSize, () => {
+  currentPage.value = 1
+  jumpPage.value = 1
+})
+watch(currentPage, (page) => {
+  jumpPage.value = page
 })
 
 // ========== 计算属性 ==========
@@ -137,9 +164,27 @@ const filtered = computed(() => {
 const totalPages = computed(() => Math.max(1, Math.ceil(filtered.value.length / pageSize.value)))
 const showPagination = computed(() => filtered.value.length > pageSize.value)
 
+watch(totalPages, (pages) => {
+  if (currentPage.value > pages) currentPage.value = pages
+  const requested = jumpPage.value === '' ? Number.NaN : Number(jumpPage.value)
+  jumpPage.value = Number.isInteger(requested)
+    ? Math.min(pages, Math.max(1, requested))
+    : currentPage.value
+})
+
+function jumpToPage() {
+  const requested = jumpPage.value === '' ? Number.NaN : Number(jumpPage.value)
+  if (!Number.isInteger(requested)) {
+    jumpPage.value = currentPage.value
+    return
+  }
+
+  currentPage.value = Math.min(totalPages.value, Math.max(1, requested))
+  jumpPage.value = currentPage.value
+}
+
 const pagePosts = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value
   return filtered.value.slice(start, start + pageSize.value)
 })
 </script>
-

@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
+import yaml from 'js-yaml'
 
 // ========== 类型定义 ==========
 export interface Post {
@@ -37,58 +38,13 @@ const PREFIX_MAP: Record<string, Record<string, string>> = {
 }
 
 // ========== Frontmatter 解析 ==========
-function parseYamlValue(value: string): any {
-  if (!value) return value
-  if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
-    return value.slice(1, -1)
-  }
-  if (value.startsWith('[') && value.endsWith(']')) {
-    return value.slice(1, -1).split(',').map(s => s.trim().replace(/['"]/g, ''))
-  }
-  if (value === 'true') return true
-  if (value === 'false') return false
-  if (/^\d+$/.test(value)) return Number(value)
-  return value
-}
-
 function parseFrontmatter(raw: string): Record<string, any> {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!match) return {}
-  const fm: Record<string, any> = {}
-  const lines = match[1].split('\n')
-  let currentKey = ''
-  let currentList: string[] | null = null
-
-  for (const line of lines) {
-    if (currentList !== null) {
-      const trimmed = line.trim()
-      if (trimmed.startsWith('- ')) {
-        currentList.push(trimmed.slice(2).trim().replace(/['"]/g, ''))
-        continue
-      }
-      fm[currentKey] = currentList
-      currentList = null
-    }
-
-    const colonIdx = line.indexOf(':')
-    if (colonIdx <= 0) continue
-
-    currentKey = line.slice(0, colonIdx).trim()
-    const value = line.slice(colonIdx + 1).trim()
-
-    if (value === '') {
-      currentList = []
-      continue
-    }
-
-    fm[currentKey] = parseYamlValue(value)
-  }
-
-  if (currentList !== null) {
-    fm[currentKey] = currentList
-  }
-
-  return fm
+  const parsed = yaml.safeLoad(match[1], { schema: yaml.JSON_SCHEMA })
+  return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+    ? parsed as Record<string, any>
+    : {}
 }
 
 // ========== 阅读时间计算 ==========
@@ -142,11 +98,13 @@ function buildPosts(modules: Record<string, any>, prefix: string, type: ContentT
   const dir = DIR_MAP[type]
   return Object.entries(modules)
     .filter(([path]) => !path.endsWith('index.md'))
-    .map(([path, raw]) => {
+    .flatMap(([path, raw]) => {
       const content = raw as string
       const fm = parseFrontmatter(content)
+      if (fm.published === false) return []
+
       const slug = path.replace(/.*\//, '').replace('.md', '')
-      return {
+      return [{
         title: fm.title || slug,
         date: fm.date || '',
         tags: Array.isArray(fm.tags) ? fm.tags : [],
@@ -156,7 +114,7 @@ function buildPosts(modules: Record<string, any>, prefix: string, type: ContentT
         url: `/${prefix}${dir}/${slug}`,
         slug,
         readingTime: calcReadingTime(content),
-      }
+      }]
     })
     .sort((a, b) => {
       const dateCmp = (b.date || '').localeCompare(a.date || '')
