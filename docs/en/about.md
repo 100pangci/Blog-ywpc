@@ -11,28 +11,31 @@ I usually spend my time tinkering with Linux, Android, containers, networking, o
 
 ## GitHub Projects
 
-* [open-webui-pure: An extremely minimal fork of Open WebUI](https://github.com/100pangci/open-webui-pure)
-* [DateNote-Weii: A native Kotlin / Jetpack Compose schedule app](https://github.com/100pangci/DateNote-Weii)
-* [syncthing-android: A Syncthing wrapper for Android](https://github.com/100pangci/syncthing-android)
-* [mpvKt: An Android player based on mpv-android](https://github.com/100pangci/mpvKt)
-* [mpv-android: The underlying lib used by mpvKt](https://github.com/100pangci/mpv-android)
-* [terraria: Self-maintained Terraria Server container image](https://github.com/100pangci/terraria)
-* [fedora-nas-config: Fedora Server NAS configuration and automation](https://github.com/100pangci/fedora-nas-config)
-* [Localsend-Cli-Container: LocalSend CLI Podman container](https://github.com/100pangci/Localsend-Cli-Container)
-* [Binary-Patcher-Rs: Cross-platform binary patching tool](https://github.com/100pangci/Binary-Patcher-Rs)
-* [VNDB-GUI-Rs](https://github.com/100pangci/VNDB-GUI-Rs)
-* [Batch-Unpack](https://github.com/100pangci/Batch-Unpack)
-* [Translater-Helper](https://github.com/100pangci/Translater-Helper)
-* [Usage-Widget](https://github.com/100pangci/Usage-Widget)
-* [PaperVaultQR](https://github.com/100pangci/PaperVaultQR)
-* [My-Firefox-Bookmark-Tree](https://github.com/100pangci/My-Firefox-Bookmark-Tree)
-* [MyTools](https://github.com/100pangci/MyTools)
-* [DiskTree-GUI](https://github.com/100pangci/DiskTree-GUI)
-* [Blog-ywpc](https://github.com/100pangci/Blog-ywpc)
+Here are selected projects pinned or recently maintained on my [GitHub profile](https://github.com/100pangci). See the profile for the full and up-to-date list.
+
+### Pinned on my profile
+
+* [PaperVaultQR](https://github.com/100pangci/PaperVaultQR): Encodes data as printable QR codes for offline paper backups, and restores it from scanned images.
+* [mpvKt](https://github.com/100pangci/mpvKt): A maintained Android player fork based on mpv, using the companion [mpv-android](https://github.com/100pangci/mpv-android) library.
+* [Noxfold-Sync](https://github.com/100pangci/Noxfold-Sync): An Android syncing app evolved from Syncthing-Fork, with its UI and service layer substantially rewritten.
+* [How To Ask Questions the Smart Way — Galgame Edition](https://github.com/GalGame-Work/How-To-Ask-Questions-The-Smart-Way-Galgame): A technical-question guide adapted for the Galgame community.
+* [vn_patch](https://github.com/GalGame-Work/vn_patch): An archive of legacy visual novel translation patches.
+* [Binary-Patcher-Rs](https://github.com/100pangci/Binary-Patcher-Rs): A cross-platform binary patching tool written in Rust, with file and directory workflows, verification, and rollback.
+
+### Other selected projects
+
+* [Syncthing-for-magisk](https://github.com/100pangci/Syncthing-for-magisk): A revived Magisk module that runs Syncthing as a background Android system service, with boot startup, multi-ABI support, and builds that track the latest stable release.
+* [EfuSeek](https://github.com/100pangci/EfuSeek): A native Linux desktop app for searching Everything `.efu` file lists without scanning the disks or NAS themselves.
+* [VNventory](https://github.com/100pangci/VNventory): An Android collection manager for physical Galgame / visual novel editions, copies, and purchase costs.
+* [VNDB-GUI-Rs](https://github.com/100pangci/VNDB-GUI-Rs): A desktop tool that queries VNDB and generates standardized visual novel filenames.
+* [DateNote-Weii](https://github.com/100pangci/DateNote-Weii): An Android personal planner with natural-language entry, calendar views, and reminders.
+* [Fedora-NAS-Config](https://github.com/100pangci/Fedora-NAS-Config): Configuration snapshots and maintenance automation for a Fedora Server NAS.
+* [Translater-Helper](https://github.com/100pangci/Translater-Helper): A desktop LLM-powered translation, vocabulary, and grammar assistant.
+* [open-webui-pure](https://github.com/100pangci/open-webui-pure): A lightweight Open WebUI fork for self-hosting, with SQLite as the default storage.
+* [Usage-Widget](https://github.com/100pangci/Usage-Widget): A desktop widget with a plugin system for tracking AI usage and system stats.
 
 ### Discontinued / Archived
 
-* syncthing-for-magisk
 * Binary-Patcher
 * VNDB-GUI
 * GitHub-Stars-Release-Watcher

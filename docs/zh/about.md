@@ -11,28 +11,31 @@ comment: false
 
 ## GitHub 项目
 
-* [open-webui-pure：Open WebUI 极限精简分支](https://github.com/100pangci/open-webui-pure)
-* [DateNote-Weii：原生 Kotlin / Jetpack Compose 日程应用](https://github.com/100pangci/DateNote-Weii)
-* [syncthing-android：Syncthing 的 Android 封装](https://github.com/100pangci/syncthing-android)
-* [mpvKt：基于 mpv-android 的 Android 播放器](https://github.com/100pangci/mpvKt)
-* [mpv-android：mpvKt 使用的底层 lib](https://github.com/100pangci/mpv-android)
-* [terraria：自行维护的 Terraria Server 容器镜像](https://github.com/100pangci/terraria)
-* [fedora-nas-config：Fedora Server NAS 配置与自动化](https://github.com/100pangci/fedora-nas-config)
-* [Localsend-Cli-Container：LocalSend CLI Podman 容器](https://github.com/100pangci/Localsend-Cli-Container)
-* [Binary-Patcher-Rs：跨平台二进制补丁工具](https://github.com/100pangci/Binary-Patcher-Rs)
-* [VNDB-GUI-Rs](https://github.com/100pangci/VNDB-GUI-Rs)
-* [Batch-Unpack](https://github.com/100pangci/Batch-Unpack)
-* [Translater-Helper](https://github.com/100pangci/Translater-Helper)
-* [Usage-Widget](https://github.com/100pangci/Usage-Widget)
-* [PaperVaultQR](https://github.com/100pangci/PaperVaultQR)
-* [My-Firefox-Bookmark-Tree](https://github.com/100pangci/My-Firefox-Bookmark-Tree)
-* [MyTools](https://github.com/100pangci/MyTools)
-* [DiskTree-GUI](https://github.com/100pangci/DiskTree-GUI)
-* [Blog-ywpc](https://github.com/100pangci/Blog-ywpc)
+以下是我在 [GitHub 主页](https://github.com/100pangci)置顶或近期维护的代表项目，完整列表以主页为准。
+
+### 主页置顶
+
+* [PaperVaultQR](https://github.com/100pangci/PaperVaultQR)：将数据编码为二维码并排版打印，方便制作离线纸质冷备份，也支持从扫描图片恢复。
+* [mpvKt](https://github.com/100pangci/mpvKt)：基于 mpv 的 Android 播放器维护分支；底层使用配套的 [mpv-android](https://github.com/100pangci/mpv-android) 库。
+* [Noxfold-Sync](https://github.com/100pangci/Noxfold-Sync)：由 Syncthing-Fork 演变而来的 Android 文件同步应用，在此基础上重构了界面与服务层。
+* [提问的智慧 · Galgame 版](https://github.com/GalGame-Work/How-To-Ask-Questions-The-Smart-Way-Galgame)：面向 Galgame 社区整理的技术提问指南。
+* [vn_patch](https://github.com/GalGame-Work/vn_patch)：视觉小说汉化补丁遗产归档仓库。
+* [Binary-Patcher-Rs](https://github.com/100pangci/Binary-Patcher-Rs)：使用 Rust 编写的跨平台二进制补丁工具，支持文件及目录补丁、校验与回滚。
+
+### 其他代表项目
+
+* [Syncthing-for-magisk](https://github.com/100pangci/Syncthing-for-magisk)：重新恢复维护的 Magisk 模块，让 Syncthing 作为 Android 后台系统服务运行，支持开机自启、多架构和自动跟进最新正式版。
+* [EfuSeek](https://github.com/100pangci/EfuSeek)：Linux 原生桌面应用，用于搜索 Everything 的 `.efu` 文件列表，不扫描实际磁盘或 NAS。
+* [VNventory](https://github.com/100pangci/VNventory)：Android Galgame / Visual Novel 实体收藏管理应用，记录具体版本、盒数与购买成本。
+* [VNDB-GUI-Rs](https://github.com/100pangci/VNDB-GUI-Rs)：查询 VNDB 并生成规范化视觉小说文件名的桌面工具。
+* [DateNote-Weii](https://github.com/100pangci/DateNote-Weii)：支持自然语言录入、日历查看和到期提醒的 Android 个人排期应用。
+* [Fedora-NAS-Config](https://github.com/100pangci/Fedora-NAS-Config)：Fedora Server NAS 配置快照与运维自动化脚本。
+* [Translater-Helper](https://github.com/100pangci/Translater-Helper)：基于大模型 API 的桌面翻译与词汇、语法解析工具。
+* [open-webui-pure](https://github.com/100pangci/open-webui-pure)：面向轻量自托管场景、以 SQLite 为默认存储的 Open WebUI 分支。
+* [Usage-Widget](https://github.com/100pangci/Usage-Widget)：带插件系统的桌面悬浮小部件，用于查看 AI 用量和系统状态。
 
 ### 已停止维护 / 归档
 
-* syncthing-for-magisk
 * Binary-Patcher
 * VNDB-GUI
 * GitHub-Stars-Release-Watcher

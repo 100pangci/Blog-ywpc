@@ -11,28 +11,31 @@ comment: false
 
 ## GitHub プロジェクト
 
-* [open-webui-pure：Open WebUI を極限まで簡素化したフォーク](https://github.com/100pangci/open-webui-pure)
-* [DateNote-Weii：ネイティブ Kotlin / Jetpack Compose のスケジュールアプリ](https://github.com/100pangci/DateNote-Weii)
-* [syncthing-android：Syncthing の Android ラッパー](https://github.com/100pangci/syncthing-android)
-* [mpvKt：mpv-android ベースの Android プレイヤー](https://github.com/100pangci/mpvKt)
-* [mpv-android：mpvKt が使用する基盤ライブラリ](https://github.com/100pangci/mpv-android)
-* [terraria：自作メンテナンスの Terraria サーバーコンテナイメージ](https://github.com/100pangci/terraria)
-* [fedora-nas-config：Fedora Server NAS の設定と自動化](https://github.com/100pangci/fedora-nas-config)
-* [Localsend-Cli-Container：LocalSend CLI の Podman コンテナ](https://github.com/100pangci/Localsend-Cli-Container)
-* [Binary-Patcher-Rs：クロスプラットフォーム対応のバイナリパッチツール](https://github.com/100pangci/Binary-Patcher-Rs)
-* [VNDB-GUI-Rs](https://github.com/100pangci/VNDB-GUI-Rs)
-* [Batch-Unpack](https://github.com/100pangci/Batch-Unpack)
-* [Translater-Helper](https://github.com/100pangci/Translater-Helper)
-* [Usage-Widget](https://github.com/100pangci/Usage-Widget)
-* [PaperVaultQR](https://github.com/100pangci/PaperVaultQR)
-* [My-Firefox-Bookmark-Tree](https://github.com/100pangci/My-Firefox-Bookmark-Tree)
-* [MyTools](https://github.com/100pangci/MyTools)
-* [DiskTree-GUI](https://github.com/100pangci/DiskTree-GUI)
-* [Blog-ywpc](https://github.com/100pangci/Blog-ywpc)
+以下は [GitHub プロフィール](https://github.com/100pangci)でピン留め、または最近メンテナンスしている主なプロジェクトです。最新の一覧はプロフィールをご覧ください。
+
+### プロフィールのピン留め
+
+* [PaperVaultQR](https://github.com/100pangci/PaperVaultQR)：データを印刷可能な QR コードに分割し、紙のオフラインバックアップを作成・スキャン画像から復元します。
+* [mpvKt](https://github.com/100pangci/mpvKt)：mpv をベースに継続メンテナンスしている Android プレイヤーのフォークです。基盤には [mpv-android](https://github.com/100pangci/mpv-android) を使用しています。
+* [Noxfold-Sync](https://github.com/100pangci/Noxfold-Sync)：Syncthing-Fork から派生した Android ファイル同期アプリです。UI とサービス層を大幅に再構築しています。
+* [「提問の智慧」Galgame 版](https://github.com/GalGame-Work/How-To-Ask-Questions-The-Smart-Way-Galgame)：Galgame コミュニティ向けに編集した、技術的な質問のガイドです。
+* [vn_patch](https://github.com/GalGame-Work/vn_patch)：ビジュアルノベル中国語パッチの旧作アーカイブです。
+* [Binary-Patcher-Rs](https://github.com/100pangci/Binary-Patcher-Rs)：Rust 製のクロスプラットフォーム・バイナリパッチツール。ファイル／ディレクトリのパッチ、検証、ロールバックに対応します。
+
+### その他の主なプロジェクト
+
+* [Syncthing-for-magisk](https://github.com/100pangci/Syncthing-for-magisk)：メンテナンスを再開した Magisk モジュールです。Syncthing を Android のバックグラウンドシステムサービスとして実行し、起動時の自動開始、複数 ABI、最新安定版への追従に対応します。
+* [EfuSeek](https://github.com/100pangci/EfuSeek)：Everything の `.efu` ファイル一覧を、ディスクや NAS を走査せずに検索する Linux ネイティブアプリです。
+* [VNventory](https://github.com/100pangci/VNventory)：Galgame / Visual Novel の実物コレクションについて、版・所持数・購入費用を管理する Android アプリです。
+* [VNDB-GUI-Rs](https://github.com/100pangci/VNDB-GUI-Rs)：VNDB を検索して、ビジュアルノベルのファイル名を整形・生成するデスクトップツールです。
+* [DateNote-Weii](https://github.com/100pangci/DateNote-Weii)：自然言語での予定入力、カレンダー表示、期限通知に対応する Android スケジュールアプリです。
+* [Fedora-NAS-Config](https://github.com/100pangci/Fedora-NAS-Config)：Fedora Server NAS の設定スナップショットと運用自動化スクリプトです。
+* [Translater-Helper](https://github.com/100pangci/Translater-Helper)：LLM API を利用したデスクトップ翻訳・語彙・文法解析ツールです。
+* [open-webui-pure](https://github.com/100pangci/open-webui-pure)：SQLite を標準ストレージとする、軽量セルフホスト向け Open WebUI フォークです。
+* [Usage-Widget](https://github.com/100pangci/Usage-Widget)：プラグイン対応のデスクトップウィジェット。AI の利用量やシステム状態を確認できます。
 
 ### メンテナンス終了 / アーカイブ
 
-* syncthing-for-magisk
 * Binary-Patcher
 * VNDB-GUI
 * GitHub-Stars-Release-Watcher
