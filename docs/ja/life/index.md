@@ -5,4 +5,6 @@ comment: false
 published: false
 ---
 
+# 日常
+
 <BlogList type="life" />

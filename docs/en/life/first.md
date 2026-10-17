@@ -6,8 +6,6 @@ author: 100pangci
 tags: ['life', 'essay']
 ---
 
-# First Essay
-
 Life is not just about code and keyboards, but also poetry and distant places.
 
 ## Recent Updates

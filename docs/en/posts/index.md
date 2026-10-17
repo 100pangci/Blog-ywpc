@@ -5,4 +5,6 @@ comment: false
 published: false
 ---
 
+# Blog
+
 <BlogList />

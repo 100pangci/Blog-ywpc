@@ -16,7 +16,7 @@ tags: [技術, 入門]
 
 - **フレームワーク**: Vue 3 + VitePress
 - **コメント**: Giscus (GitHub Discussions)
-- **統計**: 不蒜子
+- **統計**: 自前の Cloudflare Worker（不蒜子にフォールバック）
 - **デプロイ**: GitHub Actions
 
 ## 今後の計画

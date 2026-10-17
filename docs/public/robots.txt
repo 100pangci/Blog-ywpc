@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://100pangci.github.io/Blog-ywpc/sitemap.xml

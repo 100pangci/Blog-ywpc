@@ -16,7 +16,7 @@ tags: [技术, 入门]
 
 - **框架**: Vue 3 + VitePress
 - **评论**: Giscus (GitHub Discussions)
-- **统计**: 不蒜子
+- **统计**: 自部署 Cloudflare Worker（可回退不蒜子）
 - **部署**: GitHub Actions
 
 ## 后续计划

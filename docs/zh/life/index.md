@@ -5,4 +5,6 @@ comment: false
 published: false
 ---
 
+# 生活随笔
+
 <BlogList type="life" />

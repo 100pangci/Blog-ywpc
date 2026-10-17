@@ -30,7 +30,7 @@
 
     <!-- cover -->
     <figure v-if="fm.cover" class="blog-cover">
-      <img :src="fm.cover" :alt="fm.title" loading="lazy" />
+      <img :src="resolveAsset(fm.cover)" :alt="fm.title" loading="lazy" />
     </figure>
   </div>
 </template>
@@ -41,6 +41,7 @@ import { computed } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { usePosts } from '../composables/usePosts'
 import { useLifePosts } from '../composables/useLifePosts'
+import { resolveAsset } from '../composables/useContent'
 import { useI18n } from '../composables/useI18n'
 import BlogOutline from './BlogOutline.vue'
 

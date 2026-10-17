@@ -16,7 +16,7 @@ This site is built with [VitePress](https://vitepress.dev) and deployed on GitHu
 
 - **Framework**: Vue 3 + VitePress
 - **Comments**: Giscus (GitHub Discussions)
-- **Analytics**: Busuanzi
+- **Analytics**: self-hosted Cloudflare Worker (falls back to Busuanzi)
 - **Deployment**: GitHub Actions
 
 ## Future Plans

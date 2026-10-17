@@ -1,0 +1,11 @@
+# Cloudflare Worker 配置 — 页面计数器
+# 部署：npm i -g wrangler && wrangler login
+#       wrangler kv namespace create "BLOG_COUNTER"   ← 把返回的 id 填到下面
+#       cd docs && wrangler deploy
+name = "blog-counter"
+main = "counter-worker.js"
+compatibility_date = "2026-01-01"
+
+[[kv_namespaces]]
+binding = "BLOG_COUNTER"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"

@@ -30,7 +30,7 @@
       <article v-for="post in pagePosts" :key="post.url" class="blog-card">
         <a :href="withBase(post.url)" class="blog-card__link">
           <div v-if="post.cover" class="blog-card__cover">
-            <img :src="post.cover" :alt="post.title" loading="lazy" />
+            <img :src="resolveAsset(post.cover)" :alt="post.title" loading="lazy" />
           </div>
           <div class="blog-card__content">
             <div class="blog-card__header">
@@ -109,7 +109,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { withBase } from 'vitepress'
-import { useContent } from '../composables/useContent'
+import { useContent, resolveAsset } from '../composables/useContent'
 import { useI18n } from '../composables/useI18n'
 
 const props = withDefaults(defineProps<{
@@ -154,7 +154,8 @@ const filtered = computed(() => {
   return sourcePosts.value.filter(p => {
     const matchSearch = !q ||
       p.title.toLowerCase().includes(q) ||
-      p.description.toLowerCase().includes(q)
+      p.description.toLowerCase().includes(q) ||
+      p.tags.some(t => t.toLowerCase().includes(q))
     const matchTag = tag === 'all' || p.tags.includes(tag)
     return matchSearch && matchTag
   })

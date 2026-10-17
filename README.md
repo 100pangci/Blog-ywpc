@@ -15,7 +15,7 @@ npm run docs:dev
 
 ### 技术博客
 
-在 `docs/posts/` 下新建 `.md` 文件，按以下格式编写：
+在 `docs/zh/posts/` 下新建 `.md` 文件（英文用 `docs/en/posts/`，日文用 `docs/ja/posts/`，slug 保持一致），按以下格式编写：
 
 ```md
 ---
@@ -42,7 +42,7 @@ cover: /images/xxx.png # 可选，封面图
 
 ### 生活随笔
 
-在 `docs/life/` 下新建 `.md` 文件：
+在 `docs/zh/life/` 下新建 `.md` 文件（英/日同理）：
 
 ```md
 ---
@@ -168,71 +168,76 @@ npm run docs:build
 
 ### 3. 配置自部署页面计数器
 
-> 不再使用不蒜子（`busuanzi.ibruce.info`）服务。改为自部署的 Cloudflare Worker。
+页面计数器默认回退到公共不蒜子服务；想改用自部署的 Cloudflare Worker：
 
 1. 安装 [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)（`npm i -g wrangler`）
 2. 登录 Cloudflare：`wrangler login`
-3. 创建 KV Namespace：`wrangler kv:namespace create "BLOG_COUNTER"`
-4. 复制输出的 namespace ID
-5. 在 `docs/counter-worker.js` 顶部有 `wrangler.toml` 模板，创建文件后填入 namespace ID：
+3. 创建 KV Namespace：`wrangler kv namespace create "BLOG_COUNTER"`
+4. 把输出的 namespace ID 填进 `docs/wrangler.toml`（模板已就位，替换 `REPLACE_WITH_YOUR_KV_NAMESPACE_ID`）
+5. 部署：`cd docs && wrangler deploy`
+6. 把 worker 地址填进 `docs/.vitepress/config.mts` 的 `themeConfig.counterEndpoint`，例如：
 
-```toml
-name = "blog-counter"
-main = "counter.js"
-compatibility_date = "2026-01-01"
-
-[[kv_namespaces]]
-binding = "BLOG_COUNTER"
-id = "你的namespace-id"
+```ts
+themeConfig: {
+  counterEndpoint: 'https://blog-counter.xxx.workers.dev/counter',
+  // ...
+}
 ```
 
-6. 部署：`wrangler deploy`
-7. 修改 `docs/.vitepress/theme/components/Busuanzi.vue` 第一行的 `COUNTER_ENDPOINT` 为你的 worker 地址。
+> Worker 返回 JSON，也兼容 `?jsonpCallback=`；请求失败时会自动回退到不蒜子，填错地址不会让统计块消失。
 
 ## 主题架构
 
 完全自建的 VitePress 主题，不依赖 `vitepress-plugin-blog`：
 
 ```
-docs/.vitepress/theme/
-├── index.ts                 # 入口，注册 doc-before / doc-after 插槽
-├── style/
-│   ├── index.css            # 桶文件，导入以下所有 CSS
-│   ├── light.css            # 浅色主题 CSS 变量
-│   ├── dark.css             # 深色主题 CSS 变量
-│   ├── variables.css        # 全局 :root 自定义属性
-│   ├── base.css             # 基础/重置/滚动条/毛玻璃/内容区
-│   ├── nav-screen.css       # 移动端导航屏 + 语言选择器
-│   ├── hero.css             # 主页 Hero 区
-│   ├── features.css         # 特性卡片
-│   ├── buttons.css          # 按钮
-│   ├── doc.css              # 排版/自定义块/图片/表格/代码块
-│   ├── sidebar.css          # 侧边栏
-│   ├── footer.css           # 页脚 + Busuanzi 计数器
-│   ├── back-to-top.css      # 回到顶部按钮
-│   ├── blog-list.css        # 博客列表页（搜索/标签/分页）
-│   ├── blog-post.css        # 文章元信息/标签/上下篇导航
-│   ├── loading-bar.css      # 加载进度条
-│   ├── lightbox.css         # 灯箱画廊
-│   ├── giscus.css           # Giscus 评论
-│   └── mobile.css           # 移动端适配 + 行内大纲
-├── config/
-│   └── giscusTheme.ts       # Giscus 评论 light/dark CSS 配置
-├── components/
-│   ├── BlogPostMeta.vue     # 文章头部（面包屑 / 标题 / 描述 / 作者 / 日期 / 标签 / 封面）
-│   ├── BlogPostNav.vue      # 上下篇导航
-│   ├── BlogList.vue         # 博客列表页（搜索 + 标签筛选 + 分页）
-│   ├── Busuanzi.vue         # 自部署计数器（Cloudflare Worker）
-│   ├── GiscusComment.vue    # Giscus 评论
-│   ├── BackToTop.vue        # 回到顶部按钮
-│   ├── FloatingToc.vue      # 浮动目录
-│   └── LoadingBar.vue       # 页面切换加载进度条
-└── composables/
-    ├── useContent.ts        # 统一内容扫描（posts/life），含 CJK 阅读时间、YAML 解析
-    ├── usePosts.ts          # useContent('posts') 包装
-    ├── useLifePosts.ts      # useContent('life') 包装
-    └── useI18n.ts           # 多语言文案
+docs/.vitepress/
+├── config.mts               # 唯一配置（locales / SEO-OG / sitemap / vite 插件）
+├── plugins/
+│   └── blog-meta.mts        # 构建期解析文章元数据（virtual:blog-meta）
+├── types/                   # 虚拟模块 / themeConfig 的类型声明
+└── theme/
+    ├── index.ts             # 入口，注册 doc-before / doc-after 插槽
+    ├── style/
+    │   ├── index.css            # 桶文件，导入以下所有 CSS
+    │   ├── light.css            # 浅色主题 CSS 变量
+    │   ├── dark.css             # 深色主题 CSS 变量
+    │   ├── variables.css        # 全局 :root 自定义属性
+    │   ├── base.css             # 基础/重置/滚动条/毛玻璃/内容区
+    │   ├── nav-screen.css       # 移动端导航屏 + 语言选择器
+    │   ├── hero.css             # 主页 Hero 区
+    │   ├── features.css         # 特性卡片
+    │   ├── buttons.css          # 按钮
+    │   ├── doc.css              # 排版/自定义块/图片/表格/代码块
+    │   ├── sidebar.css          # 侧边栏
+    │   ├── footer.css           # 页脚 + Busuanzi 计数器
+    │   ├── back-to-top.css      # 回到顶部按钮
+    │   ├── blog-list.css        # 博客列表页（搜索/标签/分页）
+    │   ├── blog-post.css        # 文章元信息/标签/上下篇导航
+    │   ├── loading-bar.css      # 加载进度条
+    │   ├── lightbox.css         # 灯箱画廊
+    │   ├── giscus.css           # Giscus 评论
+    │   └── mobile.css           # 移动端适配 + 行内大纲
+    ├── config/
+    │   └── giscusTheme.ts       # Giscus 评论 light/dark CSS 配置
+    ├── components/
+    │   ├── BlogPostMeta.vue     # 文章头部（面包屑 / 标题 / 描述 / 作者 / 日期 / 标签 / 封面）
+    │   ├── BlogPostNav.vue      # 上下篇导航
+    │   ├── BlogList.vue         # 博客列表页（搜索 + 标签筛选 + 分页）
+    │   ├── Busuanzi.vue         # 页面计数器（Worker / 不蒜子可切换）
+    │   ├── GiscusComment.vue    # Giscus 评论
+    │   ├── BackToTop.vue        # 回到顶部按钮
+    │   ├── FloatingToc.vue      # 浮动目录
+    │   └── LoadingBar.vue       # 页面切换加载进度条
+    └── composables/
+        ├── useContent.ts        # 读取 BLOG_META（构建期解析结果）的薄封装
+        ├── usePosts.ts          # useContent('posts') 包装
+        ├── useLifePosts.ts      # useContent('life') 包装
+        └── useI18n.ts           # 多语言文案
 ```
+
+> 文章元数据（标题/日期/标签/简介/阅读时间）在构建期由 `plugins/blog-meta.mts` 解析，
+> 客户端只拿到轻量 JSON，不再打包 Markdown 原文。
 
 **文章详情页渲染流程：**
 
@@ -245,9 +250,10 @@ docs/.vitepress/theme/
 - 站内全文搜索
 - 暗色模式（跟随系统）
 - Giscus 评论系统
-- 自部署页面计数器
+- 页面计数器（自部署 Worker，可回退不蒜子）
 - RSS 订阅 (`/feed.xml`)
-- Sitemap 自动生成
+- Sitemap 自动生成 + `robots.txt`
+- 每页 Open Graph / canonical 标签
 - 图片画廊
 - Markdown 任务列表 (`- [ ]`)
 - 浮动目录（文章页自动生成，随滚动高亮当前位置）
@@ -255,4 +261,4 @@ docs/.vitepress/theme/
 - 页面切换加载进度条（顶部进度指示器）
 - 列表页分页（每页 5/10/20 篇可切换）
 - 列表页按标签筛选
-- 列表页搜索（匹配标题和描述）
+- 列表页搜索（匹配标题、描述和标签）

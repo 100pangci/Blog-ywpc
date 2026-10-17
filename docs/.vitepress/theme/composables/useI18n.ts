@@ -23,7 +23,10 @@ export function useI18n() {
     }
     if (typeof msg !== 'string') return key
     if (!vars) return msg
-    return Object.entries(vars).reduce((acc, [k, v]) => acc.replace(`{${k}}`, String(v)), msg)
+    return Object.entries(vars).reduce(
+      (acc, [k, v]) => acc.split(`{${k}}`).join(String(v)),
+      msg
+    )
   }
 
   return { locale, t }

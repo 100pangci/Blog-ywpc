@@ -5,4 +5,6 @@ comment: false
 published: false
 ---
 
+# Life
+
 <BlogList type="life" />

@@ -11,12 +11,12 @@
   "author": "Ywpc",
   "license": "ISC",
   "dependencies": {
-    "vue": "^3.5.39"
+    "js-yaml": "^5.5.0",
+    "vue": "^3.5.44"
   },
   "devDependencies": {
-    "js-yaml": "^3.15.0",
     "markdown-it-task-lists": "^2.1.1",
     "vitepress": "^1.6.4",
-    "vitepress-plugin-rss": "^0.4.4"
+    "vitepress-plugin-rss": "^0.4.5"
   }
 }
